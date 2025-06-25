@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -162,7 +161,7 @@ const CollaborationsPage = () => {
         </div>
       </div>
 
-      <div className="px-4 py-4">
+      <div className="px-4 py-4 scrollbar-hide">
         {/* Mis colaboraciones */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-3">
@@ -241,7 +240,7 @@ const CollaborationsPage = () => {
 
       {/* Profile Sidebar Sheet */}
       <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
-        <SheetContent side="right" className="w-80 p-0">
+        <SheetContent side="right" className="w-80 p-0 scrollbar-hide">
           <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
         </SheetContent>
       </Sheet>
