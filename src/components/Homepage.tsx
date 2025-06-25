@@ -36,12 +36,8 @@ const Homepage = () => {
               Discover new partnerships and grow your audience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" onClick={handleGetStarted} className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg font-semibold">
-                Get Started <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button variant="outline" size="lg" onClick={handleGetStarted} className="px-8 py-3 text-lg font-semibold">
-                Learn More
-              </Button>
+              
+              
             </div>
           </div>
         </div>
