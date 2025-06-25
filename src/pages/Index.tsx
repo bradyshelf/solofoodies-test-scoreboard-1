@@ -1,12 +1,8 @@
 
-import AuthLanding from '../components/AuthLanding';
+import Homepage from '../components/Homepage';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen">
-      <AuthLanding />
-    </div>
-  );
+  return <Homepage />;
 };
 
 export default Index;
