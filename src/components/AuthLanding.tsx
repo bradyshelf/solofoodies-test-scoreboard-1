@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,7 +8,9 @@ import { Utensils, Users, ArrowRight, Loader2 } from 'lucide-react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import RoleSelection from './RoleSelection';
+
 type UserRole = 'restaurant' | 'foodie';
+
 const AuthLanding = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -17,6 +20,7 @@ const AuthLanding = () => {
     user,
     loading: authLoading
   } = useAuth();
+  
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,30 +28,34 @@ const AuthLanding = () => {
   const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
   const [showRoleSelection, setShowRoleSelection] = useState(false);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     // Check if we should start in signup mode
     if (searchParams.get('mode') === 'signup') {
       setIsSignUp(true);
     }
-
+    
     // Check if a role was pre-selected from the homepage
     const roleParam = searchParams.get('role') as UserRole;
     if (roleParam && (roleParam === 'restaurant' || roleParam === 'foodie')) {
       setSelectedRole(roleParam);
     }
   }, [searchParams]);
+
   useEffect(() => {
     // Redirect authenticated users to dashboard
     if (user && !authLoading) {
       navigate('/dashboard');
     }
   }, [user, authLoading, navigate]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignUp && !selectedRole) {
       // Don't show role selection modal, just return early
       return;
     }
+
     setLoading(true);
     try {
       if (isSignUp && selectedRole) {
@@ -59,20 +67,24 @@ const AuthLanding = () => {
       setLoading(false);
     }
   };
+
   const handleRoleSelect = (role: UserRole) => {
     setSelectedRole(role);
     setShowRoleSelection(false);
   };
+
   const handleBottomRoleSelect = (role: UserRole) => {
     if (isSignUp) {
       setSelectedRole(role);
     }
   };
+
   if (authLoading) {
     return <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50 flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-red-500" />
       </div>;
   }
+
   return <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50 flex items-center justify-center p-4">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -135,7 +147,7 @@ const AuthLanding = () => {
                     </p>
                   </div>}
 
-                <Button type="submit" disabled={loading || isSignUp && !selectedRole} className="w-full bg-red-500 hover:bg-red-600 h-12">
+                <Button type="submit" disabled={loading || (isSignUp && !selectedRole)} className="w-full bg-red-500 hover:bg-red-600 h-12">
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <>
                       {isSignUp ? 'Create Account' : 'Sign In'}
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -159,7 +171,27 @@ const AuthLanding = () => {
                 </div>
 
                 {/* Feature highlights - now clickable for signup */}
-                
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  {isSignUp && <div className="text-center mb-4">
+                      <p className="text-sm font-medium text-gray-700">Select your account type:</p>
+                    </div>}
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${isSignUp ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'restaurant' ? 'bg-red-50 ring-2 ring-red-200' : ''}` : ''}`} onClick={() => handleBottomRoleSelect('restaurant')}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'restaurant' ? 'bg-red-500' : 'bg-red-500'}`}>
+                        <Utensils className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
+                      <p className="text-xs text-gray-500">Find Influencers</p>
+                    </div>
+                    <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${isSignUp ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'foodie' ? 'bg-green-50 ring-2 ring-green-200' : ''}` : ''}`} onClick={() => handleBottomRoleSelect('foodie')}>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'foodie' ? 'bg-green-500' : 'bg-red-500'}`}>
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">For Foodies</p>
+                      <p className="text-xs text-gray-500">Get Collaborations</p>
+                    </div>
+                  </div>
+                </div>
               </>}
           </CardContent>
         </Card>
@@ -171,4 +203,5 @@ const AuthLanding = () => {
       </div>
     </div>;
 };
+
 export default AuthLanding;
