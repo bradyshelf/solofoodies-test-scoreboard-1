@@ -37,8 +37,7 @@ const ChatHome = () => {
   };
 
   const handleChatClick = (chatId: number) => {
-    // Navigate to individual chat - to be implemented later
-    console.log('Navigate to chat:', chatId);
+    navigate(`/chat/${chatId}`);
   };
 
   return (
