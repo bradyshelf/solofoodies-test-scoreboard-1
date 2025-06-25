@@ -197,9 +197,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Basic analytics</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full" variant="outline">
-                  Get Started
-                </Button>
+                
               </CardContent>
             </Card>
 
@@ -238,9 +236,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Featured restaurant profile</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full bg-red-500 hover:bg-red-600">
-                  Start Free Trial
-                </Button>
+                
               </CardContent>
             </Card>
 
@@ -274,9 +270,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Dedicated account manager</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full" variant="outline">
-                  Contact Sales
-                </Button>
+                
               </CardContent>
             </Card>
           </div>
