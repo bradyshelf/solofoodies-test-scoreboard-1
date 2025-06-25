@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
@@ -22,7 +21,7 @@ const ChatConversation = () => {
   // Mock chat user data - in a real app this would come from an API
   const chatUser = {
     username: '@UserInstagram',
-    avatar: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    avatar: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
   };
 
   const handleBack = () => {

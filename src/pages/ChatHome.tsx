@@ -15,7 +15,7 @@ const ChatHome = () => {
       username: '@UserInstagram',
       message: 'soy un hombre de influencia. Me encant...',
       timestamp: '1h',
-      avatar: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      avatar: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
       hidden: false
     },
     {
@@ -23,7 +23,7 @@ const ChatHome = () => {
       username: '@UserInstagram',
       message: 'soy un hombre de influencia. Me encant...',
       timestamp: '2d',
-      avatar: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      avatar: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
       hidden: false
     },
     {
@@ -31,7 +31,7 @@ const ChatHome = () => {
       username: '@UserInstagram',
       message: 'soy un hombre de influencia. Me encant...',
       timestamp: '3w',
-      avatar: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      avatar: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
       hidden: false
     }
   ]);
