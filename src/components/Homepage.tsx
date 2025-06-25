@@ -15,6 +15,10 @@ const Homepage = () => {
     navigate('/auth?mode=signup');
   };
 
+  const handleCreatorSignUp = () => {
+    navigate('/auth?mode=signup');
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
@@ -122,7 +126,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Get paid for content</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full bg-green-500 hover:bg-green-600">
+                <Button onClick={handleCreatorSignUp} className="w-full bg-green-500 hover:bg-green-600">
                   Start as Creator
                 </Button>
               </CardContent>
