@@ -95,7 +95,7 @@ const Dashboard = () => {
       </header>
 
       {/* Header with tabs */}
-      <div className="bg-white border-b border-gray-200 sticky top-16 z-10">
+      <div className="bg-white border-b border-gray-200 sticky top-0 z-20">
         <div className="px-4 pt-4">
           <div className="flex space-x-8">
             {tabs.map((tab) => (
@@ -116,7 +116,7 @@ const Dashboard = () => {
       </div>
 
       {/* Content */}
-      <div className="px-4 py-4 pb-20">
+      <div className="px-4 py-4 pb-24">
         {/* Title and Location */}
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-semibold text-gray-900">
@@ -222,9 +222,9 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Bottom Navigation - Mobile First */}
+      {/* Bottom Navigation - Fixed at bottom */}
       {userRole === 'foodie' && (
-        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
           <div className="flex justify-around items-center max-w-md mx-auto">
             <button 
               onClick={() => navigate('/dashboard')}
