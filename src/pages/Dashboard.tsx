@@ -193,7 +193,10 @@ const Dashboard = () => {
               <Search className="w-6 h-6" />
               <span className="text-xs mt-1">Explore</span>
             </button>
-            <button className="flex flex-col items-center p-2 text-gray-400">
+            <button 
+              onClick={() => navigate('/chat')}
+              className="flex flex-col items-center p-2 text-gray-400"
+            >
               <MessageCircle className="w-6 h-6" />
               <span className="text-xs mt-1">Messages</span>
             </button>
