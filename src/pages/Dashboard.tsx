@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import ProfileSidebar from '@/components/ProfileSidebar';
-
 const Dashboard = () => {
   const {
     user,
@@ -61,9 +60,7 @@ const Dashboard = () => {
   const handleProfileClick = () => {
     setIsProfileSidebarOpen(true);
   };
-
-  return (
-    <SidebarProvider>
+  return <SidebarProvider>
       <div className="min-h-screen bg-gray-50 w-full">
         {/* Header */}
         <header className="bg-white shadow-sm border-b">
@@ -75,10 +72,7 @@ const Dashboard = () => {
                 </div>
                 <span className="text-xl font-bold text-gray-900">Solo Foodies</span>
               </div>
-              <Button onClick={signOut} variant="outline" className="flex items-center gap-2">
-                <LogOut className="w-4 h-4" />
-                Sign Out
-              </Button>
+              
             </div>
           </div>
         </header>
@@ -161,40 +155,26 @@ const Dashboard = () => {
         </div>
 
         {/* Bottom Navigation - Fixed at bottom */}
-        {userRole === 'foodie' && (
-          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
+        {userRole === 'foodie' && <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
             <div className="flex justify-around items-center max-w-md mx-auto">
-              <button
-                onClick={() => navigate('/dashboard')}
-                className="flex flex-col items-center p-2 text-blue-600"
-              >
+              <button onClick={() => navigate('/dashboard')} className="flex flex-col items-center p-2 text-blue-600">
                 <Search className="w-6 h-6" />
                 <span className="text-xs mt-1">Explore</span>
               </button>
-              <button
-                onClick={() => navigate('/collaborations')}
-                className="flex flex-col items-center p-2 text-gray-400"
-              >
+              <button onClick={() => navigate('/collaborations')} className="flex flex-col items-center p-2 text-gray-400">
                 <Handshake className="w-6 h-6" />
                 <span className="text-xs mt-1">Colaboraciones</span>
               </button>
-              <button
-                onClick={() => navigate('/chat')}
-                className="flex flex-col items-center p-2 text-gray-400"
-              >
+              <button onClick={() => navigate('/chat')} className="flex flex-col items-center p-2 text-gray-400">
                 <MessageCircle className="w-6 h-6" />
                 <span className="text-xs mt-1">Messages</span>
               </button>
-              <button
-                onClick={handleProfileClick}
-                className="flex flex-col items-center p-2 text-zinc-400"
-              >
+              <button onClick={handleProfileClick} className="flex flex-col items-center p-2 text-zinc-400">
                 <User className="w-6 h-6" />
                 <span className="text-xs mt-1">Profile</span>
               </button>
             </div>
-          </div>
-        )}
+          </div>}
 
         {/* Profile Sidebar Sheet */}
         <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
@@ -203,8 +183,6 @@ const Dashboard = () => {
           </SheetContent>
         </Sheet>
       </div>
-    </SidebarProvider>
-  );
+    </SidebarProvider>;
 };
-
 export default Dashboard;
