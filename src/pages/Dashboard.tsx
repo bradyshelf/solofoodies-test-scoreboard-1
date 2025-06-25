@@ -2,10 +2,12 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Utensils, Users, LogOut } from 'lucide-react';
+import { Utensils, Users, LogOut, Search, MessageCircle, User } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
   const { user, userRole, signOut } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -32,7 +34,7 @@ const Dashboard = () => {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-20">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             Welcome to Solo Foodies!
@@ -103,7 +105,12 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full bg-green-500 hover:bg-green-600">Browse Opportunities</Button>
+                  <Button 
+                    onClick={() => navigate('/explore')}
+                    className="w-full bg-green-500 hover:bg-green-600"
+                  >
+                    Browse Opportunities
+                  </Button>
                 </CardContent>
               </Card>
 
@@ -140,6 +147,32 @@ const Dashboard = () => {
           )}
         </div>
       </main>
+
+      {/* Bottom Navigation - Mobile First */}
+      {userRole === 'foodie' && (
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2">
+          <div className="flex justify-around items-center max-w-md mx-auto">
+            <button 
+              onClick={() => navigate('/explore')}
+              className="flex flex-col items-center p-2 text-blue-600"
+            >
+              <Search className="w-6 h-6" />
+              <span className="text-xs mt-1">Explore</span>
+            </button>
+            <button className="flex flex-col items-center p-2 text-gray-400">
+              <MessageCircle className="w-6 h-6" />
+              <span className="text-xs mt-1">Messages</span>
+            </button>
+            <button 
+              onClick={() => navigate('/dashboard')}
+              className="flex flex-col items-center p-2 text-gray-900"
+            >
+              <User className="w-6 h-6" />
+              <span className="text-xs mt-1">Profile</span>
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

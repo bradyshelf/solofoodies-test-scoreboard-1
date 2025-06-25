@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
+import ExplorePage from "./pages/ExplorePage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
