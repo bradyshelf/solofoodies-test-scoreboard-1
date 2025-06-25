@@ -22,7 +22,7 @@ const ColabDetail = () => {
       phone: '912 345 678',
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid'
     },
-    question: '¿Qué día quieres venir?',
+    question: '¿Te interesa esta colaboración?',
     images: ['/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png']
   };
 
@@ -30,9 +30,9 @@ const ColabDetail = () => {
     navigate(-1);
   };
 
-  const handleReserveTable = () => {
-    // Handle table reservation logic
-    console.log('Reserving table...');
+  const handleRequestCollaboration = () => {
+    // Handle collaboration request logic
+    console.log('Requesting collaboration...');
   };
 
   const handleCancelCollab = () => {
@@ -126,13 +126,13 @@ const ColabDetail = () => {
             {colabData.question}
           </h2>
           
-          {/* Reserve button */}
+          {/* Request collaboration button */}
           <Button
-            onClick={handleReserveTable}
+            onClick={handleRequestCollaboration}
             className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg mb-4"
           >
             <Calendar className="w-5 h-5 mr-2" />
-            Reservar una mesa
+            Solicitar colaboración
           </Button>
 
           {/* Cancel collaboration link */}
@@ -140,7 +140,7 @@ const ColabDetail = () => {
             onClick={handleCancelCollab}
             className="text-gray-500 text-sm underline"
           >
-            Quiero cancelar la colaboración
+            No me interesa esta colaboración
           </button>
         </div>
       </div>
