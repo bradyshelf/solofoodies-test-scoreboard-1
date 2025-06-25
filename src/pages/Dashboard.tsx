@@ -95,7 +95,7 @@ const Dashboard = () => {
       </header>
 
       {/* Header with tabs */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-20">
+      <div className="bg-white border-b border-gray-200">
         <div className="px-4 pt-4">
           <div className="flex space-x-8">
             {tabs.map((tab) => (
@@ -163,9 +163,8 @@ const Dashboard = () => {
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 text-base">
-                          {collab.title}
+                          {collab.restaurantName}
                         </h3>
-                        <p className="text-gray-600 text-sm">{collab.restaurantName}</p>
                         <p className="text-gray-500 text-xs">{collab.handle}</p>
                         
                         {/* Rating */}
