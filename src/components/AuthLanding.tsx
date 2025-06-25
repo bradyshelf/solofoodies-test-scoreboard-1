@@ -18,17 +18,17 @@ const AuthLanding = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 via-white to-green-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50 flex items-center justify-center p-4">
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-orange-200/30 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute top-20 left-10 w-32 h-32 bg-red-200/30 rounded-full blur-xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-green-200/30 rounded-full blur-xl animate-pulse" style={{ animationDelay: '1s' }}></div>
       </div>
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo and Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-green-500 rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-500 to-green-500 rounded-2xl mb-4">
             <Utensils className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Solo Foodies</h1>
@@ -83,7 +83,7 @@ const AuthLanding = () => {
 
               <Button 
                 type="submit" 
-                className="w-full h-12 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                className="w-full h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
               >
                 <span>{isSignUp ? 'Create Account' : 'Sign In'}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -97,7 +97,7 @@ const AuthLanding = () => {
                 <button
                   type="button"
                   onClick={() => setIsSignUp(!isSignUp)}
-                  className="ml-2 text-orange-600 hover:text-orange-700 font-medium hover:underline transition-colors"
+                  className="ml-2 text-red-600 hover:text-red-700 font-medium hover:underline transition-colors"
                 >
                   {isSignUp ? 'Sign In' : 'Sign Up'}
                 </button>
@@ -108,8 +108,8 @@ const AuthLanding = () => {
             <div className="mt-8 pt-6 border-t border-gray-200">
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center mb-2">
-                    <Utensils className="w-5 h-5 text-orange-600" />
+                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mb-2">
+                    <Utensils className="w-5 h-5 text-red-600" />
                   </div>
                   <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
                   <p className="text-xs text-gray-500">Find Influencers</p>
