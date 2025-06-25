@@ -1,13 +1,18 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle } from 'lucide-react';
+import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const Homepage = () => {
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     navigate('/auth');
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -160,18 +165,137 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="px-4 py-16 bg-red-500 md:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Ready to Start Your Food Journey?
-          </h2>
-          <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of restaurants and food creators who are already collaborating on our platform.
-          </p>
-          <Button size="lg" onClick={handleGetStarted} className="bg-white text-red-500 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
-            Join Solo Foodies Today <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
+      {/* Pricing Section */}
+      <section className="px-4 py-16 bg-gray-50 md:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Simple Pricing for Restaurants
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Choose the plan that fits your restaurant's collaboration needs. Food creators join for free!
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Starter Plan */}
+            <Card className="relative border-2 border-gray-200 shadow-lg">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">$29</div>
+                  <p className="text-gray-600">per month</p>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Up to 5 active collaborations</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Basic creator search</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Direct messaging</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Basic analytics</span>
+                  </li>
+                </ul>
+                <Button onClick={handleGetStarted} className="w-full" variant="outline">
+                  Get Started
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Growth Plan - Popular */}
+            <Card className="relative border-2 border-red-500 shadow-xl">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <div className="bg-red-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                  Most Popular
+                </div>
+              </div>
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Growth</h3>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">$79</div>
+                  <p className="text-gray-600">per month</p>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Up to 20 active collaborations</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Advanced creator search & filters</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Priority messaging</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Detailed analytics & ROI tracking</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Featured restaurant profile</span>
+                  </li>
+                </ul>
+                <Button onClick={handleGetStarted} className="w-full bg-red-500 hover:bg-red-600">
+                  Start Free Trial
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Enterprise Plan */}
+            <Card className="relative border-2 border-gray-200 shadow-lg">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Enterprise</h3>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">$199</div>
+                  <p className="text-gray-600">per month</p>
+                </div>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Unlimited collaborations</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">AI-powered creator matching</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Multi-location management</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Advanced analytics dashboard</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Dedicated account manager</span>
+                  </li>
+                </ul>
+                <Button onClick={handleGetStarted} className="w-full" variant="outline">
+                  Contact Sales
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-gray-600 mb-4">
+              All plans include a 14-day free trial. No credit card required.
+            </p>
+            <p className="text-sm text-gray-500">
+              Food creators can join and use the platform completely free!
+            </p>
+          </div>
         </div>
       </section>
 
@@ -191,6 +315,8 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Homepage;
