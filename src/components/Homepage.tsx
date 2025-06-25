@@ -1,18 +1,13 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 const Homepage = () => {
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate('/auth');
   };
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -169,9 +164,7 @@ const Homepage = () => {
       <section className="px-4 py-16 bg-gray-50 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Simple Pricing for Restaurants
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Pricing for Restaurants</h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Choose the plan that fits your restaurant's collaboration needs. Food creators join for free!
             </p>
@@ -315,8 +308,6 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Homepage;
