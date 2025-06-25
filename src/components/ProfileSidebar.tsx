@@ -9,16 +9,6 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarSeparator,
-  SidebarFooter,
-} from '@/components/ui/sidebar';
 
 interface ProfileSidebarProps {
   onClose: () => void;
@@ -101,8 +91,9 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
   ];
 
   return (
-    <Sidebar side="right" className="w-80">
-      <SidebarHeader className="p-6">
+    <div className="w-full h-full bg-white flex flex-col">
+      {/* Header */}
+      <div className="p-6 border-b border-gray-200">
         <div className="flex items-center space-x-3">
           <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
             <img
@@ -116,32 +107,40 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
             <p className="text-sm text-gray-500">@usuarioinstagram</p>
           </div>
         </div>
-      </SidebarHeader>
+      </div>
 
-      <SidebarContent className="px-4">
-        <SidebarMenu>
+      {/* Menu Items */}
+      <div className="flex-1 px-4 py-4">
+        <div className="space-y-1">
           {menuItems.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton onClick={item.onClick} className="w-full justify-start py-3">
-                <item.icon className="w-5 h-5 mr-3" />
-                <span className="text-base">{item.title}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <button
+              key={item.title}
+              onClick={item.onClick}
+              className="w-full flex items-center px-3 py-3 text-left hover:bg-gray-50 rounded-lg transition-colors"
+            >
+              <item.icon className="w-5 h-5 mr-3 text-gray-600" />
+              <span className="text-base text-gray-900">{item.title}</span>
+            </button>
           ))}
-        </SidebarMenu>
+        </div>
 
-        <SidebarSeparator className="my-4" />
+        {/* Separator */}
+        <div className="border-t border-gray-200 my-4"></div>
 
-        <SidebarMenu>
+        {/* Policy Items */}
+        <div className="space-y-1">
           {policyItems.map((item) => (
-            <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton onClick={item.onClick} className="w-full justify-start py-2">
-                <span className="text-sm text-gray-600">{item.title}</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            <button
+              key={item.title}
+              onClick={item.onClick}
+              className="w-full flex items-center px-3 py-2 text-left hover:bg-gray-50 rounded-lg transition-colors"
+            >
+              <span className="text-sm text-gray-600">{item.title}</span>
+            </button>
           ))}
-        </SidebarMenu>
+        </div>
 
+        {/* Solofoodies Branding */}
         <div className="mt-6 mb-4">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
@@ -150,19 +149,19 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
             <span className="text-sm font-medium">Solofoodies</span>
           </div>
         </div>
-      </SidebarContent>
+      </div>
 
-      <SidebarFooter className="p-4">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton onClick={handleSignOut} className="w-full justify-start py-3 text-red-600 hover:text-red-700 hover:bg-red-50">
-              <LogOut className="w-5 h-5 mr-3" />
-              <span className="text-base">Cerrar sesión</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
-    </Sidebar>
+      {/* Footer - Sign Out */}
+      <div className="p-4 border-t border-gray-200">
+        <button
+          onClick={handleSignOut}
+          className="w-full flex items-center px-3 py-3 text-left hover:bg-red-50 rounded-lg transition-colors text-red-600"
+        >
+          <LogOut className="w-5 h-5 mr-3" />
+          <span className="text-base">Cerrar sesión</span>
+        </button>
+      </div>
+    </div>
   );
 };
 
