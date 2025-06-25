@@ -1,4 +1,3 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -12,11 +11,11 @@ const Homepage = () => {
   };
 
   const handleRestaurantSignUp = () => {
-    navigate('/auth?mode=signup');
+    navigate('/auth?mode=signup&role=restaurant');
   };
 
   const handleCreatorSignUp = () => {
-    navigate('/auth?mode=signup');
+    navigate('/auth?mode=signup&role=foodie');
   };
 
   return (
