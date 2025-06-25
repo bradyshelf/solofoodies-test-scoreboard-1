@@ -9,7 +9,6 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
-import ExplorePage from "./pages/ExplorePage";
 import ColabDetail from "./pages/ColabDetail";
 import NotFound from "./pages/NotFound";
 
@@ -30,14 +29,6 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/explore" 
-              element={
-                <ProtectedRoute>
-                  <ExplorePage />
                 </ProtectedRoute>
               } 
             />
