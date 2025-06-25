@@ -63,7 +63,7 @@ const Homepage = () => {
                 <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
                   <Utensils className="w-6 h-6 text-red-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Restaurants</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Restaurants and Agencies</h3>
                 <p className="text-gray-600 mb-6">
                   Connect with food influencers and creators to showcase your dishes to new audiences.
                 </p>
