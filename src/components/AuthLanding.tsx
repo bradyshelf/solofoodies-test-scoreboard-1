@@ -42,7 +42,7 @@ const AuthLanding = () => {
     e.preventDefault();
     
     if (isSignUp && !selectedRole) {
-      setShowRoleSelection(true);
+      // Don't show role selection modal, just return early
       return;
     }
 
@@ -62,6 +62,12 @@ const AuthLanding = () => {
   const handleRoleSelect = (role: UserRole) => {
     setSelectedRole(role);
     setShowRoleSelection(false);
+  };
+
+  const handleBottomRoleSelect = (role: UserRole) => {
+    if (isSignUp) {
+      setSelectedRole(role);
+    }
   };
 
   if (authLoading) {
@@ -165,7 +171,7 @@ const AuthLanding = () => {
                         type="button"
                         variant="ghost"
                         size="sm"
-                        onClick={() => setShowRoleSelection(true)}
+                        onClick={() => setSelectedRole(null)}
                         className="ml-2 h-auto p-0 text-red-600 hover:text-red-700"
                       >
                         Change
@@ -176,15 +182,20 @@ const AuthLanding = () => {
 
                 <Button 
                   type="submit" 
-                  disabled={loading}
+                  disabled={loading || (isSignUp && !selectedRole)}
                   className="w-full h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
                     <>
-                      <span>{isSignUp ? (selectedRole ? 'Create Account' : 'Choose Role') : 'Sign In'}</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <span>
+                        {isSignUp 
+                          ? (selectedRole ? 'Create Account' : 'Select Account Type Below') 
+                          : 'Sign In'
+                        }
+                      </span>
+                      {(!isSignUp || selectedRole) && <ArrowRight className="w-4 h-4" />}
                     </>
                   )}
                 </Button>
@@ -211,18 +222,41 @@ const AuthLanding = () => {
                   </p>
                 </div>
 
-                {/* Feature highlights */}
+                {/* Feature highlights - now clickable for signup */}
                 <div className="mt-8 pt-6 border-t border-gray-200">
+                  {isSignUp && (
+                    <div className="text-center mb-4">
+                      <p className="text-sm font-medium text-gray-700">Select your account type:</p>
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-4 text-center">
-                    <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                    <div 
+                      className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${
+                        isSignUp 
+                          ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'restaurant' ? 'bg-red-50 ring-2 ring-red-200' : ''}`
+                          : ''
+                      }`}
+                      onClick={() => handleBottomRoleSelect('restaurant')}
+                    >
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
+                        selectedRole === 'restaurant' ? 'bg-red-500' : 'bg-red-500'
+                      }`}>
                         <Utensils className="w-5 h-5 text-white" />
                       </div>
                       <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
                       <p className="text-xs text-gray-500">Find Influencers</p>
                     </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                    <div 
+                      className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${
+                        isSignUp 
+                          ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'foodie' ? 'bg-green-50 ring-2 ring-green-200' : ''}`
+                          : ''
+                      }`}
+                      onClick={() => handleBottomRoleSelect('foodie')}
+                    >
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${
+                        selectedRole === 'foodie' ? 'bg-green-500' : 'bg-red-500'
+                      }`}>
                         <Users className="w-5 h-5 text-white" />
                       </div>
                       <p className="text-xs text-gray-600 font-medium">For Foodies</p>
