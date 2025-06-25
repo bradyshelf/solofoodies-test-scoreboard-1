@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import AuthPage from "./pages/AuthPage";
 import Dashboard from "./pages/Dashboard";
 import ExplorePage from "./pages/ExplorePage";
+import ColabDetail from "./pages/ColabDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +38,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <ExplorePage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/colab/:id" 
+              element={
+                <ProtectedRoute>
+                  <ColabDetail />
                 </ProtectedRoute>
               } 
             />
