@@ -1,0 +1,198 @@
+
+import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Search, Star, Users, Calendar, Euro } from 'lucide-react';
+
+const CollaborationsPage = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Mock data for collaborations
+  const myCollaborations = [
+    {
+      id: 1,
+      restaurantName: 'Kuoko',
+      date: '08/12/21',
+      time: '21:00',
+      status: 'FOODIE QUEDADA',
+      completion: 100,
+      people: 6,
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    },
+    {
+      id: 2,
+      restaurantName: 'Restaurante de Don Juan',
+      dateFrom: '08/12/21',
+      dateTo: '27/12/21',
+      price: '50€',
+      people: 3,
+      rating: 5,
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    }
+  ];
+
+  const pendingInvitations = [
+    {
+      id: 3,
+      restaurantName: 'Restaurante de Don Juan',
+      dateFrom: '08/12/21',
+      dateTo: '27/12/21',
+      price: '50€',
+      people: 3,
+      rating: 5,
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    }
+  ];
+
+  const discoverCollaborations = [
+    {
+      id: 4,
+      restaurantName: 'Kuoko',
+      date: '08/12/21',
+      time: '21:00',
+      status: 'FOODIE QUEDADA',
+      completion: 100,
+      people: 6,
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    },
+    {
+      id: 5,
+      restaurantName: 'Restaurante de Don Juan',
+      dateFrom: '08/12/21',
+      dateTo: '27/12/21',
+      price: '50€',
+      people: 3,
+      rating: 5,
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+    }
+  ];
+
+  const CollaborationCard = ({ collab }: { collab: any }) => (
+    <Card className="overflow-hidden">
+      <CardContent className="p-0">
+        <div className="relative">
+          <img 
+            src={collab.image} 
+            alt={collab.restaurantName}
+            className="w-full h-32 object-cover"
+          />
+          <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-3">
+            <h3 className="text-white font-semibold text-lg">{collab.restaurantName}</h3>
+            {collab.status && (
+              <span className="text-blue-400 text-xs font-medium">{collab.status}</span>
+            )}
+          </div>
+        </div>
+        
+        <div className="p-3">
+          <div className="flex justify-between items-start mb-2">
+            <div className="text-sm text-gray-600">
+              {collab.date ? (
+                <>
+                  {collab.date}<br />
+                  {collab.time}
+                </>
+              ) : (
+                <>
+                  Del {collab.dateFrom}<br />
+                  al {collab.dateTo}
+                </>
+              )}
+            </div>
+            
+            <div className="text-right">
+              {collab.completion ? (
+                <div className="text-2xl font-bold">{collab.completion}%</div>
+              ) : (
+                <div className="text-2xl font-bold">{collab.price}</div>
+              )}
+              
+              <div className="flex items-center text-sm text-gray-500">
+                {collab.people && (
+                  <>
+                    <Users className="w-4 h-4 mr-1" />
+                    <span>+{collab.people}</span>
+                  </>
+                )}
+                {collab.rating && (
+                  <div className="flex items-center ml-2">
+                    {[...Array(collab.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-current text-yellow-400" />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
+  return (
+    <div className="min-h-screen bg-white pb-24">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 px-4 py-4">
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-xl font-bold">COLABORACIONES</h1>
+          <Search className="w-6 h-6 text-gray-400" />
+        </div>
+        
+        {/* Search Bar */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <input
+            type="text"
+            placeholder="Buscar colaboraciones"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 bg-gray-100 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      <div className="px-4 py-4">
+        {/* Mis colaboraciones */}
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-lg font-semibold">Mis colaboraciones ({myCollaborations.length})</h2>
+            <Button variant="ghost" className="text-blue-600 text-sm">Ver todas</Button>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {myCollaborations.map((collab) => (
+              <CollaborationCard key={collab.id} collab={collab} />
+            ))}
+          </div>
+        </div>
+
+        {/* Invitaciones pendientes */}
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-lg font-semibold">Invitaciones pendientes ({pendingInvitations.length})</h2>
+            <Button variant="ghost" className="text-blue-600 text-sm">Ver todas</Button>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {pendingInvitations.map((collab) => (
+              <CollaborationCard key={collab.id} collab={collab} />
+            ))}
+          </div>
+        </div>
+
+        {/* Descubre colaboraciones */}
+        <div className="mb-6">
+          <div className="flex justify-between items-center mb-3">
+            <h2 className="text-lg font-semibold">Descubre colaboraciones ({discoverCollaborations.length})</h2>
+            <Button variant="ghost" className="text-blue-600 text-sm">Ver todas</Button>
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {discoverCollaborations.map((collab) => (
+              <CollaborationCard key={collab.id} collab={collab} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CollaborationsPage;

@@ -13,6 +13,7 @@ import ColabDetail from "./pages/ColabDetail";
 import NotFound from "./pages/NotFound";
 import ChatHome from "./pages/ChatHome";
 import ChatConversation from "./pages/ChatConversation";
+import CollaborationsPage from "./pages/CollaborationsPage";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/collaborations" 
+              element={
+                <ProtectedRoute>
+                  <CollaborationsPage />
                 </ProtectedRoute>
               } 
             />
