@@ -42,14 +42,10 @@ const ColabDetail = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header with back button and restaurant images */}
+      {/* Header with back button */}
       <div className="relative">
-        <div className="h-64 bg-gray-200 overflow-hidden">
-          <img
-            src={colabData.images[0]}
-            alt={colabData.restaurantName}
-            className="w-full h-full object-cover"
-          />
+        <div className="h-16 bg-white">
+          {/* Empty header space */}
         </div>
         
         {/* Back button overlay */}
