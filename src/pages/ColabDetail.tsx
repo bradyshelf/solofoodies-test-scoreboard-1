@@ -1,9 +1,10 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone, MapPin, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
 const ColabDetail = () => {
-  const { id } = useParams();
+  const {
+    id
+  } = useParams();
   const navigate = useNavigate();
 
   // Mock collaboration data - in real app this would come from API
@@ -24,23 +25,18 @@ const ColabDetail = () => {
     question: '¿Te interesa esta colaboración?',
     images: ['/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png']
   };
-
   const handleBack = () => {
     navigate('/dashboard');
   };
-
   const handleRequestCollaboration = () => {
     // Handle collaboration request logic
     console.log('Requesting collaboration...');
   };
-
   const handleCancelCollab = () => {
     // Handle collaboration cancellation
     console.log('Cancelling collaboration...');
   };
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header with back button */}
       <div className="relative">
         <div className="h-16 bg-white">
@@ -48,17 +44,12 @@ const ColabDetail = () => {
         </div>
         
         {/* Back button overlay */}
-        <button
-          onClick={handleBack}
-          className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-full p-2 z-10"
-        >
+        <button onClick={handleBack} className="absolute top-4 left-4 bg-white/80 backdrop-blur-sm rounded-full p-2 z-10">
           <ArrowLeft className="w-5 h-5 text-gray-700" />
         </button>
 
         {/* Chat icon overlay */}
-        <div className="absolute bottom-4 right-4 bg-green-500 rounded-full p-3">
-          <div className="w-6 h-6 bg-white rounded-sm"></div>
-        </div>
+        
       </div>
 
       {/* Content */}
@@ -83,14 +74,9 @@ const ColabDetail = () => {
 
           {/* Days of the week */}
           <div className="flex space-x-2">
-            {colabData.days.map((day, index) => (
-              <div
-                key={index}
-                className="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-medium flex items-center justify-center"
-              >
+            {colabData.days.map((day, index) => <div key={index} className="w-8 h-8 rounded-full bg-blue-600 text-white text-xs font-medium flex items-center justify-center">
                 {day}
-              </div>
-            ))}
+              </div>)}
           </div>
 
           {/* Guests and reference */}
@@ -126,25 +112,17 @@ const ColabDetail = () => {
           </h2>
           
           {/* Request collaboration button */}
-          <Button
-            onClick={handleRequestCollaboration}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg mb-4"
-          >
+          <Button onClick={handleRequestCollaboration} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg mb-4">
             <Calendar className="w-5 h-5 mr-2" />
             Solicitar colaboración
           </Button>
 
           {/* Cancel collaboration link */}
-          <button
-            onClick={handleCancelCollab}
-            className="text-gray-500 text-sm underline"
-          >
+          <button onClick={handleCancelCollab} className="text-gray-500 text-sm underline">
             No me interesa esta colaboración
           </button>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default ColabDetail;
