@@ -1,18 +1,13 @@
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 const Homepage = () => {
   const navigate = useNavigate();
-
   const handleGetStarted = () => {
     navigate('/auth');
   };
-
-  return (
-    <div className="min-h-screen bg-white">
+  return <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -22,11 +17,7 @@ const Homepage = () => {
             </div>
             <span className="text-xl font-bold text-gray-900">Solo Foodies</span>
           </div>
-          <Button 
-            variant="outline" 
-            onClick={handleGetStarted}
-            className="hidden md:flex"
-          >
+          <Button variant="outline" onClick={handleGetStarted} className="hidden md:flex">
             Sign In
           </Button>
         </div>
@@ -45,19 +36,10 @@ const Homepage = () => {
               Discover new partnerships and grow your audience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                onClick={handleGetStarted}
-                className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg font-semibold"
-              >
+              <Button size="lg" onClick={handleGetStarted} className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg font-semibold">
                 Get Started <ArrowRight className="w-5 h-5 ml-2" />
               </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={handleGetStarted}
-                className="px-8 py-3 text-lg font-semibold"
-              >
+              <Button variant="outline" size="lg" onClick={handleGetStarted} className="px-8 py-3 text-lg font-semibold">
                 Learn More
               </Button>
             </div>
@@ -103,10 +85,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Track partnership success</span>
                   </li>
                 </ul>
-                <Button 
-                  onClick={handleGetStarted}
-                  className="w-full bg-red-500 hover:bg-red-600"
-                >
+                <Button onClick={handleGetStarted} className="w-full bg-red-500 hover:bg-red-600">
                   Start as Restaurant
                 </Button>
               </CardContent>
@@ -118,7 +97,7 @@ const Homepage = () => {
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
                   <Users className="w-6 h-6 text-green-500" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Food Creators</h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Foodies</h3>
                 <p className="text-gray-600 mb-6">
                   Discover amazing restaurants and create content while enjoying great food experiences.
                 </p>
@@ -136,10 +115,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Get paid for content</span>
                   </li>
                 </ul>
-                <Button 
-                  onClick={handleGetStarted}
-                  className="w-full bg-green-500 hover:bg-green-600"
-                >
+                <Button onClick={handleGetStarted} className="w-full bg-green-500 hover:bg-green-600">
                   Start as Creator
                 </Button>
               </CardContent>
@@ -197,11 +173,7 @@ const Homepage = () => {
           <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
             Join thousands of restaurants and food creators who are already collaborating on our platform.
           </p>
-          <Button 
-            size="lg" 
-            onClick={handleGetStarted}
-            className="bg-white text-red-500 hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
-          >
+          <Button size="lg" onClick={handleGetStarted} className="bg-white text-red-500 hover:bg-gray-100 px-8 py-3 text-lg font-semibold">
             Join Solo Foodies Today <ArrowRight className="w-5 h-5 ml-2" />
           </Button>
         </div>
@@ -223,8 +195,6 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Homepage;
