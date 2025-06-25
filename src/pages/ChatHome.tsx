@@ -116,8 +116,8 @@ const ChatHome = () => {
                 </p>
               </div>
 
-              {/* Delete Icon - positioned at bottom left */}
-              <div className="absolute bottom-4 left-4">
+              {/* Delete Icon - positioned at bottom right */}
+              <div className="absolute bottom-4 right-4">
                 <button
                   onClick={(e) => handleDeleteChat(chat.id, e)}
                   className="p-1 hover:bg-gray-200 rounded-full transition-colors"
