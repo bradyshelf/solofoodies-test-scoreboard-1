@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -28,7 +27,7 @@ const AuthLanding = () => {
       <div className="w-full max-w-md relative z-10">
         {/* Logo and Brand */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-red-500 to-green-500 rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-500 rounded-2xl mb-4">
             <Utensils className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Solo Foodies</h1>
@@ -108,15 +107,15 @@ const AuthLanding = () => {
             <div className="mt-8 pt-6 border-t border-gray-200">
               <div className="grid grid-cols-2 gap-4 text-center">
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mb-2">
-                    <Utensils className="w-5 h-5 text-red-600" />
+                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                    <Utensils className="w-5 h-5 text-white" />
                   </div>
                   <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
                   <p className="text-xs text-gray-500">Find Influencers</p>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mb-2">
-                    <Users className="w-5 h-5 text-green-600" />
+                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                    <Users className="w-5 h-5 text-white" />
                   </div>
                   <p className="text-xs text-gray-600 font-medium">For Foodies</p>
                   <p className="text-xs text-gray-500">Get Collaborations</p>
