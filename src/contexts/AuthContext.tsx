@@ -38,6 +38,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     // Set up auth state listener
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('Auth state change:', event, session?.user?.id);
         setSession(session);
         setUser(session?.user ?? null);
         
@@ -45,13 +46,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           // Fetch user role
           setTimeout(async () => {
             try {
-              const { data: roleData } = await supabase
+              console.log('Fetching user role for:', session.user.id);
+              const { data: roleData, error } = await supabase
                 .from('user_roles')
                 .select('role')
                 .eq('user_id', session.user.id)
                 .single();
               
-              setUserRole(roleData?.role || null);
+              if (error) {
+                console.error('Error fetching user role:', error);
+              } else {
+                console.log('User role fetched:', roleData?.role);
+                setUserRole(roleData?.role || null);
+              }
             } catch (error) {
               console.error('Error fetching user role:', error);
             }
@@ -66,6 +73,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('Initial session check:', session?.user?.id);
       setSession(session);
       setUser(session?.user ?? null);
       setLoading(false);
@@ -76,9 +84,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signUp = async (email: string, password: string, role: UserRole, fullName?: string) => {
     try {
+      console.log('Attempting to sign up:', { email, role, fullName });
       const redirectUrl = `${window.location.origin}/`;
       
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -90,7 +99,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       });
 
+      console.log('Signup response:', { data, error });
+
       if (error) {
+        console.error('Signup error:', error);
         toast({
           title: "Sign Up Error",
           description: error.message,
@@ -99,13 +111,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return { error };
       }
 
-      toast({
-        title: "Success!",
-        description: "Please check your email to verify your account.",
-      });
+      // If signup is successful but user needs email confirmation
+      if (data.user && !data.session) {
+        toast({
+          title: "Success!",
+          description: "Please check your email to verify your account.",
+        });
+      } else if (data.session) {
+        toast({
+          title: "Success!",
+          description: "Your account has been created successfully.",
+        });
+      }
 
       return { error: null };
     } catch (error: any) {
+      console.error('Signup catch error:', error);
       toast({
         title: "Sign Up Error",
         description: error.message || "An unexpected error occurred",
@@ -117,12 +138,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signIn = async (email: string, password: string) => {
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      console.log('Attempting to sign in:', email);
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
+      console.log('Signin response:', { data, error });
+
       if (error) {
+        console.error('Signin error:', error);
         toast({
           title: "Sign In Error",
           description: error.message,
@@ -133,6 +158,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       return { error: null };
     } catch (error: any) {
+      console.error('Signin catch error:', error);
       toast({
         title: "Sign In Error",
         description: error.message || "An unexpected error occurred",
