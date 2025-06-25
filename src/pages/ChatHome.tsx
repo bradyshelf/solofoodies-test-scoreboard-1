@@ -57,7 +57,7 @@ const ChatHome = () => {
   const visibleChats = chats.filter(chat => !chat.hidden);
 
   return (
-    <div className="min-h-screen bg-white pb-24 scrollbar-hide">
+    <div className="min-h-screen bg-white pb-24">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <button onClick={handleBack}>

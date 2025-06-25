@@ -102,24 +102,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-/* Hide scrollbar for webkit browsers (Chrome, Safari, Edge) */
-@layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none !important;  /* Chrome, Safari, Opera - added !important */
-  }
-  
-  /* Additional specificity for hiding scrollbars */
-  .scrollbar-hide::-webkit-scrollbar-track {
-    display: none !important;
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar-thumb {
-    display: none !important;
-  }
-}

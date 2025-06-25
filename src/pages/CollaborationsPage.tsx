@@ -140,7 +140,7 @@ const CollaborationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24 overflow-y-auto scrollbar-hide">
+    <div className="min-h-screen bg-white pb-24 overflow-y-auto">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="flex items-center justify-between mb-4">
@@ -161,7 +161,7 @@ const CollaborationsPage = () => {
         </div>
       </div>
 
-      <div className="px-4 py-4 scrollbar-hide">
+      <div className="px-4 py-4">
         {/* Mis colaboraciones */}
         <div className="mb-6">
           <div className="flex justify-between items-center mb-3">
@@ -240,7 +240,7 @@ const CollaborationsPage = () => {
 
       {/* Profile Sidebar Sheet */}
       <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
-        <SheetContent side="right" className="w-80 p-0 scrollbar-hide">
+        <SheetContent side="right" className="w-80 p-0">
           <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
         </SheetContent>
       </Sheet>
