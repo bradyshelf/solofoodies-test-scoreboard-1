@@ -2,12 +2,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const Homepage = () => {
   const navigate = useNavigate();
+  
   const handleGetStarted = () => {
     navigate('/auth');
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -35,10 +39,12 @@ const Homepage = () => {
               The platform where food influencers and restaurants create amazing collaborations. 
               Discover new partnerships and grow your audience.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              
-              
-            </div>
+            <Button 
+              onClick={handleGetStarted}
+              className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 text-lg rounded-lg"
+            >
+              Sign In
+            </Button>
           </div>
         </div>
       </section>
@@ -302,6 +308,8 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Homepage;
