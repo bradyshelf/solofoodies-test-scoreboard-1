@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -140,7 +141,7 @@ const CollaborationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+    <div className="min-h-screen bg-white pb-24 overflow-y-auto scrollbar-hide">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="flex items-center justify-between mb-4">
@@ -244,14 +245,6 @@ const CollaborationsPage = () => {
           <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
         </SheetContent>
       </Sheet>
-
-      <style dangerouslySetInnerHTML={{
-        __html: `
-          .min-h-screen::-webkit-scrollbar {
-            display: none;
-          }
-        `
-      }} />
     </div>
   );
 };
