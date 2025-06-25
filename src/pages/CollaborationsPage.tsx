@@ -1,8 +1,7 @@
-
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Search, Users, Calendar, Euro, MessageCircle, User, Handshake } from 'lucide-react';
+import { Search, Star, Users, Calendar, Euro, MessageCircle, User, Handshake } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
@@ -33,6 +32,7 @@ const CollaborationsPage = () => {
       dateTo: '27/12/21',
       price: '50€',
       people: 3,
+      rating: 5,
       image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
@@ -45,6 +45,7 @@ const CollaborationsPage = () => {
       dateTo: '27/12/21',
       price: '50€',
       people: 3,
+      rating: 5,
       image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
@@ -67,6 +68,7 @@ const CollaborationsPage = () => {
       dateTo: '27/12/21',
       price: '50€',
       people: 3,
+      rating: 5,
       image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
@@ -117,6 +119,13 @@ const CollaborationsPage = () => {
                     <Users className="w-4 h-4 mr-1" />
                     <span>+{collab.people}</span>
                   </>
+                )}
+                {collab.rating && (
+                  <div className="flex items-center ml-2">
+                    {[...Array(collab.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 fill-current text-yellow-400" />
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
@@ -202,24 +211,28 @@ const CollaborationsPage = () => {
               className="flex flex-col items-center p-2 text-gray-400"
             >
               <Search className="w-6 h-6" />
+              <span className="text-xs mt-1">Explore</span>
             </button>
             <button
               onClick={() => navigate('/collaborations')}
               className="flex flex-col items-center p-2 text-blue-600"
             >
               <Handshake className="w-6 h-6" />
+              <span className="text-xs mt-1">Colaboraciones</span>
             </button>
             <button
               onClick={() => navigate('/chat')}
               className="flex flex-col items-center p-2 text-gray-400"
             >
               <MessageCircle className="w-6 h-6" />
+              <span className="text-xs mt-1">Messages</span>
             </button>
             <button
               onClick={handleProfileClick}
               className="flex flex-col items-center p-2 text-zinc-400"
             >
               <User className="w-6 h-6" />
+              <span className="text-xs mt-1">Profile</span>
             </button>
           </div>
         </div>
