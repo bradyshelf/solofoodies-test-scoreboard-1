@@ -4,9 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Search, Star, Users, Calendar, Euro, MessageCircle, User, Handshake } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import ProfileSidebar from '@/components/ProfileSidebar';
 
 const CollaborationsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const { userRole } = useAuth();
 
@@ -132,6 +135,10 @@ const CollaborationsPage = () => {
     </Card>
   );
 
+  const handleProfileClick = () => {
+    setIsProfileSidebarOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-white pb-24">
       {/* Header */}
@@ -221,7 +228,7 @@ const CollaborationsPage = () => {
               <span className="text-xs mt-1">Messages</span>
             </button>
             <button
-              onClick={() => navigate('/dashboard')}
+              onClick={handleProfileClick}
               className="flex flex-col items-center p-2 text-zinc-400"
             >
               <User className="w-6 h-6" />
@@ -230,6 +237,13 @@ const CollaborationsPage = () => {
           </div>
         </div>
       )}
+
+      {/* Profile Sidebar Sheet */}
+      <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
+        <SheetContent side="right" className="w-80 p-0">
+          <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };

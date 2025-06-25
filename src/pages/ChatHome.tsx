@@ -1,6 +1,6 @@
 
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Search, MessageCircle, User, Trash2 } from 'lucide-react';
+import { ArrowLeft, Search, MessageCircle, User, Trash2, Handshake } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 
@@ -57,7 +57,7 @@ const ChatHome = () => {
   const visibleChats = chats.filter(chat => !chat.hidden);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pb-24">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <button onClick={handleBack}>
@@ -141,13 +141,23 @@ const ChatHome = () => {
               <Search className="w-6 h-6" />
               <span className="text-xs mt-1">Explore</span>
             </button>
-            <button className="flex flex-col items-center p-2 text-blue-600">
+            <button
+              onClick={() => navigate('/collaborations')}
+              className="flex flex-col items-center p-2 text-gray-400"
+            >
+              <Handshake className="w-6 h-6" />
+              <span className="text-xs mt-1">Colaboraciones</span>
+            </button>
+            <button
+              onClick={() => navigate('/chat')}
+              className="flex flex-col items-center p-2 text-blue-600"
+            >
               <MessageCircle className="w-6 h-6" />
               <span className="text-xs mt-1">Messages</span>
             </button>
             <button
               onClick={() => navigate('/dashboard')}
-              className="flex flex-col items-center p-2 text-gray-400"
+              className="flex flex-col items-center p-2 text-zinc-400"
             >
               <User className="w-6 h-6" />
               <span className="text-xs mt-1">Profile</span>

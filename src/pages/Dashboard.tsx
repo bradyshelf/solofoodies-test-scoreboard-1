@@ -61,7 +61,9 @@ const Dashboard = () => {
   const handleProfileClick = () => {
     setIsProfileSidebarOpen(true);
   };
-  return <SidebarProvider>
+
+  return (
+    <SidebarProvider>
       <div className="min-h-screen bg-gray-50 w-full">
         {/* Header */}
         <header className="bg-white shadow-sm border-b">
@@ -201,7 +203,8 @@ const Dashboard = () => {
           </SheetContent>
         </Sheet>
       </div>
-    </SidebarProvider>;
+    </SidebarProvider>
+  );
 };
 
 export default Dashboard;
