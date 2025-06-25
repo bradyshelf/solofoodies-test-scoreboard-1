@@ -1,12 +1,14 @@
-
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Search, MessageCircle, User, Trash2, Handshake } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
+import ProfileSidebar from '@/components/ProfileSidebar';
 
 const ChatHome = () => {
   const navigate = useNavigate();
   const { userRole } = useAuth();
+  const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
 
   // Mock chat data with hidden state
   const [chats, setChats] = useState([
@@ -51,6 +53,10 @@ const ChatHome = () => {
         chat.id === chatId ? { ...chat, hidden: true } : chat
       )
     );
+  };
+
+  const handleProfileClick = () => {
+    setIsProfileSidebarOpen(true);
   };
 
   // Filter out hidden chats
@@ -156,7 +162,7 @@ const ChatHome = () => {
               <span className="text-xs mt-1">Messages</span>
             </button>
             <button
-              onClick={() => navigate('/dashboard')}
+              onClick={handleProfileClick}
               className="flex flex-col items-center p-2 text-zinc-400"
             >
               <User className="w-6 h-6" />
@@ -165,6 +171,13 @@ const ChatHome = () => {
           </div>
         </div>
       )}
+
+      {/* Profile Sidebar Sheet */}
+      <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
+        <SheetContent side="right" className="w-80 p-0">
+          <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 };
