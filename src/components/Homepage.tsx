@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -8,6 +9,10 @@ const Homepage = () => {
   
   const handleGetStarted = () => {
     navigate('/auth');
+  };
+
+  const handleRestaurantSignUp = () => {
+    navigate('/auth?mode=signup');
   };
 
   return (
@@ -87,7 +92,7 @@ const Homepage = () => {
                     <span className="text-gray-700">Track partnership success</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full bg-red-500 hover:bg-red-600">
+                <Button onClick={handleRestaurantSignUp} className="w-full bg-red-500 hover:bg-red-600">
                   Start as Restaurant
                 </Button>
               </CardContent>
