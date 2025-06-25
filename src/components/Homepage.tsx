@@ -2,12 +2,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const Homepage = () => {
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     navigate('/auth');
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -26,11 +30,17 @@ const Homepage = () => {
       {/* Hero Section */}
       <section className="px-4 py-12 md:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto relative">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
               Connect Food Creators
               <span className="text-red-500"> with Local Restaurants</span>
             </h1>
+            {/* Sign In Button positioned in top right of hero content */}
+            <div className="absolute top-0 right-0">
+              <Button onClick={handleGetStarted} className="bg-red-500 hover:bg-red-600 text-white">
+                Sign In
+              </Button>
+            </div>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               The platform where food influencers and restaurants create amazing collaborations. 
               Discover new partnerships and grow your audience.
@@ -302,6 +312,8 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Homepage;
