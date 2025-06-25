@@ -157,7 +157,7 @@ const Dashboard = () => {
               <MessageCircle className="w-6 h-6" />
               <span className="text-xs mt-1">Messages</span>
             </button>
-            <button onClick={() => navigate('/dashboard')} className="flex flex-col items-center p-2 text-gray-900">
+            <button onClick={() => navigate('/dashboard')} className="flex flex-col items-center p-2 text-zinc-400">
               <User className="w-6 h-6" />
               <span className="text-xs mt-1">Profile</span>
             </button>
