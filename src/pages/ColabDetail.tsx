@@ -1,4 +1,3 @@
-
 import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Phone, MapPin, Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,7 +26,7 @@ const ColabDetail = () => {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate('/dashboard');
   };
 
   const handleRequestCollaboration = () => {
