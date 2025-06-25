@@ -1,13 +1,18 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const Homepage = () => {
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     navigate('/auth');
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -67,7 +72,7 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Connect with food influencers and creators to showcase your dishes to new audiences.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3">
                   <li className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Find relevant food creators</span>
@@ -81,9 +86,6 @@ const Homepage = () => {
                     <span className="text-gray-700">Track partnership success</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full bg-red-500 hover:bg-red-600">
-                  Start as Restaurant
-                </Button>
               </CardContent>
             </Card>
 
@@ -97,7 +99,7 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Discover amazing restaurants and create content while enjoying great food experiences.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3">
                   <li className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Browse collaboration opportunities</span>
@@ -111,9 +113,6 @@ const Homepage = () => {
                     <span className="text-gray-700">Get paid for content</span>
                   </li>
                 </ul>
-                <Button onClick={handleGetStarted} className="w-full bg-green-500 hover:bg-green-600">
-                  Start as Creator
-                </Button>
               </CardContent>
             </Card>
           </div>
@@ -308,6 +307,8 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Homepage;
