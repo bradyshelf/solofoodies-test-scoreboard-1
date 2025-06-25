@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Search, Star, Users, Calendar, Euro, MessageCircle, User, Handshake } from 'lucide-react';
+import { Search, Users, MessageCircle, User, Handshake } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import ProfileSidebar from '@/components/ProfileSidebar';
+import { Star, Calendar, Euro } from 'lucide-react';
 
 const CollaborationsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -119,13 +120,6 @@ const CollaborationsPage = () => {
                     <Users className="w-4 h-4 mr-1" />
                     <span>+{collab.people}</span>
                   </>
-                )}
-                {collab.rating && (
-                  <div className="flex items-center ml-2">
-                    {[...Array(collab.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-current text-yellow-400" />
-                    ))}
-                  </div>
                 )}
               </div>
             </div>
