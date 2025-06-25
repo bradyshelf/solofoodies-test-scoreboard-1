@@ -23,7 +23,7 @@ const CollaborationsPage = () => {
       status: 'FOODIE QUEDADA',
       completion: 100,
       people: 6,
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ const CollaborationsPage = () => {
       price: '50€',
       people: 3,
       rating: 5,
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
 
@@ -46,7 +46,7 @@ const CollaborationsPage = () => {
       price: '50€',
       people: 3,
       rating: 5,
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
 
@@ -59,7 +59,7 @@ const CollaborationsPage = () => {
       status: 'FOODIE QUEDADA',
       completion: 100,
       people: 6,
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     },
     {
       id: 5,
@@ -69,7 +69,7 @@ const CollaborationsPage = () => {
       price: '50€',
       people: 3,
       rating: 5,
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png'
     }
   ];
 

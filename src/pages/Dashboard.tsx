@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import ProfileSidebar from '@/components/ProfileSidebar';
+
 const Dashboard = () => {
   const {
     user,
@@ -23,7 +24,7 @@ const Dashboard = () => {
     id: 1,
     restaurantName: 'Restaurante de Don Juan',
     handle: '@restaurantedj',
-    image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+    image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
     rating: 5.0,
     reviewCount: 5,
     address: 'C/ Marqués del Riscal, 5, 28010, Madrid'
@@ -31,7 +32,7 @@ const Dashboard = () => {
     id: 2,
     restaurantName: 'Café Central',
     handle: '@cafecentral',
-    image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+    image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
     rating: 4.8,
     reviewCount: 12,
     address: 'Gran Vía, 28, 28013, Madrid'
@@ -39,7 +40,7 @@ const Dashboard = () => {
     id: 3,
     restaurantName: 'Bistro Moderno',
     handle: '@bistromoderno',
-    image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+    image: '/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png',
     rating: 4.9,
     reviewCount: 8,
     address: 'Calle Serrano, 45, 28001, Madrid'
@@ -185,4 +186,5 @@ const Dashboard = () => {
       </div>
     </SidebarProvider>;
 };
+
 export default Dashboard;

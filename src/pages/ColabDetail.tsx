@@ -23,7 +23,7 @@ const ColabDetail = () => {
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid'
     },
     question: '¿Qué día quieres venir?',
-    images: ['/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png']
+    images: ['/lovable-uploads/af4f172b-c1c6-4c8b-916f-423ef933eeaa.png']
   };
 
   const handleBack = () => {
