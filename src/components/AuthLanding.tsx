@@ -170,28 +170,30 @@ const AuthLanding = () => {
                   </p>
                 </div>
 
-                {/* Feature highlights - now clickable for signup */}
-                <div className="mt-8 pt-6 border-t border-gray-200">
-                  {isSignUp && <div className="text-center mb-4">
+                {/* Feature highlights - only shown for signup */}
+                {isSignUp && (
+                  <div className="mt-8 pt-6 border-t border-gray-200">
+                    <div className="text-center mb-4">
                       <p className="text-sm font-medium text-gray-700">Select your account type:</p>
-                    </div>}
-                  <div className="grid grid-cols-2 gap-4 text-center">
-                    <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${isSignUp ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'restaurant' ? 'bg-red-50 ring-2 ring-red-200' : ''}` : ''}`} onClick={() => handleBottomRoleSelect('restaurant')}>
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'restaurant' ? 'bg-red-500' : 'bg-red-500'}`}>
-                        <Utensils className="w-5 h-5 text-white" />
-                      </div>
-                      <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
-                      <p className="text-xs text-gray-500">Find Influencers</p>
                     </div>
-                    <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 ${isSignUp ? `cursor-pointer hover:bg-gray-50 ${selectedRole === 'foodie' ? 'bg-green-50 ring-2 ring-green-200' : ''}` : ''}`} onClick={() => handleBottomRoleSelect('foodie')}>
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'foodie' ? 'bg-green-500' : 'bg-red-500'}`}>
-                        <Users className="w-5 h-5 text-white" />
+                    <div className="grid grid-cols-2 gap-4 text-center">
+                      <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 cursor-pointer hover:bg-gray-50 ${selectedRole === 'restaurant' ? 'bg-red-50 ring-2 ring-red-200' : ''}`} onClick={() => handleBottomRoleSelect('restaurant')}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'restaurant' ? 'bg-red-500' : 'bg-red-500'}`}>
+                          <Utensils className="w-5 h-5 text-white" />
+                        </div>
+                        <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
+                        <p className="text-xs text-gray-500">Find Influencers</p>
                       </div>
-                      <p className="text-xs text-gray-600 font-medium">For Foodies</p>
-                      <p className="text-xs text-gray-500">Get Collaborations</p>
+                      <div className={`flex flex-col items-center p-3 rounded-lg transition-all duration-200 cursor-pointer hover:bg-gray-50 ${selectedRole === 'foodie' ? 'bg-green-50 ring-2 ring-green-200' : ''}`} onClick={() => handleBottomRoleSelect('foodie')}>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center mb-2 ${selectedRole === 'foodie' ? 'bg-green-500' : 'bg-red-500'}`}>
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                        <p className="text-xs text-gray-600 font-medium">For Foodies</p>
+                        <p className="text-xs text-gray-500">Get Collaborations</p>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </>}
           </CardContent>
         </Card>
