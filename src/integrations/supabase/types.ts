@@ -9,16 +9,162 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      foodie_profiles: {
+        Row: {
+          collaboration_rate: string | null
+          created_at: string
+          follower_count: number | null
+          id: string
+          instagram_handle: string | null
+          niche_tags: string[] | null
+          portfolio_url: string | null
+          tiktok_handle: string | null
+          updated_at: string
+          user_id: string
+          youtube_channel: string | null
+        }
+        Insert: {
+          collaboration_rate?: string | null
+          created_at?: string
+          follower_count?: number | null
+          id?: string
+          instagram_handle?: string | null
+          niche_tags?: string[] | null
+          portfolio_url?: string | null
+          tiktok_handle?: string | null
+          updated_at?: string
+          user_id: string
+          youtube_channel?: string | null
+        }
+        Update: {
+          collaboration_rate?: string | null
+          created_at?: string
+          follower_count?: number | null
+          id?: string
+          instagram_handle?: string | null
+          niche_tags?: string[] | null
+          portfolio_url?: string | null
+          tiktok_handle?: string | null
+          updated_at?: string
+          user_id?: string
+          youtube_channel?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      restaurant_profiles: {
+        Row: {
+          address: string | null
+          city: string | null
+          created_at: string
+          cuisine_type: string | null
+          description: string | null
+          id: string
+          phone: string | null
+          restaurant_name: string
+          state: string | null
+          updated_at: string
+          user_id: string
+          website_url: string | null
+          zip_code: string | null
+        }
+        Insert: {
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          cuisine_type?: string | null
+          description?: string | null
+          id?: string
+          phone?: string | null
+          restaurant_name: string
+          state?: string | null
+          updated_at?: string
+          user_id: string
+          website_url?: string | null
+          zip_code?: string | null
+        }
+        Update: {
+          address?: string | null
+          city?: string | null
+          created_at?: string
+          cuisine_type?: string | null
+          description?: string | null
+          id?: string
+          phone?: string | null
+          restaurant_name?: string
+          state?: string | null
+          updated_at?: string
+          user_id?: string
+          website_url?: string | null
+          zip_code?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_user_role: {
+        Args: { user_id: string }
+        Returns: Database["public"]["Enums"]["app_role"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "restaurant" | "foodie"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -133,6 +279,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["restaurant", "foodie"],
+    },
   },
 } as const

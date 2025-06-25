@@ -4,14 +4,25 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Utensils, Users, ArrowRight } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
+import { Utensils, Users, ArrowRight, Loader2 } from 'lucide-react';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import RoleSelection from './RoleSelection';
+
+type UserRole = 'restaurant' | 'foodie';
 
 const AuthLanding = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { signUp, signIn, user, loading: authLoading } = useAuth();
+  
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [selectedRole, setSelectedRole] = useState<UserRole | null>(null);
+  const [showRoleSelection, setShowRoleSelection] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Check if we should start in signup mode
@@ -20,11 +31,46 @@ const AuthLanding = () => {
     }
   }, [searchParams]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    // Redirect authenticated users to dashboard
+    if (user && !authLoading) {
+      navigate('/dashboard');
+    }
+  }, [user, authLoading, navigate]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement authentication logic
-    console.log('Auth form submitted:', { email, password, isSignUp });
+    
+    if (isSignUp && !selectedRole) {
+      setShowRoleSelection(true);
+      return;
+    }
+
+    setLoading(true);
+    
+    try {
+      if (isSignUp && selectedRole) {
+        await signUp(email, password, selectedRole, fullName);
+      } else {
+        await signIn(email, password);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
+
+  const handleRoleSelect = (role: UserRole) => {
+    setSelectedRole(role);
+    setShowRoleSelection(false);
+  };
+
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50 flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-red-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 via-white to-green-50 flex items-center justify-center p-4">
@@ -59,79 +105,133 @@ const AuthLanding = () => {
           </CardHeader>
           
           <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                  Email
-                </Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="h-12"
-                />
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-                  Password
-                </Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="h-12"
-                />
-              </div>
+            {showRoleSelection ? (
+              <RoleSelection onRoleSelect={handleRoleSelect} />
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {isSignUp && (
+                  <div className="space-y-2">
+                    <Label htmlFor="fullName" className="text-sm font-medium text-gray-700">
+                      Full Name
+                    </Label>
+                    <Input
+                      id="fullName"
+                      type="text"
+                      placeholder="Enter your full name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      required={isSignUp}
+                      className="h-12"
+                    />
+                  </div>
+                )}
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                    Email
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="h-12"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                    Password
+                  </Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="h-12"
+                    minLength={6}
+                  />
+                </div>
 
-              <Button 
-                type="submit" 
-                className="w-full h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
-              >
-                <span>{isSignUp ? 'Create Account' : 'Sign In'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Button>
-            </form>
+                {isSignUp && selectedRole && (
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-600">
+                      Selected role: <span className="font-medium capitalize">{selectedRole}</span>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowRoleSelection(true)}
+                        className="ml-2 h-auto p-0 text-red-600 hover:text-red-700"
+                      >
+                        Change
+                      </Button>
+                    </p>
+                  </div>
+                )}
 
-            {/* Toggle between sign in and sign up */}
-            <div className="mt-6 text-center">
-              <p className="text-sm text-gray-600">
-                {isSignUp ? 'Already have an account?' : "Don't have an account?"}
-                <button
-                  type="button"
-                  onClick={() => setIsSignUp(!isSignUp)}
-                  className="ml-2 text-red-600 hover:text-red-700 font-medium hover:underline transition-colors"
+                <Button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full h-12 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
-                  {isSignUp ? 'Sign In' : 'Sign Up'}
-                </button>
-              </p>
-            </div>
+                  {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <>
+                      <span>{isSignUp ? (selectedRole ? 'Create Account' : 'Choose Role') : 'Sign In'}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            )}
 
-            {/* Feature highlights */}
-            <div className="mt-8 pt-6 border-t border-gray-200">
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
-                    <Utensils className="w-5 h-5 text-white" />
-                  </div>
-                  <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
-                  <p className="text-xs text-gray-500">Find Influencers</p>
+            {!showRoleSelection && (
+              <>
+                {/* Toggle between sign in and sign up */}
+                <div className="mt-6 text-center">
+                  <p className="text-sm text-gray-600">
+                    {isSignUp ? 'Already have an account?' : "Don't have an account?"}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsSignUp(!isSignUp);
+                        setSelectedRole(null);
+                        setShowRoleSelection(false);
+                      }}
+                      className="ml-2 text-red-600 hover:text-red-700 font-medium hover:underline transition-colors"
+                    >
+                      {isSignUp ? 'Sign In' : 'Sign Up'}
+                    </button>
+                  </p>
                 </div>
-                <div className="flex flex-col items-center">
-                  <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
-                    <Users className="w-5 h-5 text-white" />
+
+                {/* Feature highlights */}
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <div className="grid grid-cols-2 gap-4 text-center">
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                        <Utensils className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">For Restaurants</p>
+                      <p className="text-xs text-gray-500">Find Influencers</p>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <div className="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center mb-2">
+                        <Users className="w-5 h-5 text-white" />
+                      </div>
+                      <p className="text-xs text-gray-600 font-medium">For Foodies</p>
+                      <p className="text-xs text-gray-500">Get Collaborations</p>
+                    </div>
                   </div>
-                  <p className="text-xs text-gray-600 font-medium">For Foodies</p>
-                  <p className="text-xs text-gray-500">Get Collaborations</p>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
           </CardContent>
         </Card>
 
