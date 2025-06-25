@@ -8,34 +8,40 @@ const ExplorePage = () => {
   const [activeTab, setActiveTab] = useState('explorar');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock restaurant data based on the screenshot
-  const restaurants = [
+  // Mock collaboration data based on the screenshot
+  const collaborations = [
     {
       id: 1,
-      name: 'Restaurante Nombre',
+      restaurantName: 'Restaurante Nombre',
       handle: '@idRestaurante',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 5.0,
       reviewCount: 5,
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
+      collaborationType: 'Free Meal',
+      partySize: 2,
     },
     {
       id: 2,
-      name: 'Restaurante Nombre',
+      restaurantName: 'Restaurante Nombre',
       handle: '@idRestaurante',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 5.0,
       reviewCount: 5,
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
+      collaborationType: 'Free Meal',
+      partySize: 2,
     },
     {
       id: 3,
-      name: 'Restaurante Nombre',
+      restaurantName: 'Restaurante Nombre',
       handle: '@idRestaurante',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 5.0,
       reviewCount: 5,
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
+      collaborationType: 'Free Meal',
+      partySize: 2,
     },
   ];
 
@@ -96,17 +102,17 @@ const ExplorePage = () => {
           />
         </div>
 
-        {/* Restaurant Cards */}
+        {/* Collaboration Cards */}
         <div className="space-y-4">
-          {restaurants.map((restaurant) => (
-            <Card key={restaurant.id} className="overflow-hidden">
+          {collaborations.map((collab) => (
+            <Card key={collab.id} className="overflow-hidden">
               <CardContent className="p-4">
                 <div className="flex items-start space-x-4">
                   {/* Restaurant Image */}
                   <div className="w-16 h-16 rounded-full overflow-hidden bg-gray-200 flex-shrink-0">
                     <img
-                      src={restaurant.image}
-                      alt={restaurant.name}
+                      src={collab.image}
+                      alt={collab.restaurantName}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -116,9 +122,9 @@ const ExplorePage = () => {
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 text-base">
-                          {restaurant.name}
+                          {collab.restaurantName}
                         </h3>
-                        <p className="text-gray-500 text-sm">{restaurant.handle}</p>
+                        <p className="text-gray-500 text-sm">{collab.handle}</p>
                         
                         {/* Rating */}
                         <div className="flex items-center mt-1 space-x-1">
@@ -129,7 +135,7 @@ const ExplorePage = () => {
                             />
                           ))}
                           <span className="text-xs text-gray-500">
-                            ({restaurant.reviewCount})
+                            ({collab.reviewCount})
                           </span>
                         </div>
                       </div>
@@ -143,7 +149,7 @@ const ExplorePage = () => {
                     {/* Address */}
                     <div className="flex items-center mt-2 text-blue-600 text-sm">
                       <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
-                      <span className="truncate">{restaurant.address}</span>
+                      <span className="truncate">{collab.address}</span>
                     </div>
                   </div>
                 </div>
