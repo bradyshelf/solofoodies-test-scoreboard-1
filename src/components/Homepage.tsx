@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -40,13 +41,8 @@ const Homepage = () => {
               Discover new partnerships and grow your audience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button onClick={handleGetStarted} size="lg" className="bg-red-500 hover:bg-red-600">
-                Get Started
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button onClick={handleGetStarted} variant="outline" size="lg">
-                Learn More
-              </Button>
+              
+              
             </div>
           </div>
         </div>
