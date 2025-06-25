@@ -2,7 +2,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Utensils, LogOut, Search, MessageCircle, User, MapPin, Star, Users, Clock } from 'lucide-react';
+import { Utensils, LogOut, Search, MessageCircle, User, MapPin, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -16,51 +16,30 @@ const Dashboard = () => {
   const activeCollaborations = [
     {
       id: 1,
-      title: 'Free Dinner for Two',
       restaurantName: 'Restaurante Nombre',
       handle: '@idRestaurante',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 5.0,
       reviewCount: 5,
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
-      collaborationType: 'Free Meal',
-      partySize: 2,
-      value: '€80',
-      requirements: 'Instagram post + Story',
-      expiresIn: '5 days',
-      status: 'Active'
     },
     {
       id: 2,
-      title: '50% Off Weekend Brunch',
       restaurantName: 'Café Central',
       handle: '@cafecentral',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 4.8,
       reviewCount: 12,
       address: 'Gran Vía, 28, 28013, Madrid',
-      collaborationType: 'Discount',
-      partySize: 4,
-      value: '50% Off',
-      requirements: 'TikTok video + Instagram Reel',
-      expiresIn: '2 days',
-      status: 'Active'
     },
     {
       id: 3,
-      title: 'Complimentary Tasting Menu',
       restaurantName: 'Bistro Moderno',
       handle: '@bistromoderno',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
       rating: 4.9,
       reviewCount: 8,
       address: 'Calle Serrano, 45, 28001, Madrid',
-      collaborationType: 'Free Meal',
-      partySize: 2,
-      value: '€120',
-      requirements: 'Instagram post + Google Review',
-      expiresIn: '1 week',
-      status: 'Active'
     },
   ];
 
@@ -158,7 +137,7 @@ const Dashboard = () => {
                     />
                   </div>
 
-                  {/* Collaboration Info */}
+                  {/* Restaurant Info */}
                   <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
@@ -181,37 +160,16 @@ const Dashboard = () => {
                         </div>
                       </div>
 
-                      {/* Colab Button */}
+                      {/* Apply Button */}
                       <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 text-sm rounded-full">
                         Aplicar
                       </Button>
                     </div>
 
-                    {/* Collaboration Details */}
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-4 text-sm">
-                        <div className="flex items-center text-green-600">
-                          <span className="font-medium">{collab.value}</span>
-                        </div>
-                        <div className="flex items-center text-gray-600">
-                          <Users className="w-4 h-4 mr-1" />
-                          <span>{collab.partySize} personas</span>
-                        </div>
-                        <div className="flex items-center text-orange-600">
-                          <Clock className="w-4 h-4 mr-1" />
-                          <span>{collab.expiresIn}</span>
-                        </div>
-                      </div>
-
-                      <div className="text-xs text-gray-500">
-                        <span className="font-medium">Requisitos:</span> {collab.requirements}
-                      </div>
-
-                      {/* Address */}
-                      <div className="flex items-center text-blue-600 text-sm">
-                        <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
-                        <span className="truncate">{collab.address}</span>
-                      </div>
+                    {/* Address */}
+                    <div className="flex items-center text-blue-600 text-sm mt-2">
+                      <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
+                      <span className="truncate">{collab.address}</span>
                     </div>
                   </div>
                 </div>
