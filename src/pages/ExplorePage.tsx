@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Search, MapPin, Star } from 'lucide-react';
+import { Search, MapPin, Star, Users, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -8,10 +8,11 @@ const ExplorePage = () => {
   const [activeTab, setActiveTab] = useState('explorar');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock collaboration data based on the screenshot
-  const collaborations = [
+  // Mock active collaboration data
+  const activeCollaborations = [
     {
       id: 1,
+      title: 'Free Dinner for Two',
       restaurantName: 'Restaurante Nombre',
       handle: '@idRestaurante',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
@@ -20,28 +21,42 @@ const ExplorePage = () => {
       address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
       collaborationType: 'Free Meal',
       partySize: 2,
+      value: '€80',
+      requirements: 'Instagram post + Story',
+      expiresIn: '5 days',
+      status: 'Active'
     },
     {
       id: 2,
-      restaurantName: 'Restaurante Nombre',
-      handle: '@idRestaurante',
+      title: '50% Off Weekend Brunch',
+      restaurantName: 'Café Central',
+      handle: '@cafecentral',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
-      rating: 5.0,
-      reviewCount: 5,
-      address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
-      collaborationType: 'Free Meal',
-      partySize: 2,
+      rating: 4.8,
+      reviewCount: 12,
+      address: 'Gran Vía, 28, 28013, Madrid',
+      collaborationType: 'Discount',
+      partySize: 4,
+      value: '50% Off',
+      requirements: 'TikTok video + Instagram Reel',
+      expiresIn: '2 days',
+      status: 'Active'
     },
     {
       id: 3,
-      restaurantName: 'Restaurante Nombre',
-      handle: '@idRestaurante',
+      title: 'Complimentary Tasting Menu',
+      restaurantName: 'Bistro Moderno',
+      handle: '@bistromoderno',
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
-      rating: 5.0,
-      reviewCount: 5,
-      address: 'C/ Marqués del Riscal, 5, 28010, Madrid',
+      rating: 4.9,
+      reviewCount: 8,
+      address: 'Calle Serrano, 45, 28001, Madrid',
       collaborationType: 'Free Meal',
       partySize: 2,
+      value: '€120',
+      requirements: 'Instagram post + Google Review',
+      expiresIn: '1 week',
+      status: 'Active'
     },
   ];
 
@@ -79,7 +94,7 @@ const ExplorePage = () => {
         {/* Title and Location */}
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-semibold text-gray-900">
-            Restaurantes populares
+            Colaboraciones activas
           </h1>
           <div className="flex items-center text-blue-600 text-sm">
             <span>MADRID</span>
@@ -95,16 +110,16 @@ const ExplorePage = () => {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Busca restaurantes"
+            placeholder="Busca colaboraciones"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-3 bg-gray-100 border-0 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
-        {/* Collaboration Cards */}
+        {/* Active Collaboration Cards */}
         <div className="space-y-4">
-          {collaborations.map((collab) => (
+          {activeCollaborations.map((collab) => (
             <Card key={collab.id} className="overflow-hidden">
               <CardContent className="p-4">
                 <div className="flex items-start space-x-4">
@@ -117,14 +132,15 @@ const ExplorePage = () => {
                     />
                   </div>
 
-                  {/* Restaurant Info */}
+                  {/* Collaboration Info */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start justify-between">
+                    <div className="flex items-start justify-between mb-2">
                       <div className="flex-1">
                         <h3 className="font-semibold text-gray-900 text-base">
-                          {collab.restaurantName}
+                          {collab.title}
                         </h3>
-                        <p className="text-gray-500 text-sm">{collab.handle}</p>
+                        <p className="text-gray-600 text-sm">{collab.restaurantName}</p>
+                        <p className="text-gray-500 text-xs">{collab.handle}</p>
                         
                         {/* Rating */}
                         <div className="flex items-center mt-1 space-x-1">
@@ -142,14 +158,35 @@ const ExplorePage = () => {
 
                       {/* Colab Button */}
                       <Button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 text-sm rounded-full">
-                        Colab
+                        Aplicar
                       </Button>
                     </div>
 
-                    {/* Address */}
-                    <div className="flex items-center mt-2 text-blue-600 text-sm">
-                      <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
-                      <span className="truncate">{collab.address}</span>
+                    {/* Collaboration Details */}
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-4 text-sm">
+                        <div className="flex items-center text-green-600">
+                          <span className="font-medium">{collab.value}</span>
+                        </div>
+                        <div className="flex items-center text-gray-600">
+                          <Users className="w-4 h-4 mr-1" />
+                          <span>{collab.partySize} personas</span>
+                        </div>
+                        <div className="flex items-center text-orange-600">
+                          <Clock className="w-4 h-4 mr-1" />
+                          <span>{collab.expiresIn}</span>
+                        </div>
+                      </div>
+
+                      <div className="text-xs text-gray-500">
+                        <span className="font-medium">Requisitos:</span> {collab.requirements}
+                      </div>
+
+                      {/* Address */}
+                      <div className="flex items-center text-blue-600 text-sm">
+                        <MapPin className="w-4 h-4 mr-1 flex-shrink-0" />
+                        <span className="truncate">{collab.address}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
