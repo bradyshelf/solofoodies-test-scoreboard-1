@@ -140,7 +140,7 @@ const CollaborationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white pb-24 overflow-y-auto scrollbar-hide" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
+    <div className="min-h-screen bg-white pb-24 overflow-y-auto" style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}>
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="flex items-center justify-between mb-4">
@@ -245,11 +245,13 @@ const CollaborationsPage = () => {
         </SheetContent>
       </Sheet>
 
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .min-h-screen::-webkit-scrollbar {
+            display: none;
+          }
+        `
+      }} />
     </div>
   );
 };
