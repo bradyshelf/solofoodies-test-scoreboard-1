@@ -1,4 +1,3 @@
-
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -198,41 +197,39 @@ const Dashboard = () => {
           )}
         </div>
 
-        {/* Bottom Navigation - Fixed at bottom */}
-        {userRole === 'foodie' && (
-          <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
-            <div className="flex justify-around items-center max-w-md mx-auto">
-              <button 
-                onClick={() => navigate('/dashboard')} 
-                className="flex flex-col items-center p-2 text-blue-600"
-              >
-                <Search className="w-6 h-6" />
-                <span className="text-xs mt-1">Explore</span>
-              </button>
-              <button 
-                onClick={() => navigate('/collaborations')} 
-                className="flex flex-col items-center p-2 text-gray-400"
-              >
-                <Handshake className="w-6 h-6" />
-                <span className="text-xs mt-1">Colaboraciones</span>
-              </button>
-              <button 
-                onClick={() => navigate('/chat')} 
-                className="flex flex-col items-center p-2 text-gray-400"
-              >
-                <MessageCircle className="w-6 h-6" />
-                <span className="text-xs mt-1">Messages</span>
-              </button>
-              <button 
-                onClick={handleProfileClick} 
-                className="flex flex-col items-center p-2 text-zinc-400"
-              >
-                <User className="w-6 h-6" />
-                <span className="text-xs mt-1">Profile</span>
-              </button>
-            </div>
+        {/* Bottom Navigation - Fixed at bottom for both roles */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
+          <div className="flex justify-around items-center max-w-md mx-auto">
+            <button 
+              onClick={() => navigate('/dashboard')} 
+              className="flex flex-col items-center p-2 text-blue-600"
+            >
+              <Search className="w-6 h-6" />
+              <span className="text-xs mt-1">Explore</span>
+            </button>
+            <button 
+              onClick={() => navigate('/collaborations')} 
+              className="flex flex-col items-center p-2 text-gray-400"
+            >
+              <Handshake className="w-6 h-6" />
+              <span className="text-xs mt-1">Colaboraciones</span>
+            </button>
+            <button 
+              onClick={() => navigate('/chat')} 
+              className="flex flex-col items-center p-2 text-gray-400"
+            >
+              <MessageCircle className="w-6 h-6" />
+              <span className="text-xs mt-1">Messages</span>
+            </button>
+            <button 
+              onClick={handleProfileClick} 
+              className="flex flex-col items-center p-2 text-zinc-400"
+            >
+              <User className="w-6 h-6" />
+              <span className="text-xs mt-1">Profile</span>
+            </button>
           </div>
-        )}
+        </div>
 
         {/* Profile Sidebar Sheet */}
         <Sheet open={isProfileSidebarOpen} onOpenChange={setIsProfileSidebarOpen}>
