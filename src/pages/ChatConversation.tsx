@@ -92,6 +92,17 @@ const ChatConversation = () => {
     }
   };
 
+  // Helper function to determine if we should show timestamp
+  const shouldShowTimestamp = (currentIndex: number) => {
+    if (currentIndex === messages.length - 1) return true; // Always show on last message
+    
+    const currentMessage = messages[currentIndex];
+    const nextMessage = messages[currentIndex + 1];
+    
+    // Show timestamp if next message is from different sender
+    return currentMessage.isUser !== nextMessage.isUser;
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
@@ -124,7 +135,7 @@ const ChatConversation = () => {
             Start a conversation!
           </div>
         ) : (
-          messages.map((message) => (
+          messages.map((message, index) => (
             <div key={message.id} className="space-y-1">
               <div
                 className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
@@ -139,11 +150,13 @@ const ChatConversation = () => {
                   <p className="text-sm">{message.text}</p>
                 </div>
               </div>
-              <div className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
-                <span className="text-xs text-gray-400 px-2">
-                  {formatTimestamp(message.timestamp)}
-                </span>
-              </div>
+              {shouldShowTimestamp(index) && (
+                <div className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
+                  <span className="text-xs text-gray-400 px-2">
+                    {formatTimestamp(message.timestamp)}
+                  </span>
+                </div>
+              )}
             </div>
           ))
         )}
