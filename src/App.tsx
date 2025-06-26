@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import ChatHome from "./pages/ChatHome";
 import ChatConversation from "./pages/ChatConversation";
 import CollaborationsPage from "./pages/CollaborationsPage";
+import CreateCollaborationPage from "./pages/CreateCollaborationPage";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +40,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <CollaborationsPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/collaborations/create" 
+              element={
+                <ProtectedRoute>
+                  <CreateCollaborationPage />
                 </ProtectedRoute>
               } 
             />

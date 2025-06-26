@@ -157,7 +157,10 @@ const CollaborationsPage = () => {
                 <p className="text-sm">No has creado ninguna</p>
                 <p className="text-sm">colaboración todavía</p>
               </div>
-              <button className="text-blue-600 text-sm font-medium">
+              <button 
+                onClick={() => navigate('/collaborations/create')}
+                className="text-blue-600 text-sm font-medium"
+              >
                 + Crear colaboración
               </button>
             </CardContent>
@@ -167,7 +170,10 @@ const CollaborationsPage = () => {
 
       {/* Fixed Create Collaboration Button */}
       <div className="fixed bottom-20 left-4 right-4 z-20">
-        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-full text-base font-medium">
+        <Button 
+          onClick={() => navigate('/collaborations/create')}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-full text-base font-medium"
+        >
           <Plus className="w-5 h-5 mr-2" />
           Crear colaboración
         </Button>
