@@ -1,4 +1,5 @@
 
+
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
@@ -42,15 +43,26 @@ const ChatConversation = () => {
       setMessages(prev => [...prev, userMessage]);
       setInputValue('');
 
-      // Auto-reply after a short delay
+      // Send first auto-reply after a short delay
       setTimeout(() => {
-        const autoReply: Message = {
+        const firstAutoReply: Message = {
           id: Date.now() + 1,
-          text: "Thanks for your message! This is an automated response.",
+          text: "Thanks for your message!",
           isUser: false,
           timestamp: new Date()
         };
-        setMessages(prev => [...prev, autoReply]);
+        setMessages(prev => [...prev, firstAutoReply]);
+
+        // Send second auto-reply after another delay
+        setTimeout(() => {
+          const secondAutoReply: Message = {
+            id: Date.now() + 2,
+            text: "This is an automated response. We'll get back to you soon!",
+            isUser: false,
+            timestamp: new Date()
+          };
+          setMessages(prev => [...prev, secondAutoReply]);
+        }, 1500);
       }, 1000);
     }
   };
@@ -162,3 +174,4 @@ const ChatConversation = () => {
 };
 
 export default ChatConversation;
+
