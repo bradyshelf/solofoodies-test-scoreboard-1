@@ -74,8 +74,10 @@ const Homepage = () => {
             {/* For Restaurants */}
             <Card className="p-8 border-0 shadow-lg">
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
-                  <Utensils className="w-6 h-6 text-red-500" />
+                <div className="flex justify-center mb-6">
+                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                    <Utensils className="w-6 h-6 text-red-500" />
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">For Restaurants and Agencies</h3>
                 <p className="text-gray-600 mb-6">
@@ -104,8 +106,10 @@ const Homepage = () => {
             {/* For Food Creators */}
             <Card className="p-8 border-0 shadow-lg">
               <CardContent className="p-0">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                  <Users className="w-6 h-6 text-green-500" />
+                <div className="flex justify-center mb-6">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-green-500" />
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">For Foodies</h3>
                 <p className="text-gray-600 mb-6">
