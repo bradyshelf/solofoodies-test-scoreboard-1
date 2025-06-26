@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ArrowLeft, Send } from 'lucide-react';
@@ -60,6 +61,25 @@ const ChatConversation = () => {
     }
   };
 
+  const formatTimestamp = (date: Date) => {
+    const now = new Date();
+    const diffInHours = Math.floor((now.getTime() - date.getTime()) / (1000 * 60 * 60));
+    
+    if (diffInHours < 24) {
+      return date.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: false 
+      });
+    } else {
+      return date.toLocaleDateString('en-US', { 
+        month: '2-digit', 
+        day: '2-digit',
+        year: '2-digit'
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Header */}
@@ -93,18 +113,24 @@ const ChatConversation = () => {
           </div>
         ) : (
           messages.map((message) => (
-            <div
-              key={message.id}
-              className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
-            >
+            <div key={message.id} className="space-y-1">
               <div
-                className={`max-w-[80%] px-4 py-2 rounded-lg ${
-                  message.isUser
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-200 text-gray-900'
-                }`}
+                className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
               >
-                <p className="text-sm">{message.text}</p>
+                <div
+                  className={`max-w-[80%] px-4 py-2 rounded-lg ${
+                    message.isUser
+                      ? 'bg-green-500 text-white'
+                      : 'bg-gray-200 text-gray-900'
+                  }`}
+                >
+                  <p className="text-sm">{message.text}</p>
+                </div>
+              </div>
+              <div className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}>
+                <span className="text-xs text-gray-400 px-2">
+                  {formatTimestamp(message.timestamp)}
+                </span>
               </div>
             </div>
           ))
