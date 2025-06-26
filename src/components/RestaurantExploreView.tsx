@@ -2,8 +2,11 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Star, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const RestaurantExploreView = () => {
+  const navigate = useNavigate();
+
   // Mock popular foodies data
   const popularFoodies = [
     {
@@ -47,6 +50,8 @@ const RestaurantExploreView = () => {
 
   const handleMessageClick = (foodieId: number) => {
     console.log('Message foodie:', foodieId);
+    // Navigate to specific chat conversation with the foodie
+    navigate(`/chat/${foodieId}`);
   };
 
   return (
