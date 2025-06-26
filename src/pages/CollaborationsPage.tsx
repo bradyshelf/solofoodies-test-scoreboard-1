@@ -1,7 +1,8 @@
+
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Search, Users, MessageCircle, User, Handshake } from 'lucide-react';
+import { Search, Users, MessageCircle, User, Handshake, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
@@ -14,7 +15,7 @@ const CollaborationsPage = () => {
   const navigate = useNavigate();
   const { userRole } = useAuth();
 
-  // Mock data for collaborations
+  // Mock data for collaborations - only used for foodie view
   const myCollaborations = [
     {
       id: 1,
@@ -133,7 +134,49 @@ const CollaborationsPage = () => {
     setIsProfileSidebarOpen(true);
   };
 
-  return (
+  // Restaurant Empty State Component
+  const RestaurantEmptyState = () => (
+    <div className="min-h-screen bg-white pb-24 overflow-y-auto">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200 px-4 py-4">
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-xl font-bold">COLABORACIONES</h1>
+          <Search className="w-6 h-6 text-gray-400" />
+        </div>
+      </div>
+
+      <div className="px-4 py-6">
+        {/* Mis Colaboraciones Section */}
+        <div className="mb-6">
+          <h2 className="text-lg font-semibold mb-4">Mis Colaboraciones (0)</h2>
+          
+          {/* Empty State Card */}
+          <Card className="bg-gray-50 border-gray-200">
+            <CardContent className="p-8 text-center">
+              <div className="text-gray-500 mb-4">
+                <p className="text-sm">No has creado ninguna</p>
+                <p className="text-sm">colaboración todavía</p>
+              </div>
+              <button className="text-blue-600 text-sm font-medium">
+                + Crear colaboración
+              </button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+
+      {/* Fixed Create Collaboration Button */}
+      <div className="fixed bottom-20 left-4 right-4 z-20">
+        <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-full text-base font-medium">
+          <Plus className="w-5 h-5 mr-2" />
+          Crear colaboración
+        </Button>
+      </div>
+    </div>
+  );
+
+  // Foodie View Component (existing functionality)
+  const FoodieView = () => (
     <div className="min-h-screen bg-white pb-24 overflow-y-auto">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
@@ -195,6 +238,13 @@ const CollaborationsPage = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Render different views based on user role */}
+      {userRole === 'restaurant' ? <RestaurantEmptyState /> : <FoodieView />}
 
       {/* Bottom Navigation - Fixed at bottom for both roles */}
       <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2 z-30">
@@ -236,7 +286,7 @@ const CollaborationsPage = () => {
           <ProfileSidebar onClose={() => setIsProfileSidebarOpen(false)} />
         </SheetContent>
       </Sheet>
-    </div>
+    </>
   );
 };
 
