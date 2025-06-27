@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,11 +14,6 @@ const SubscriptionPage = () => {
     { month: 'Febrero 2022', date: '2022-02-01' },
   ];
 
-  const handleBackClick = () => {
-    // Navigate to the profile page
-    navigate('/profile');
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -27,7 +23,7 @@ const SubscriptionPage = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={handleBackClick}
+              onClick={() => navigate('/dashboard')}
             >
               <ArrowLeft className="w-4 h-4" />
             </Button>
