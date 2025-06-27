@@ -70,68 +70,34 @@ const Homepage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-16">
-            {/* For Restaurants */}
-            <Card className="p-8 border-0 shadow-lg">
-              <CardContent className="p-0 text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                    <Utensils className="w-6 h-6 text-red-500" />
-                  </div>
+          <div className="grid md:grid-cols-1 gap-8 max-w-md mx-auto">
+            {/* Starter Plan */}
+            <Card className="relative border-2 border-gray-200 shadow-lg">
+              <CardContent className="p-8">
+                <div className="text-center mb-6">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
+                  <div className="text-4xl font-bold text-gray-900 mb-1">$29</div>
+                  <p className="text-gray-600">per month</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Restaurants and Agencies</h3>
-                <p className="text-gray-600 mb-6">
-                  Connect with food influencers and creators to showcase your dishes to new audiences.
-                </p>
-                <ul className="space-y-3 mb-6 max-w-sm mx-auto">
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Find relevant food creators</span>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Up to 5 active collaborations</span>
                   </li>
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Create collaboration offers</span>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Basic creator search</span>
                   </li>
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Track partnership success</span>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Direct messaging</span>
+                  </li>
+                  <li className="flex items-center gap-3">
+                    <Check className="w-5 h-5 text-green-500" />
+                    <span className="text-gray-700">Basic analytics</span>
                   </li>
                 </ul>
-                <Button onClick={handleRestaurantSignUp} className="w-full bg-red-500 hover:bg-red-600">
-                  Start as Restaurant
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* For Food Creators */}
-            <Card className="p-8 border-0 shadow-lg">
-              <CardContent className="p-0 text-center">
-                <div className="flex justify-center mb-6">
-                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Users className="w-6 h-6 text-green-500" />
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">For Foodies</h3>
-                <p className="text-gray-600 mb-6">
-                  Discover amazing restaurants and create content while enjoying great food experiences.
-                </p>
-                <ul className="space-y-3 mb-6 max-w-sm mx-auto text-center">
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Browse collaboration opportunities</span>
-                  </li>
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Showcase your portfolio</span>
-                  </li>
-                  <li className="flex items-center justify-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-gray-700">Get paid for content</span>
-                  </li>
-                </ul>
-                <Button onClick={handleCreatorSignUp} className="w-full bg-green-500 hover:bg-green-600">
-                  Start as Creator
-                </Button>
+                
               </CardContent>
             </Card>
           </div>
