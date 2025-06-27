@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, LogOut, Search, MessageCircle, User, MapPin, Star, Handshake } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import ProfileSidebar from '@/components/ProfileSidebar';
@@ -19,6 +19,19 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('explorar');
   const [searchQuery, setSearchQuery] = useState('');
   const [isProfileSidebarOpen, setIsProfileSidebarOpen] = useState(false);
+
+  // Listen for custom event to open profile sidebar
+  useEffect(() => {
+    const handleOpenProfileSidebar = () => {
+      setIsProfileSidebarOpen(true);
+    };
+
+    window.addEventListener('openProfileSidebar', handleOpenProfileSidebar);
+    
+    return () => {
+      window.removeEventListener('openProfileSidebar', handleOpenProfileSidebar);
+    };
+  }, []);
 
   // Mock active collaboration data - only for foodie users
   const activeCollaborations = [{

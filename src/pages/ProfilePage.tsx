@@ -150,6 +150,15 @@ const ProfilePage = () => {
     setLocations(locations.filter(loc => loc.id !== id));
   };
 
+  const handleBackClick = () => {
+    // Navigate back to dashboard and trigger profile sidebar open
+    navigate('/dashboard');
+    // Use a small delay to ensure the navigation completes before triggering the sidebar
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('openProfileSidebar'));
+    }, 100);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -167,7 +176,7 @@ const ProfilePage = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate('/dashboard')}
+              onClick={handleBackClick}
             >
               <ArrowLeft className="w-4 h-4" />
             </Button>
