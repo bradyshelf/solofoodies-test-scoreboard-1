@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -5,9 +6,11 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { ArrowLeft, Calendar, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const CreateCollaborationPage = () => {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<string>('');
+
   const handleContinue = () => {
     if (selectedType) {
       // For now, just console log the selection
@@ -15,7 +18,9 @@ const CreateCollaborationPage = () => {
       // TODO: Navigate to next step when implemented
     }
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="flex items-center space-x-4">
@@ -96,21 +101,21 @@ const CreateCollaborationPage = () => {
 
           {/* Private Collaboration */}
           <div className="relative">
-            <Card className="border-gray-200 bg-gray-900">
-              <CardContent className="p-4 bg-gray-50">
+            <Card className="border-gray-200">
+              <CardContent className="p-4">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <div className="flex items-center space-x-3 mb-2">
-                      <RadioGroupItem value="private" id="private" className="border-white text-zinc-950" />
-                      <Label htmlFor="private" className="text-lg font-semibold text-white bg-gray-50">
+                      <RadioGroupItem value="private" id="private" />
+                      <Label htmlFor="private" className="text-lg font-semibold text-gray-900">
                         Por invitación
                       </Label>
                     </div>
-                    <p className="text-sm text-gray-300 ml-6">
+                    <p className="text-sm text-gray-600 ml-6">
                       Define las condiciones y elige los foodies con los que quieres colaborar
                     </p>
                   </div>
-                  <Button variant={selectedType === 'private' ? 'secondary' : 'outline'} className={`px-4 py-2 text-sm rounded-full ${selectedType === 'private' ? 'bg-white text-gray-900' : 'bg-transparent border-gray-600 text-gray-300'}`}>
+                  <Button variant={selectedType === 'private' ? 'default' : 'secondary'} className={`px-4 py-2 text-sm rounded-full ${selectedType === 'private' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'}`}>
                     Elegido
                   </Button>
                 </div>
@@ -135,6 +140,8 @@ const CreateCollaborationPage = () => {
           <ArrowLeft className="w-5 h-5 text-white rotate-180" />
         </Button>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default CreateCollaborationPage;
