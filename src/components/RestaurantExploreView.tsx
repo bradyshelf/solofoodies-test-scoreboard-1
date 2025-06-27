@@ -54,6 +54,10 @@ const RestaurantExploreView = () => {
     navigate(`/chat/${foodieId}`);
   };
 
+  const handleFoodieClick = (foodieId: number) => {
+    navigate(`/foodie/${foodieId}`);
+  };
+
   return (
     <div className="space-y-3">
       {popularFoodies.map(foodie => (
@@ -73,9 +77,14 @@ const RestaurantExploreView = () => {
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between mb-2 sm:mb-3">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 text-sm sm:text-base truncate">
-                      {foodie.handle}
-                    </h3>
+                    <button
+                      onClick={() => handleFoodieClick(foodie.id)}
+                      className="text-left"
+                    >
+                      <h3 className="font-semibold text-gray-900 text-sm sm:text-base truncate hover:text-blue-600 transition-colors">
+                        {foodie.handle}
+                      </h3>
+                    </button>
                     <p className="text-gray-500 text-xs sm:text-sm truncate">{foodie.name}</p>
                     
                     {/* Rating */}

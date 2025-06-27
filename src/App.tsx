@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -20,6 +21,7 @@ import SubscriptionPage from "./pages/SubscriptionPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
+import FoodieProfilePage from "./pages/FoodieProfilePage";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <ProfilePage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/foodie/:foodieId" 
+              element={
+                <ProtectedRoute>
+                  <FoodieProfilePage />
                 </ProtectedRoute>
               } 
             />
