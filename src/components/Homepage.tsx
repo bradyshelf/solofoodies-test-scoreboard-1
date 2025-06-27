@@ -1,4 +1,5 @@
 
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -84,16 +85,16 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Connect with food influencers and creators to showcase your dishes to new audiences.
                 </p>
-                <ul className="space-y-3 mb-6 text-left max-w-sm mx-auto">
-                  <li className="flex items-center gap-3">
+                <ul className="space-y-3 mb-6 max-w-sm mx-auto">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Find relevant food creators</span>
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Create collaboration offers</span>
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Track partnership success</span>
                   </li>
@@ -116,16 +117,16 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Discover amazing restaurants and create content while enjoying great food experiences.
                 </p>
-                <ul className="space-y-3 mb-6 text-left max-w-sm mx-auto">
-                  <li className="flex items-center gap-3">
+                <ul className="space-y-3 mb-6 max-w-sm mx-auto">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Browse collaboration opportunities</span>
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Showcase your portfolio</span>
                   </li>
-                  <li className="flex items-center gap-3">
+                  <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Get paid for content</span>
                   </li>
@@ -326,3 +327,4 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
