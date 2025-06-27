@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, MapPin, Users, Calendar } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -10,36 +11,37 @@ const LocationSelectionPage = () => {
   const location = useLocation();
   const collaborationType = location.state?.collaborationType || '';
   
-  const [selectedLocation, setSelectedLocation] = useState<string>('');
+  const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
 
   const locations = [
     {
       id: 'sede-central',
       name: 'Sede Central',
       address: 'Calle Gran Vía, 45',
-      isSelected: false
     },
     {
       id: 'local-valencia',
       name: 'Local Valencia',
       address: 'Calle Colon, 27',
-      isSelected: true
     },
     {
       id: 'sucursal-barcelona',
       name: 'Sucursal Barcelona',
       address: 'Passeig de Gràcia, 92',
-      isSelected: true
     }
   ];
 
-  const handleLocationSelect = (locationId: string) => {
-    setSelectedLocation(locationId);
+  const handleLocationSelect = (locationId: string, checked: boolean) => {
+    if (checked) {
+      setSelectedLocations(prev => [...prev, locationId]);
+    } else {
+      setSelectedLocations(prev => prev.filter(id => id !== locationId));
+    }
   };
 
   const handleContinue = () => {
-    if (selectedLocation) {
-      console.log('Selected location:', selectedLocation);
+    if (selectedLocations.length > 0) {
+      console.log('Selected locations:', selectedLocations);
       console.log('Collaboration type:', collaborationType);
       // TODO: Navigate to next step when implemented
     }
@@ -114,26 +116,17 @@ const LocationSelectionPage = () => {
           {locations.map((location) => (
             <Card 
               key={location.id}
-              className={`border-gray-200 cursor-pointer transition-all ${
-                selectedLocation === location.id ? 'ring-2 ring-blue-500' : ''
-              }`}
-              onClick={() => handleLocationSelect(location.id)}
+              className="border-gray-200 cursor-pointer transition-all"
+              onClick={() => handleLocationSelect(location.id, !selectedLocations.includes(location.id))}
             >
               <CardContent className="p-4">
                 <div className="flex items-center space-x-4">
-                  <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                    location.isSelected 
-                      ? 'bg-blue-600 border-blue-600' 
-                      : selectedLocation === location.id
-                      ? 'border-blue-600'
-                      : 'border-gray-300'
-                  }`}>
-                    {location.isSelected && (
-                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    )}
-                  </div>
+                  <Checkbox
+                    checked={selectedLocations.includes(location.id)}
+                    onCheckedChange={(checked) => handleLocationSelect(location.id, !!checked)}
+                    className="w-6 h-6"
+                    onClick={(e) => e.stopPropagation()}
+                  />
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900">{location.name}</h3>
                     <p className="text-sm text-gray-500">{location.address}</p>
@@ -156,7 +149,7 @@ const LocationSelectionPage = () => {
         
         <Button 
           onClick={handleContinue} 
-          disabled={!selectedLocation} 
+          disabled={selectedLocations.length === 0} 
           className="w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center justify-center"
         >
           <ArrowLeft className="w-5 h-5 text-white rotate-180" />
