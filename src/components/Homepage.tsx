@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -73,7 +74,7 @@ const Homepage = () => {
           <div className="grid md:grid-cols-2 gap-8 mb-16">
             {/* For Restaurants */}
             <Card className="p-8 border-0 shadow-lg">
-              <CardContent className="p-0">
+              <CardContent className="p-0 text-center">
                 <div className="flex justify-center mb-6">
                   <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
                     <Utensils className="w-6 h-6 text-red-500" />
@@ -83,7 +84,7 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Connect with food influencers and creators to showcase your dishes to new audiences.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 text-left max-w-sm mx-auto">
                   <li className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Find relevant food creators</span>
@@ -105,7 +106,7 @@ const Homepage = () => {
 
             {/* For Food Creators */}
             <Card className="p-8 border-0 shadow-lg">
-              <CardContent className="p-0">
+              <CardContent className="p-0 text-center">
                 <div className="flex justify-center mb-6">
                   <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
                     <Users className="w-6 h-6 text-green-500" />
@@ -115,7 +116,7 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Discover amazing restaurants and create content while enjoying great food experiences.
                 </p>
-                <ul className="space-y-3 mb-6">
+                <ul className="space-y-3 mb-6 text-left max-w-sm mx-auto">
                   <li className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Browse collaboration opportunities</span>
