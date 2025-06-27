@@ -16,6 +16,9 @@ import ChatConversation from "./pages/ChatConversation";
 import CollaborationsPage from "./pages/CollaborationsPage";
 import CreateCollaborationPage from "./pages/CreateCollaborationPage";
 import ProfilePage from "./pages/ProfilePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsOfServicePage from "./pages/TermsOfServicePage";
+import CookiePolicyPage from "./pages/CookiePolicyPage";
 
 const queryClient = new QueryClient();
 
@@ -85,6 +88,9 @@ const App = () => (
                 </ProtectedRoute>
               } 
             />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/terms-of-service" element={<TermsOfServicePage />} />
+            <Route path="/cookie-policy" element={<CookiePolicyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

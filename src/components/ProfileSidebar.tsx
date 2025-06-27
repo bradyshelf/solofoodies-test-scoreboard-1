@@ -1,3 +1,4 @@
+
 import { 
   User, 
   Heart, 
@@ -78,21 +79,21 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
     {
       title: "Políticas de privacidad",
       onClick: () => {
-        console.log("Navigate to privacy policy");
+        navigate('/privacy-policy');
         onClose();
       }
     },
     {
       title: "Condiciones de uso y contratación",
       onClick: () => {
-        console.log("Navigate to terms");
+        navigate('/terms-of-service');
         onClose();
       }
     },
     {
       title: "Política de cookies",
       onClick: () => {
-        console.log("Navigate to cookie policy");
+        navigate('/cookie-policy');
         onClose();
       }
     }
