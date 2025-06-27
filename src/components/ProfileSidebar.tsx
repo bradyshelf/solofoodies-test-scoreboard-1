@@ -15,7 +15,7 @@ interface ProfileSidebarProps {
 }
 
 const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
-  const { signOut } = useAuth();
+  const { signOut, userRole } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -23,7 +23,7 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
     navigate('/');
   };
 
-  const menuItems = [
+  const allMenuItems = [
     {
       title: "Mi perfil",
       icon: User,
@@ -62,9 +62,18 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
       onClick: () => {
         console.log("Navigate to subscription");
         onClose();
-      }
+      },
+      showForRoles: ['restaurant'] // Only show for restaurant users
     }
   ];
+
+  // Filter menu items based on user role
+  const menuItems = allMenuItems.filter(item => {
+    if (item.showForRoles) {
+      return item.showForRoles.includes(userRole || '');
+    }
+    return true; // Show items without role restrictions for all users
+  });
 
   const policyItems = [
     {
