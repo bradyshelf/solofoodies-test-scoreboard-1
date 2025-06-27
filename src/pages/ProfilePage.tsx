@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -151,6 +150,11 @@ const ProfilePage = () => {
     setLocations(locations.filter(loc => loc.id !== id));
   };
 
+  const handleBackClick = () => {
+    // Go back to the previous page in history
+    navigate(-1);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -168,7 +172,7 @@ const ProfilePage = () => {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => navigate('/dashboard')}
+              onClick={handleBackClick}
             >
               <ArrowLeft className="w-4 h-4" />
             </Button>
