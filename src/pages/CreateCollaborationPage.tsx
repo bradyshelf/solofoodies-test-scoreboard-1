@@ -8,13 +8,23 @@ import { useNavigate } from 'react-router-dom';
 const CreateCollaborationPage = () => {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<string>('');
+  
   const handleContinue = () => {
     if (selectedType) {
-      // For now, just console log the selection
       console.log('Selected collaboration type:', selectedType);
-      // TODO: Navigate to next step when implemented
+      navigate('/collaborations/location', { 
+        state: { collaborationType: selectedType } 
+      });
     }
   };
+
+  const handleElegirClick = (type: string) => {
+    setSelectedType(type);
+    navigate('/collaborations/location', { 
+      state: { collaborationType: type } 
+    });
+  };
+
   return <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-4 py-4">
@@ -86,7 +96,10 @@ const CreateCollaborationPage = () => {
                       Define las condiciones y recibe solicitudes de foodies
                     </p>
                   </div>
-                  <Button variant={selectedType === 'public' ? 'default' : 'secondary'} className={`px-4 py-2 text-sm rounded-full ${selectedType === 'public' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'}`}>
+                  <Button 
+                    onClick={() => handleElegirClick('public')}
+                    className="px-4 py-2 text-sm rounded-full bg-gray-900 text-white hover:bg-gray-800"
+                  >
                     Elegir
                   </Button>
                 </div>
@@ -110,7 +123,12 @@ const CreateCollaborationPage = () => {
                       Define las condiciones y elige los foodies con los que quieres colaborar
                     </p>
                   </div>
-                  <Button variant={selectedType === 'private' ? 'default' : 'secondary'} className={`px-4 py-2 text-sm rounded-full ${selectedType === 'private' ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-600'}`}>Elegir</Button>
+                  <Button 
+                    onClick={() => handleElegirClick('private')}
+                    className="px-4 py-2 text-sm rounded-full bg-gray-900 text-white hover:bg-gray-800"
+                  >
+                    Elegir
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -135,4 +153,5 @@ const CreateCollaborationPage = () => {
       </div>
     </div>;
 };
+
 export default CreateCollaborationPage;
