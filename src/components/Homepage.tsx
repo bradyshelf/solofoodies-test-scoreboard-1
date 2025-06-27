@@ -2,18 +2,24 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
 const Homepage = () => {
   const navigate = useNavigate();
+
   const handleGetStarted = () => {
     navigate('/auth');
   };
+
   const handleRestaurantSignUp = () => {
     navigate('/auth?mode=signup&role=restaurant');
   };
+
   const handleCreatorSignUp = () => {
     navigate('/auth?mode=signup&role=foodie');
   };
-  return <div className="min-h-screen bg-white">
+
+  return (
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="px-4 py-6 md:px-6 lg:px-8">
         <div className="flex items-center justify-between max-w-7xl mx-auto">
@@ -179,9 +185,9 @@ const Homepage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="flex justify-center max-w-5xl mx-auto">
             {/* Starter Plan */}
-            <Card className="relative border-2 border-gray-200 shadow-lg">
+            <Card className="relative border-2 border-gray-200 shadow-lg max-w-sm w-full">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Starter</h3>
@@ -206,15 +212,8 @@ const Homepage = () => {
                     <span className="text-gray-700">Basic analytics</span>
                   </li>
                 </ul>
-                
               </CardContent>
             </Card>
-
-            {/* Growth Plan - Popular */}
-            
-
-            {/* Enterprise Plan */}
-            
           </div>
 
           <div className="text-center mt-12">
@@ -244,6 +243,8 @@ const Homepage = () => {
           </div>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 };
+
 export default Homepage;
