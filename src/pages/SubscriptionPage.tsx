@@ -14,8 +14,8 @@ const SubscriptionPage = () => {
   ];
 
   const handleBackClick = () => {
-    // Go back to the previous page in history
-    navigate(-1);
+    // Navigate to the profile page
+    navigate('/profile');
   };
 
   return (
