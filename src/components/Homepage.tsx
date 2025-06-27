@@ -1,5 +1,3 @@
-
-
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Utensils, Users, MapPin, Star, ArrowRight, CheckCircle, Check } from 'lucide-react';
@@ -117,7 +115,7 @@ const Homepage = () => {
                 <p className="text-gray-600 mb-6">
                   Discover amazing restaurants and create content while enjoying great food experiences.
                 </p>
-                <ul className="space-y-3 mb-6 max-w-sm mx-auto">
+                <ul className="space-y-3 mb-6 max-w-sm mx-auto text-center">
                   <li className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-gray-700">Browse collaboration opportunities</span>
@@ -327,4 +325,3 @@ const Homepage = () => {
 };
 
 export default Homepage;
-
