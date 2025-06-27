@@ -1,4 +1,3 @@
-
 import { 
   User, 
   Heart, 
@@ -28,7 +27,7 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
       title: "Mi perfil",
       icon: User,
       onClick: () => {
-        console.log("Navigate to profile");
+        navigate('/profile');
         onClose();
       }
     },
