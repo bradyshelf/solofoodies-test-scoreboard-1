@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -43,7 +42,12 @@ const LocationSelectionPage = () => {
     if (selectedLocations.length > 0) {
       console.log('Selected locations:', selectedLocations);
       console.log('Collaboration type:', collaborationType);
-      // TODO: Navigate to next step when implemented
+      navigate('/collaborations/foodies', { 
+        state: { 
+          collaborationType, 
+          selectedLocations 
+        } 
+      });
     }
   };
 

@@ -17,6 +17,7 @@ import ChatConversation from "./pages/ChatConversation";
 import CollaborationsPage from "./pages/CollaborationsPage";
 import CreateCollaborationPage from "./pages/CreateCollaborationPage";
 import LocationSelectionPage from "./pages/LocationSelectionPage";
+import FoodieSelectionPage from "./pages/FoodieSelectionPage";
 import ProfilePage from "./pages/ProfilePage";
 import SubscriptionPage from "./pages/SubscriptionPage";
 import SubscriptionManagementPage from "./pages/SubscriptionManagementPage";
@@ -83,6 +84,14 @@ const App = () => (
                 element={
                   <ProtectedRoute>
                     <LocationSelectionPage />
+                  </ProtectedRoute>
+                } 
+              />
+              <Route 
+                path="/collaborations/foodies" 
+                element={
+                  <ProtectedRoute>
+                    <FoodieSelectionPage />
                   </ProtectedRoute>
                 } 
               />
