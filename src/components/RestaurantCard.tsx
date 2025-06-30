@@ -22,6 +22,7 @@ interface RestaurantCardProps {
 
 const RestaurantCard = ({ restaurant, onPause, onReactivate, onDelete }: RestaurantCardProps) => {
   const isActive = restaurant.status === 'Activo';
+  const hasLifetimeAccess = !restaurant.canPause;
 
   return (
     <Card className="border border-gray-200">
@@ -60,6 +61,17 @@ const RestaurantCard = ({ restaurant, onPause, onReactivate, onDelete }: Restaur
           </div>
           
           <div className="flex items-center space-x-2">
+            {!hasLifetimeAccess && onDelete && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onDelete(restaurant.id)}
+                className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
+              >
+                <Trash className="w-3 h-3" />
+              </Button>
+            )}
+
             {isActive && restaurant.canPause && onPause && (
               <Button
                 variant="outline"
@@ -87,17 +99,6 @@ const RestaurantCard = ({ restaurant, onPause, onReactivate, onDelete }: Restaur
               >
                 <RotateCcw className="w-3 h-3 mr-1" />
                 Reactivar
-              </Button>
-            )}
-
-            {onDelete && (
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => onDelete(restaurant.id)}
-                className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
-              >
-                <Trash className="w-3 h-3" />
               </Button>
             )}
           </div>
