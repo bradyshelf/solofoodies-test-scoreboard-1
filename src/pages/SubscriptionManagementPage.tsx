@@ -1,12 +1,15 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, X, Pause } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
 
 const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
+  const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
 
   const restaurants = [
     {
@@ -47,8 +50,25 @@ const SubscriptionManagementPage = () => {
   };
 
   const handlePause = (restaurantId: number) => {
-    console.log('Pausing restaurant:', restaurantId);
-    // Handle pause functionality here
+    const restaurant = restaurants.find(r => r.id === restaurantId);
+    if (restaurant) {
+      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
+      setPauseDialogOpen(true);
+    }
+  };
+
+  const handleConfirmPause = () => {
+    if (selectedRestaurant) {
+      console.log('Pausing restaurant:', selectedRestaurant.id);
+      // Handle actual pause functionality here
+      setPauseDialogOpen(false);
+      setSelectedRestaurant(null);
+    }
+  };
+
+  const handleClosePauseDialog = () => {
+    setPauseDialogOpen(false);
+    setSelectedRestaurant(null);
   };
 
   return (
@@ -144,6 +164,14 @@ const SubscriptionManagementPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Pause Confirmation Dialog */}
+      <PauseRestaurantDialog
+        isOpen={pauseDialogOpen}
+        onClose={handleClosePauseDialog}
+        onConfirm={handleConfirmPause}
+        restaurantName={selectedRestaurant?.name || ''}
+      />
     </div>
   );
 };
