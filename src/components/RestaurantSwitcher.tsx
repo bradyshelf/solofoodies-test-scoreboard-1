@@ -12,11 +12,13 @@ import {
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 interface Restaurant {
-  id: string;
+  id: number;
   name: string;
-  handle: string;
+  instagram: string;
   image: string;
-  status: 'active' | 'paused';
+  status: 'Activo' | 'Pausado';
+  plan: string;
+  canPause: boolean;
 }
 
 interface RestaurantSwitcherProps {
@@ -24,45 +26,52 @@ interface RestaurantSwitcherProps {
 }
 
 const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
-  // Mock data - in real app this would come from context/state management
+  // Use the same restaurant data as the subscription page
   const [restaurants, setRestaurants] = useState<Restaurant[]>([
     {
-      id: '1',
-      name: 'Pollos Hermanos',
-      handle: '@usuarioinstagram',
+      id: 1,
+      name: "Pollos Hermanos",
+      instagram: "@UsuarioInstagram",
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
-      status: 'active'
+      status: 'Activo',
+      plan: "Pago único",
+      canPause: false
     },
     {
-      id: '2', 
-      name: 'KFC',
-      handle: '@kfc_oficial',
+      id: 2,
+      name: "McDonalds 2",
+      instagram: "@kadjacjo",
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
-      status: 'active'
+      status: 'Activo',
+      plan: "Plan Mensual",
+      canPause: true
     },
     {
-      id: '3',
-      name: 'Burger King',
-      handle: '@burgerking',
+      id: 3,
+      name: "McDonalds",
+      instagram: "@cento",
       image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
-      status: 'paused'
+      status: 'Activo',
+      plan: "Plan Mensual",
+      canPause: true
     }
   ]);
 
-  const [activeRestaurant, setActiveRestaurant] = useState<Restaurant>(
-    restaurants.find(r => r.status === 'active') || restaurants[0]
-  );
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
 
-  const activeRestaurants = restaurants.filter(r => r.status === 'active');
-  const pausedRestaurants = restaurants.filter(r => r.status === 'paused');
+  const activeRestaurants = restaurants.filter(r => r.status === 'Activo');
+  const pausedRestaurants = restaurants.filter(r => r.status === 'Pausado');
 
-  const handleReactivate = (restaurantId: string) => {
+  const [activeRestaurant, setActiveRestaurant] = useState<Restaurant>(
+    activeRestaurants.find(r => r.status === 'Activo') || activeRestaurants[0]
+  );
+
+  const handleReactivate = (restaurantId: number) => {
     console.log('Reactivating restaurant:', restaurantId);
     
     setRestaurants(prev => prev.map(restaurant => 
       restaurant.id === restaurantId 
-        ? { ...restaurant, status: 'active' as const }
+        ? { ...restaurant, status: 'Activo' as const }
         : restaurant
     ));
   };
@@ -82,7 +91,7 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
               </div>
               <div className="text-left">
                 <h3 className="font-semibold text-gray-900">{activeRestaurant.name}</h3>
-                <p className="text-sm text-gray-500">{activeRestaurant.handle}</p>
+                <p className="text-sm text-gray-500">{activeRestaurant.instagram}</p>
               </div>
             </div>
             <ChevronDown className="w-4 h-4 text-gray-400" />
@@ -91,7 +100,7 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
         
         <DropdownMenuContent className="w-80 bg-white border border-gray-200 shadow-lg" align="start">
           <div className="p-2">
-            <div className="text-xs font-medium text-gray-500 mb-2 px-2">ATRÁS</div>
+            <div className="text-xs font-medium text-gray-500 mb-2 px-2">RESTAURANTES</div>
             
             {/* Active Restaurants */}
             {activeRestaurants.map((restaurant) => (
@@ -109,8 +118,15 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
                 </div>
                 <div className="flex-1">
                   <div className="font-medium text-gray-900">{restaurant.name}</div>
-                  <div className="text-sm text-gray-500">{restaurant.handle}</div>
-                  <div className="text-xs text-gray-400">Madrid</div>
+                  <div className="text-sm text-gray-500">{restaurant.instagram}</div>
+                  <div className="flex items-center space-x-2 mt-1">
+                    <div className="flex items-center">
+                      <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
+                      <span className="text-xs text-gray-600">{restaurant.status}</span>
+                    </div>
+                    <span className="text-xs text-gray-400">•</span>
+                    <span className="text-xs text-gray-600">{restaurant.plan}</span>
+                  </div>
                 </div>
                 {activeRestaurant.id === restaurant.id && (
                   <Check className="w-4 h-4 text-green-500" />
@@ -150,7 +166,7 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
                           </div>
                           <div className="flex-1">
                             <div className="font-medium text-gray-900">{restaurant.name}</div>
-                            <div className="text-sm text-gray-500">{restaurant.handle}</div>
+                            <div className="text-sm text-gray-500">{restaurant.instagram}</div>
                             <div className="flex items-center space-x-2 mt-1">
                               <div className="flex items-center">
                                 <div className="w-2 h-2 bg-gray-400 rounded-full mr-1"></div>
