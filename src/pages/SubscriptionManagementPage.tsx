@@ -1,33 +1,35 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ArrowLeft, X, Pause, ChevronDown, RotateCcw, Trash } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useRestaurants } from '@/contexts/RestaurantContext';
+import { useSubscriptionDialogs } from '@/hooks/useSubscriptionDialogs';
+import RestaurantCard from '@/components/RestaurantCard';
+import PausedRestaurantsSection from '@/components/PausedRestaurantsSection';
 import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
 import PlanSelectionDialog from '@/components/PlanSelectionDialog';
 import DeleteRestaurantDialog from '@/components/DeleteRestaurantDialog';
-import { useRestaurants } from '@/contexts/RestaurantContext';
 
 const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
-  const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
-  const [planSelectionDialogOpen, setPlanSelectionDialogOpen] = useState(false);
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
-  
-  const { restaurants, pauseRestaurant, reactivateRestaurant } = useRestaurants();
+  const { restaurants, pauseRestaurant, deleteRestaurant } = useRestaurants();
+  const {
+    pauseDialogOpen,
+    planSelectionDialogOpen,
+    deleteDialogOpen,
+    selectedRestaurant,
+    openPauseDialog,
+    closePauseDialog,
+    openPlanSelectionDialog,
+    closePlanSelectionDialog,
+    openDeleteDialog,
+    closeDeleteDialog,
+  } = useSubscriptionDialogs();
 
   const activeRestaurants = restaurants.filter(r => r.status === 'Activo');
   const pausedRestaurants = restaurants.filter(r => r.status === 'Pausado');
-
-  const handleBackClick = () => {
-    navigate('/dashboard');
-    setTimeout(() => {
-      window.dispatchEvent(new CustomEvent('openProfileSidebar'));
-    }, 100);
-  };
 
   const handleClose = () => {
     navigate('/dashboard');
@@ -36,8 +38,7 @@ const SubscriptionManagementPage = () => {
   const handlePause = (restaurantId: number) => {
     const restaurant = activeRestaurants.find(r => r.id === restaurantId);
     if (restaurant) {
-      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
-      setPauseDialogOpen(true);
+      openPauseDialog({ id: restaurantId, name: restaurant.name });
     }
   };
 
@@ -45,54 +46,33 @@ const SubscriptionManagementPage = () => {
     if (selectedRestaurant) {
       pauseRestaurant(selectedRestaurant.id);
       setPausedRestaurantsOpen(true);
-      setPauseDialogOpen(false);
-      setSelectedRestaurant(null);
+      closePauseDialog();
     }
-  };
-
-  const handleClosePauseDialog = () => {
-    setPauseDialogOpen(false);
-    setSelectedRestaurant(null);
   };
 
   const handleReactivate = (restaurantId: number) => {
     const restaurant = pausedRestaurants.find(r => r.id === restaurantId);
     if (restaurant) {
-      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
-      setPlanSelectionDialogOpen(true);
+      openPlanSelectionDialog({ id: restaurantId, name: restaurant.name });
     }
-  };
-
-  const handleClosePlanSelectionDialog = () => {
-    setPlanSelectionDialogOpen(false);
-    setSelectedRestaurant(null);
   };
 
   const handleDelete = (restaurantId: number) => {
     const restaurant = restaurants.find(r => r.id === restaurantId);
     if (restaurant) {
-      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
-      setDeleteDialogOpen(true);
+      openDeleteDialog({ id: restaurantId, name: restaurant.name });
     }
   };
 
   const handleConfirmDelete = () => {
     if (selectedRestaurant) {
-      // TODO: Implement actual delete functionality in context
-      console.log('Deleting restaurant:', selectedRestaurant.id);
-      setDeleteDialogOpen(false);
-      setSelectedRestaurant(null);
+      deleteRestaurant(selectedRestaurant.id);
+      closeDeleteDialog();
     }
-  };
-
-  const handleCloseDeleteDialog = () => {
-    setDeleteDialogOpen(false);
-    setSelectedRestaurant(null);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Modal-like container */}
       <div className="flex items-center justify-center min-h-screen p-4">
         <div className="w-full max-w-md bg-white rounded-lg shadow-lg">
           {/* Header */}
@@ -120,136 +100,24 @@ const SubscriptionManagementPage = () => {
               
               <div className="space-y-3">
                 {activeRestaurants.map((restaurant) => (
-                  <Card key={restaurant.id} className="border border-gray-200">
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-                            <img
-                              src={restaurant.image}
-                              alt={restaurant.name}
-                              className="w-full h-full object-cover"
-                            />
-                          </div>
-                          <div>
-                            <h3 className="font-medium text-gray-900 text-sm">
-                              {restaurant.name}
-                            </h3>
-                            <p className="text-xs text-gray-500">
-                              {restaurant.instagram}
-                            </p>
-                            <div className="flex items-center space-x-2 mt-1">
-                              <div className="flex items-center">
-                                <div className="w-2 h-2 bg-green-500 rounded-full mr-1"></div>
-                                <span className="text-xs text-gray-600">{restaurant.status}</span>
-                              </div>
-                              <span className="text-xs text-gray-400">•</span>
-                              <span className="text-xs text-gray-600">{restaurant.plan}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center space-x-2">
-                          {restaurant.canPause && (
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handlePause(restaurant.id)}
-                              className="text-orange-600 border-orange-300 hover:bg-orange-50 text-xs px-3 py-1"
-                            >
-                              <Pause className="w-3 h-3 mr-1" />
-                              Pausar
-                            </Button>
-                          )}
-                          
-                          {!restaurant.canPause && (
-                            <span className="text-xs text-blue-600 font-medium mr-2">
-                              Acceso de por vida
-                            </span>
-                          )}
-
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDelete(restaurant.id)}
-                            className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
-                          >
-                            <Trash className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <RestaurantCard
+                    key={restaurant.id}
+                    restaurant={restaurant}
+                    onPause={handlePause}
+                    onDelete={handleDelete}
+                  />
                 ))}
               </div>
             </div>
 
             {/* Paused Restaurants */}
-            {pausedRestaurants.length > 0 && (
-              <Collapsible open={pausedRestaurantsOpen} onOpenChange={setPausedRestaurantsOpen}>
-                <CollapsibleTrigger className="flex items-center justify-between w-full p-2 hover:bg-gray-50 rounded-md">
-                  <h2 className="text-sm font-medium text-gray-900">Restaurantes pausados</h2>
-                  <ChevronDown className="h-4 w-4 text-gray-500 transition-transform" />
-                </CollapsibleTrigger>
-                
-                <CollapsibleContent className="mt-3">
-                  <div className="space-y-3">
-                    {pausedRestaurants.map((restaurant) => (
-                      <Card key={restaurant.id} className="border border-gray-200">
-                        <CardContent className="p-4">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
-                                <img
-                                  src={restaurant.image}
-                                  alt={restaurant.name}
-                                  className="w-full h-full object-cover"
-                                />
-                              </div>
-                              <div>
-                                <h3 className="font-medium text-gray-900 text-sm">
-                                  {restaurant.name}
-                                </h3>
-                                <p className="text-xs text-gray-500">
-                                  {restaurant.instagram}
-                                </p>
-                                <div className="flex items-center space-x-2 mt-1">
-                                  <div className="flex items-center">
-                                    <div className="w-2 h-2 bg-gray-400 rounded-full mr-1"></div>
-                                    <span className="text-xs text-gray-600">{restaurant.status}</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            
-                            <div className="flex items-center space-x-2">
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleReactivate(restaurant.id)}
-                                className="text-green-600 border-green-300 hover:bg-green-50 text-xs px-3 py-1"
-                              >
-                                <RotateCcw className="w-3 h-3 mr-1" />
-                                Reactivar
-                              </Button>
-
-                              <Button
-                                variant="outline"
-                                size="sm"
-                                onClick={() => handleDelete(restaurant.id)}
-                                className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
-                              >
-                                <Trash className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
-            )}
+            <PausedRestaurantsSection
+              restaurants={pausedRestaurants}
+              isOpen={pausedRestaurantsOpen}
+              onToggle={setPausedRestaurantsOpen}
+              onReactivate={handleReactivate}
+              onDelete={handleDelete}
+            />
 
             {/* Close Button */}
             <div className="pt-4">
@@ -265,25 +133,23 @@ const SubscriptionManagementPage = () => {
         </div>
       </div>
 
-      {/* Pause Confirmation Dialog */}
+      {/* Dialogs */}
       <PauseRestaurantDialog
         isOpen={pauseDialogOpen}
-        onClose={handleClosePauseDialog}
+        onClose={closePauseDialog}
         onConfirm={handleConfirmPause}
         restaurantName={selectedRestaurant?.name || ''}
       />
 
-      {/* Plan Selection Dialog for Reactivation */}
       <PlanSelectionDialog
         isOpen={planSelectionDialogOpen}
-        onClose={handleClosePlanSelectionDialog}
+        onClose={closePlanSelectionDialog}
         restaurantName={selectedRestaurant?.name || ''}
       />
 
-      {/* Delete Confirmation Dialog */}
       <DeleteRestaurantDialog
         isOpen={deleteDialogOpen}
-        onClose={handleCloseDeleteDialog}
+        onClose={closeDeleteDialog}
         onConfirm={handleConfirmDelete}
         restaurantName={selectedRestaurant?.name || ''}
       />

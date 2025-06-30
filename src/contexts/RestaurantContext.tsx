@@ -17,6 +17,7 @@ interface RestaurantContextType {
   setActiveRestaurant: (restaurant: Restaurant) => void;
   pauseRestaurant: (restaurantId: number) => void;
   reactivateRestaurant: (restaurantId: number) => void;
+  deleteRestaurant: (restaurantId: number) => void;
 }
 
 const RestaurantContext = createContext<RestaurantContextType | undefined>(undefined);
@@ -83,13 +84,25 @@ export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
     ));
   };
 
+  const deleteRestaurant = (restaurantId: number) => {
+    console.log('Deleting restaurant:', restaurantId);
+    setRestaurants(prev => prev.filter(restaurant => restaurant.id !== restaurantId));
+    
+    // If the deleted restaurant was the active one, set a new active restaurant
+    if (activeRestaurant?.id === restaurantId) {
+      const remainingActive = restaurants.filter(r => r.id !== restaurantId && r.status === 'Activo');
+      setActiveRestaurant(remainingActive[0] || null);
+    }
+  };
+
   return (
     <RestaurantContext.Provider value={{
       restaurants,
       activeRestaurant,
       setActiveRestaurant,
       pauseRestaurant,
-      reactivateRestaurant
+      reactivateRestaurant,
+      deleteRestaurant
     }}>
       {children}
     </RestaurantContext.Provider>
