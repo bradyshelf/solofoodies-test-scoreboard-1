@@ -54,7 +54,6 @@ const PauseRestaurantDialog = ({ isOpen, onClose, onConfirm, restaurantName }: P
 
           {/* Warning Box */}
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-left">
-            <p className="text-sm font-medium text-gray-700 mb-2">Al pausar este restaurante:</p>
             <ul className="text-sm text-gray-600 space-y-1">
               <li>• Perderás acceso el {getEndOfBillingPeriod()}</li>
               <li>• Se cancelará la suscripción mensual</li>

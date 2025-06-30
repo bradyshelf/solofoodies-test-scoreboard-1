@@ -65,7 +65,6 @@ const DeleteRestaurantDialog = ({ isOpen, onClose, onConfirm, restaurantName }: 
 
           {/* Warning Box */}
           <div className="bg-red-50 border border-red-200 rounded-lg p-4 text-left">
-            <p className="text-sm font-medium text-red-700 mb-2">⚠️ Advertencia:</p>
             <ul className="text-sm text-red-600 space-y-1">
               <li>• Se eliminarán todos los datos del restaurante</li>
               <li>• Se cancelará la suscripción inmediatamente</li>

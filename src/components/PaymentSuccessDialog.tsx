@@ -46,13 +46,6 @@ const PaymentSuccessDialog = ({ isOpen, onClose, restaurantName, selectedPlan }:
 
           {/* Payment Details */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <div className="flex items-center justify-center mb-3">
-              <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
-                <div className="w-4 h-4 bg-blue-500 rounded"></div>
-              </div>
-              <span className="ml-2 text-sm font-medium text-gray-700">Detalles del pago</span>
-            </div>
-            
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600">Restaurante:</span>
