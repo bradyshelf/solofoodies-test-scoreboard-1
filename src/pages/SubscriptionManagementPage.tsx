@@ -1,8 +1,8 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, X, Pause } from 'lucide-react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { ArrowLeft, X, Pause, ChevronDown, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
 
@@ -10,8 +10,9 @@ const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
   const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
+  const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
 
-  const restaurants = [
+  const [activeRestaurants, setActiveRestaurants] = useState([
     {
       id: 1,
       name: "Pollos Hermanos",
@@ -36,7 +37,9 @@ const SubscriptionManagementPage = () => {
       plan: "Plan Mensual",
       canPause: true
     }
-  ];
+  ]);
+
+  const [pausedRestaurants, setPausedRestaurants] = useState<any[]>([]);
 
   const handleBackClick = () => {
     navigate('/dashboard');
@@ -50,7 +53,7 @@ const SubscriptionManagementPage = () => {
   };
 
   const handlePause = (restaurantId: number) => {
-    const restaurant = restaurants.find(r => r.id === restaurantId);
+    const restaurant = activeRestaurants.find(r => r.id === restaurantId);
     if (restaurant) {
       setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
       setPauseDialogOpen(true);
@@ -60,7 +63,15 @@ const SubscriptionManagementPage = () => {
   const handleConfirmPause = () => {
     if (selectedRestaurant) {
       console.log('Pausing restaurant:', selectedRestaurant.id);
-      // Handle actual pause functionality here
+      
+      // Move restaurant from active to paused
+      const restaurantToMove = activeRestaurants.find(r => r.id === selectedRestaurant.id);
+      if (restaurantToMove) {
+        setActiveRestaurants(prev => prev.filter(r => r.id !== selectedRestaurant.id));
+        setPausedRestaurants(prev => [...prev, { ...restaurantToMove, status: "Pausado" }]);
+        setPausedRestaurantsOpen(true); // Open the collapsible section
+      }
+      
       setPauseDialogOpen(false);
       setSelectedRestaurant(null);
     }
@@ -69,6 +80,17 @@ const SubscriptionManagementPage = () => {
   const handleClosePauseDialog = () => {
     setPauseDialogOpen(false);
     setSelectedRestaurant(null);
+  };
+
+  const handleReactivate = (restaurantId: number) => {
+    console.log('Reactivating restaurant:', restaurantId);
+    
+    // Move restaurant from paused to active
+    const restaurantToMove = pausedRestaurants.find(r => r.id === restaurantId);
+    if (restaurantToMove) {
+      setPausedRestaurants(prev => prev.filter(r => r.id !== restaurantId));
+      setActiveRestaurants(prev => [...prev, { ...restaurantToMove, status: "Activo" }]);
+    }
   };
 
   return (
@@ -95,11 +117,12 @@ const SubscriptionManagementPage = () => {
               Administra las suscripciones de tus restaurantes
             </p>
 
+            {/* Active Restaurants */}
             <div>
               <h2 className="text-sm font-medium text-gray-900 mb-3">Restaurantes activos</h2>
               
               <div className="space-y-3">
-                {restaurants.map((restaurant) => (
+                {activeRestaurants.map((restaurant) => (
                   <Card key={restaurant.id} className="border border-gray-200">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
@@ -150,6 +173,65 @@ const SubscriptionManagementPage = () => {
                 ))}
               </div>
             </div>
+
+            {/* Paused Restaurants */}
+            {pausedRestaurants.length > 0 && (
+              <Collapsible open={pausedRestaurantsOpen} onOpenChange={setPausedRestaurantsOpen}>
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-2 hover:bg-gray-50 rounded-md">
+                  <div className="flex items-center space-x-2">
+                    <h2 className="text-sm font-medium text-gray-900">Restaurantes pausados</h2>
+                    <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                      <span className="text-xs text-white font-medium">{pausedRestaurants.length}</span>
+                    </div>
+                  </div>
+                  <ChevronDown className="h-4 w-4 text-gray-500 transition-transform" />
+                </CollapsibleTrigger>
+                
+                <CollapsibleContent className="mt-3">
+                  <div className="space-y-3">
+                    {pausedRestaurants.map((restaurant) => (
+                      <Card key={restaurant.id} className="border border-gray-200">
+                        <CardContent className="p-4">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center space-x-3">
+                              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                <span className="text-xs font-medium text-gray-600">
+                                  {restaurant.name.charAt(0)}
+                                </span>
+                              </div>
+                              <div>
+                                <h3 className="font-medium text-gray-900 text-sm">
+                                  {restaurant.name}
+                                </h3>
+                                <p className="text-xs text-gray-500">
+                                  {restaurant.instagram}
+                                </p>
+                                <div className="flex items-center space-x-2 mt-1">
+                                  <div className="flex items-center">
+                                    <div className="w-2 h-2 bg-gray-400 rounded-full mr-1"></div>
+                                    <span className="text-xs text-gray-600">{restaurant.status}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleReactivate(restaurant.id)}
+                              className="text-green-600 border-green-300 hover:bg-green-50 text-xs px-3 py-1"
+                            >
+                              <RotateCcw className="w-3 h-3 mr-1" />
+                              Reactivar
+                            </Button>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            )}
 
             {/* Close Button */}
             <div className="pt-4">
