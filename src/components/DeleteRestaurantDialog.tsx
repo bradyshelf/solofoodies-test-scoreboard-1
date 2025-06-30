@@ -14,7 +14,7 @@ interface DeleteRestaurantDialogProps {
 
 const DeleteRestaurantDialog = ({ isOpen, onClose, onConfirm, restaurantName }: DeleteRestaurantDialogProps) => {
   const [confirmationText, setConfirmationText] = useState('');
-  const confirmationPhrase = 'ELIMINAR PERMANENTEMENTE';
+  const confirmationPhrase = 'ELIMINAR';
 
   const isConfirmationValid = confirmationText === confirmationPhrase;
 
