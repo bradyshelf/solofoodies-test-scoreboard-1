@@ -1,4 +1,5 @@
 
+import { useState } from 'react';
 import { 
   User, 
   Heart, 
@@ -9,6 +10,8 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import RestaurantSwitcher from './RestaurantSwitcher';
+import AddRestaurantDialog from './AddRestaurantDialog';
 
 interface ProfileSidebarProps {
   onClose: () => void;
@@ -17,10 +20,20 @@ interface ProfileSidebarProps {
 const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
   const { signOut, userRole } = useAuth();
   const navigate = useNavigate();
+  const [isAddRestaurantOpen, setIsAddRestaurantOpen] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/');
+  };
+
+  const handleAddRestaurant = () => {
+    setIsAddRestaurantOpen(true);
+  };
+
+  const handleRestaurantAdded = (restaurant: any) => {
+    console.log('New restaurant added:', restaurant);
+    // In a real app, this would update the restaurant list in state management
   };
 
   const allMenuItems = [
@@ -101,22 +114,26 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
 
   return (
     <div className="w-full h-full bg-white flex flex-col">
-      {/* Header */}
-      <div className="p-6 border-b border-gray-200">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-            <img
-              src="/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png"
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <h3 className="font-semibold text-gray-900">Pollos Hermanos</h3>
-            <p className="text-sm text-gray-500">@usuarioinstagram</p>
+      {/* Header with Restaurant Switcher */}
+      {userRole === 'restaurant' ? (
+        <RestaurantSwitcher onAddRestaurant={handleAddRestaurant} />
+      ) : (
+        <div className="p-6 border-b border-gray-200">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+              <img
+                src="/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png"
+                alt="Profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900">Pollos Hermanos</h3>
+              <p className="text-sm text-gray-500">@usuarioinstagram</p>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Menu Items */}
       <div className="flex-1 px-4 py-4">
@@ -170,6 +187,13 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
           <span className="text-base">Cerrar sesión</span>
         </button>
       </div>
+
+      {/* Add Restaurant Dialog */}
+      <AddRestaurantDialog
+        isOpen={isAddRestaurantOpen}
+        onClose={() => setIsAddRestaurantOpen(false)}
+        onAdd={handleRestaurantAdded}
+      />
     </div>
   );
 };
