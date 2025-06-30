@@ -1,18 +1,19 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ArrowLeft, X, Pause, ChevronDown, RotateCcw } from 'lucide-react';
+import { ArrowLeft, X, Pause, ChevronDown, RotateCcw, Trash } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
 import PlanSelectionDialog from '@/components/PlanSelectionDialog';
+import DeleteRestaurantDialog from '@/components/DeleteRestaurantDialog';
 import { useRestaurants } from '@/contexts/RestaurantContext';
 
 const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
   const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
   const [planSelectionDialogOpen, setPlanSelectionDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
   
@@ -64,6 +65,28 @@ const SubscriptionManagementPage = () => {
 
   const handleClosePlanSelectionDialog = () => {
     setPlanSelectionDialogOpen(false);
+    setSelectedRestaurant(null);
+  };
+
+  const handleDelete = (restaurantId: number) => {
+    const restaurant = restaurants.find(r => r.id === restaurantId);
+    if (restaurant) {
+      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
+      setDeleteDialogOpen(true);
+    }
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedRestaurant) {
+      // TODO: Implement actual delete functionality in context
+      console.log('Deleting restaurant:', selectedRestaurant.id);
+      setDeleteDialogOpen(false);
+      setSelectedRestaurant(null);
+    }
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setDeleteDialogOpen(false);
     setSelectedRestaurant(null);
   };
 
@@ -126,23 +149,34 @@ const SubscriptionManagementPage = () => {
                           </div>
                         </div>
                         
-                        {restaurant.canPause && (
+                        <div className="flex items-center space-x-2">
+                          {restaurant.canPause && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handlePause(restaurant.id)}
+                              className="text-orange-600 border-orange-300 hover:bg-orange-50 text-xs px-3 py-1"
+                            >
+                              <Pause className="w-3 h-3 mr-1" />
+                              Pausar
+                            </Button>
+                          )}
+                          
+                          {!restaurant.canPause && (
+                            <span className="text-xs text-blue-600 font-medium mr-2">
+                              Acceso de por vida
+                            </span>
+                          )}
+
                           <Button
                             variant="outline"
                             size="sm"
-                            onClick={() => handlePause(restaurant.id)}
-                            className="text-orange-600 border-orange-300 hover:bg-orange-50 text-xs px-3 py-1"
+                            onClick={() => handleDelete(restaurant.id)}
+                            className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
                           >
-                            <Pause className="w-3 h-3 mr-1" />
-                            Pausar
+                            <Trash className="w-3 h-3" />
                           </Button>
-                        )}
-                        
-                        {!restaurant.canPause && (
-                          <span className="text-xs text-blue-600 font-medium">
-                            Acceso de por vida
-                          </span>
-                        )}
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
@@ -188,15 +222,26 @@ const SubscriptionManagementPage = () => {
                               </div>
                             </div>
                             
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              onClick={() => handleReactivate(restaurant.id)}
-                              className="text-green-600 border-green-300 hover:bg-green-50 text-xs px-3 py-1"
-                            >
-                              <RotateCcw className="w-3 h-3 mr-1" />
-                              Reactivar
-                            </Button>
+                            <div className="flex items-center space-x-2">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleReactivate(restaurant.id)}
+                                className="text-green-600 border-green-300 hover:bg-green-50 text-xs px-3 py-1"
+                              >
+                                <RotateCcw className="w-3 h-3 mr-1" />
+                                Reactivar
+                              </Button>
+
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleDelete(restaurant.id)}
+                                className="text-red-600 border-red-300 hover:bg-red-50 text-xs px-2 py-1"
+                              >
+                                <Trash className="w-3 h-3" />
+                              </Button>
+                            </div>
                           </div>
                         </CardContent>
                       </Card>
@@ -232,6 +277,14 @@ const SubscriptionManagementPage = () => {
       <PlanSelectionDialog
         isOpen={planSelectionDialogOpen}
         onClose={handleClosePlanSelectionDialog}
+        restaurantName={selectedRestaurant?.name || ''}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <DeleteRestaurantDialog
+        isOpen={deleteDialogOpen}
+        onClose={handleCloseDeleteDialog}
+        onConfirm={handleConfirmDelete}
         restaurantName={selectedRestaurant?.name || ''}
       />
     </div>
