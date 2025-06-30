@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
@@ -105,7 +106,7 @@ const PlanSelectionDialog = ({ isOpen, onClose, restaurantName }: PlanSelectionD
                   onClick={() => setSelectedPlan('annual')}
                 >
                   <div className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                    Ahorra 19%
+                    Ahorra 116€
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
