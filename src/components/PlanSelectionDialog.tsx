@@ -3,6 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { X, Check } from 'lucide-react';
 import PaymentSuccessDialog from './PaymentSuccessDialog';
+import { useRestaurants } from '@/contexts/RestaurantContext';
 
 interface PlanSelectionDialogProps {
   isOpen: boolean;
@@ -13,10 +14,18 @@ interface PlanSelectionDialogProps {
 const PlanSelectionDialog = ({ isOpen, onClose, restaurantName }: PlanSelectionDialogProps) => {
   const [selectedPlan, setSelectedPlan] = useState('monthly');
   const [showPaymentSuccess, setShowPaymentSuccess] = useState(false);
+  const { restaurants, reactivateRestaurant } = useRestaurants();
 
   const handlePayment = () => {
     // Here you would integrate with your payment system
     console.log('Processing payment for plan:', selectedPlan);
+    
+    // Find the restaurant by name and reactivate it
+    const restaurant = restaurants.find(r => r.name === restaurantName);
+    if (restaurant) {
+      reactivateRestaurant(restaurant.id);
+    }
+    
     // Show success dialog after payment
     setShowPaymentSuccess(true);
   };

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -6,11 +5,13 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { ArrowLeft, X, Pause, ChevronDown, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
+import PlanSelectionDialog from '@/components/PlanSelectionDialog';
 import { useRestaurants } from '@/contexts/RestaurantContext';
 
 const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
   const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
+  const [planSelectionDialogOpen, setPlanSelectionDialogOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
   
@@ -53,7 +54,16 @@ const SubscriptionManagementPage = () => {
   };
 
   const handleReactivate = (restaurantId: number) => {
-    reactivateRestaurant(restaurantId);
+    const restaurant = pausedRestaurants.find(r => r.id === restaurantId);
+    if (restaurant) {
+      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
+      setPlanSelectionDialogOpen(true);
+    }
+  };
+
+  const handleClosePlanSelectionDialog = () => {
+    setPlanSelectionDialogOpen(false);
+    setSelectedRestaurant(null);
   };
 
   return (
@@ -219,6 +229,13 @@ const SubscriptionManagementPage = () => {
         isOpen={pauseDialogOpen}
         onClose={handleClosePauseDialog}
         onConfirm={handleConfirmPause}
+        restaurantName={selectedRestaurant?.name || ''}
+      />
+
+      {/* Plan Selection Dialog for Reactivation */}
+      <PlanSelectionDialog
+        isOpen={planSelectionDialogOpen}
+        onClose={handleClosePlanSelectionDialog}
         restaurantName={selectedRestaurant?.name || ''}
       />
     </div>
