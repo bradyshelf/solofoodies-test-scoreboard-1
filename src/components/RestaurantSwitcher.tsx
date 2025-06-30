@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { ChevronDown, Plus, Check, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -92,12 +91,7 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
                 
                 <Collapsible open={pausedRestaurantsOpen} onOpenChange={setPausedRestaurantsOpen}>
                   <CollapsibleTrigger className="flex items-center justify-between w-full p-2 hover:bg-gray-50 rounded-md">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm font-medium text-gray-900">Restaurantes pausados</span>
-                      <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-                        <span className="text-xs text-white font-medium">{pausedRestaurants.length}</span>
-                      </div>
-                    </div>
+                    <span className="text-sm font-medium text-gray-900">Restaurantes pausados</span>
                     <ChevronDown className="h-4 w-4 text-gray-500 transition-transform" />
                   </CollapsibleTrigger>
                   
