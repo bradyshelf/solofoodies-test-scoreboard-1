@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,7 @@ import CreateCollaborationPage from "./pages/CreateCollaborationPage";
 import LocationSelectionPage from "./pages/LocationSelectionPage";
 import ProfilePage from "./pages/ProfilePage";
 import SubscriptionPage from "./pages/SubscriptionPage";
+import SubscriptionManagementPage from "./pages/SubscriptionManagementPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsOfServicePage from "./pages/TermsOfServicePage";
 import CookiePolicyPage from "./pages/CookiePolicyPage";
@@ -112,6 +112,14 @@ const App = () => (
               element={
                 <ProtectedRoute>
                   <SubscriptionPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/subscription-management" 
+              element={
+                <ProtectedRoute>
+                  <SubscriptionManagementPage />
                 </ProtectedRoute>
               } 
             />

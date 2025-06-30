@@ -73,7 +73,7 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
       title: "Suscripción",
       icon: Bell,
       onClick: () => {
-        navigate('/subscription');
+        navigate('/subscription-management');
         onClose();
       },
       showForRoles: ['restaurant'] // Only show for restaurant users
