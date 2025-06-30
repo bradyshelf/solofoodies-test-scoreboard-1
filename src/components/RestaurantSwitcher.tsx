@@ -13,9 +13,10 @@ import { useRestaurants } from '@/contexts/RestaurantContext';
 
 interface RestaurantSwitcherProps {
   onAddRestaurant: () => void;
+  onReactivate?: (restaurantId: number) => void;
 }
 
-const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
+const RestaurantSwitcher = ({ onAddRestaurant, onReactivate }: RestaurantSwitcherProps) => {
   const { restaurants, activeRestaurant, setActiveRestaurant, reactivateRestaurant } = useRestaurants();
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
 
@@ -23,7 +24,11 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
   const pausedRestaurants = restaurants.filter(r => r.status === 'Pausado');
 
   const handleReactivate = (restaurantId: number) => {
-    reactivateRestaurant(restaurantId);
+    if (onReactivate) {
+      onReactivate(restaurantId);
+    } else {
+      reactivateRestaurant(restaurantId);
+    }
   };
 
   return (

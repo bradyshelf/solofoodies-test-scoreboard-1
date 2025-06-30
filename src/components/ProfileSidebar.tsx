@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { 
   User, 
@@ -12,6 +11,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import RestaurantSwitcher from './RestaurantSwitcher';
 import AddRestaurantDialog from './AddRestaurantDialog';
+import PlanSelectionDialog from './PlanSelectionDialog';
+import { useRestaurants } from '@/contexts/RestaurantContext';
 
 interface ProfileSidebarProps {
   onClose: () => void;
@@ -21,6 +22,9 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
   const { signOut, userRole } = useAuth();
   const navigate = useNavigate();
   const [isAddRestaurantOpen, setIsAddRestaurantOpen] = useState(false);
+  const [planSelectionDialogOpen, setPlanSelectionDialogOpen] = useState(false);
+  const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
+  const { restaurants } = useRestaurants();
 
   const handleSignOut = async () => {
     await signOut();
@@ -34,6 +38,19 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
   const handleRestaurantAdded = (restaurant: any) => {
     console.log('New restaurant added:', restaurant);
     // In a real app, this would update the restaurant list in state management
+  };
+
+  const handleReactivate = (restaurantId: number) => {
+    const restaurant = restaurants.find(r => r.id === restaurantId);
+    if (restaurant) {
+      setSelectedRestaurant({ id: restaurantId, name: restaurant.name });
+      setPlanSelectionDialogOpen(true);
+    }
+  };
+
+  const handleClosePlanSelectionDialog = () => {
+    setPlanSelectionDialogOpen(false);
+    setSelectedRestaurant(null);
   };
 
   const allMenuItems = [
@@ -116,7 +133,7 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
     <div className="w-full h-full bg-white flex flex-col">
       {/* Header with Restaurant Switcher */}
       {userRole === 'restaurant' ? (
-        <RestaurantSwitcher onAddRestaurant={handleAddRestaurant} />
+        <RestaurantSwitcher onAddRestaurant={handleAddRestaurant} onReactivate={handleReactivate} />
       ) : (
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center space-x-3">
@@ -193,6 +210,13 @@ const ProfileSidebar = ({ onClose }: ProfileSidebarProps) => {
         isOpen={isAddRestaurantOpen}
         onClose={() => setIsAddRestaurantOpen(false)}
         onAdd={handleRestaurantAdded}
+      />
+
+      {/* Plan Selection Dialog for Reactivation */}
+      <PlanSelectionDialog
+        isOpen={planSelectionDialogOpen}
+        onClose={handleClosePlanSelectionDialog}
+        restaurantName={selectedRestaurant?.name || ''}
       />
     </div>
   );
