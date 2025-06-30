@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -5,41 +6,18 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { ArrowLeft, X, Pause, ChevronDown, RotateCcw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import PauseRestaurantDialog from '@/components/PauseRestaurantDialog';
+import { useRestaurants } from '@/contexts/RestaurantContext';
 
 const SubscriptionManagementPage = () => {
   const navigate = useNavigate();
   const [pauseDialogOpen, setPauseDialogOpen] = useState(false);
   const [selectedRestaurant, setSelectedRestaurant] = useState<{ id: number; name: string } | null>(null);
   const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
+  
+  const { restaurants, pauseRestaurant, reactivateRestaurant } = useRestaurants();
 
-  const [activeRestaurants, setActiveRestaurants] = useState([
-    {
-      id: 1,
-      name: "Pollos Hermanos",
-      instagram: "@UsuarioInstagram",
-      status: "Activo",
-      plan: "Pago único",
-      canPause: false
-    },
-    {
-      id: 2,
-      name: "McDonalds 2",
-      instagram: "@kadjacjo",
-      status: "Activo",
-      plan: "Plan Mensual",
-      canPause: true
-    },
-    {
-      id: 3,
-      name: "McDonalds",
-      instagram: "@cento",
-      status: "Activo",
-      plan: "Plan Mensual",
-      canPause: true
-    }
-  ]);
-
-  const [pausedRestaurants, setPausedRestaurants] = useState<any[]>([]);
+  const activeRestaurants = restaurants.filter(r => r.status === 'Activo');
+  const pausedRestaurants = restaurants.filter(r => r.status === 'Pausado');
 
   const handleBackClick = () => {
     navigate('/dashboard');
@@ -62,16 +40,8 @@ const SubscriptionManagementPage = () => {
 
   const handleConfirmPause = () => {
     if (selectedRestaurant) {
-      console.log('Pausing restaurant:', selectedRestaurant.id);
-      
-      // Move restaurant from active to paused
-      const restaurantToMove = activeRestaurants.find(r => r.id === selectedRestaurant.id);
-      if (restaurantToMove) {
-        setActiveRestaurants(prev => prev.filter(r => r.id !== selectedRestaurant.id));
-        setPausedRestaurants(prev => [...prev, { ...restaurantToMove, status: "Pausado" }]);
-        setPausedRestaurantsOpen(true); // Open the collapsible section
-      }
-      
+      pauseRestaurant(selectedRestaurant.id);
+      setPausedRestaurantsOpen(true);
       setPauseDialogOpen(false);
       setSelectedRestaurant(null);
     }
@@ -83,14 +53,7 @@ const SubscriptionManagementPage = () => {
   };
 
   const handleReactivate = (restaurantId: number) => {
-    console.log('Reactivating restaurant:', restaurantId);
-    
-    // Move restaurant from paused to active
-    const restaurantToMove = pausedRestaurants.find(r => r.id === restaurantId);
-    if (restaurantToMove) {
-      setPausedRestaurants(prev => prev.filter(r => r.id !== restaurantId));
-      setActiveRestaurants(prev => [...prev, { ...restaurantToMove, status: "Activo" }]);
-    }
+    reactivateRestaurant(restaurantId);
   };
 
   return (
@@ -127,10 +90,12 @@ const SubscriptionManagementPage = () => {
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                            <span className="text-xs font-medium text-gray-600">
-                              {restaurant.name.charAt(0)}
-                            </span>
+                          <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img
+                              src={restaurant.image}
+                              alt={restaurant.name}
+                              className="w-full h-full object-cover"
+                            />
                           </div>
                           <div>
                             <h3 className="font-medium text-gray-900 text-sm">
@@ -194,10 +159,12 @@ const SubscriptionManagementPage = () => {
                         <CardContent className="p-4">
                           <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-3">
-                              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-                                <span className="text-xs font-medium text-gray-600">
-                                  {restaurant.name.charAt(0)}
-                                </span>
+                              <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                                <img
+                                  src={restaurant.image}
+                                  alt={restaurant.name}
+                                  className="w-full h-full object-cover"
+                                />
                               </div>
                               <div>
                                 <h3 className="font-medium text-gray-900 text-sm">
