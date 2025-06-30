@@ -11,6 +11,17 @@ interface PauseRestaurantDialogProps {
 }
 
 const PauseRestaurantDialog = ({ isOpen, onClose, onConfirm, restaurantName }: PauseRestaurantDialogProps) => {
+  // Calculate the end of current billing period (end of current month)
+  const getEndOfBillingPeriod = () => {
+    const now = new Date();
+    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    return endOfMonth.toLocaleDateString('es-ES', { 
+      day: 'numeric', 
+      month: 'long', 
+      year: 'numeric' 
+    });
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
@@ -45,7 +56,7 @@ const PauseRestaurantDialog = ({ isOpen, onClose, onConfirm, restaurantName }: P
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-left">
             <p className="text-sm font-medium text-gray-700 mb-2">Al pausar este restaurante:</p>
             <ul className="text-sm text-gray-600 space-y-1">
-              <li>• Perderás acceso inmediato</li>
+              <li>• Perderás acceso el {getEndOfBillingPeriod()}</li>
               <li>• Se cancelará la suscripción mensual</li>
               <li>• Todos los datos se conservarán</li>
               <li>• Podrás reactivarlo cuando quieras</li>
