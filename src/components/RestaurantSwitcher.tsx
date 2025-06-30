@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { ChevronDown, Plus, Check } from 'lucide-react';
+import { ChevronDown, Plus, Check, RotateCcw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { 
   DropdownMenu, 
@@ -9,12 +9,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 
 interface Restaurant {
   id: string;
   name: string;
   handle: string;
   image: string;
+  status: 'active' | 'paused';
 }
 
 interface RestaurantSwitcherProps {
@@ -23,28 +25,47 @@ interface RestaurantSwitcherProps {
 
 const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
   // Mock data - in real app this would come from context/state management
-  const [restaurants] = useState<Restaurant[]>([
+  const [restaurants, setRestaurants] = useState<Restaurant[]>([
     {
       id: '1',
       name: 'Pollos Hermanos',
       handle: '@usuarioinstagram',
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      status: 'active'
     },
     {
       id: '2', 
       name: 'KFC',
       handle: '@kfc_oficial',
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      status: 'active'
     },
     {
       id: '3',
-      name: 'Pollos Hermanos',
-      handle: '@HuellaMolina',
-      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png'
+      name: 'Burger King',
+      handle: '@burgerking',
+      image: '/lovable-uploads/26ce4d51-7cef-481d-8b86-af6c758c3760.png',
+      status: 'paused'
     }
   ]);
 
-  const [activeRestaurant, setActiveRestaurant] = useState<Restaurant>(restaurants[0]);
+  const [activeRestaurant, setActiveRestaurant] = useState<Restaurant>(
+    restaurants.find(r => r.status === 'active') || restaurants[0]
+  );
+  const [pausedRestaurantsOpen, setPausedRestaurantsOpen] = useState(false);
+
+  const activeRestaurants = restaurants.filter(r => r.status === 'active');
+  const pausedRestaurants = restaurants.filter(r => r.status === 'paused');
+
+  const handleReactivate = (restaurantId: string) => {
+    console.log('Reactivating restaurant:', restaurantId);
+    
+    setRestaurants(prev => prev.map(restaurant => 
+      restaurant.id === restaurantId 
+        ? { ...restaurant, status: 'active' as const }
+        : restaurant
+    ));
+  };
 
   return (
     <div className="p-6 border-b border-gray-200">
@@ -72,7 +93,8 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
           <div className="p-2">
             <div className="text-xs font-medium text-gray-500 mb-2 px-2">ATRÁS</div>
             
-            {restaurants.map((restaurant) => (
+            {/* Active Restaurants */}
+            {activeRestaurants.map((restaurant) => (
               <DropdownMenuItem
                 key={restaurant.id}
                 onClick={() => setActiveRestaurant(restaurant)}
@@ -95,6 +117,64 @@ const RestaurantSwitcher = ({ onAddRestaurant }: RestaurantSwitcherProps) => {
                 )}
               </DropdownMenuItem>
             ))}
+            
+            {/* Paused Restaurants Collapsible Section */}
+            {pausedRestaurants.length > 0 && (
+              <>
+                <DropdownMenuSeparator className="my-2" />
+                
+                <Collapsible open={pausedRestaurantsOpen} onOpenChange={setPausedRestaurantsOpen}>
+                  <CollapsibleTrigger className="flex items-center justify-between w-full p-2 hover:bg-gray-50 rounded-md">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm font-medium text-gray-900">Restaurantes pausados</span>
+                      <div className="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
+                        <span className="text-xs text-white font-medium">{pausedRestaurants.length}</span>
+                      </div>
+                    </div>
+                    <ChevronDown className="h-4 w-4 text-gray-500 transition-transform" />
+                  </CollapsibleTrigger>
+                  
+                  <CollapsibleContent className="mt-2">
+                    <div className="space-y-1">
+                      {pausedRestaurants.map((restaurant) => (
+                        <div
+                          key={restaurant.id}
+                          className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50"
+                        >
+                          <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden">
+                            <img
+                              src={restaurant.image}
+                              alt={restaurant.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <div className="font-medium text-gray-900">{restaurant.name}</div>
+                            <div className="text-sm text-gray-500">{restaurant.handle}</div>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <div className="flex items-center">
+                                <div className="w-2 h-2 bg-gray-400 rounded-full mr-1"></div>
+                                <span className="text-xs text-gray-600">Pausado</span>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleReactivate(restaurant.id)}
+                            className="text-green-600 border-green-300 hover:bg-green-50 text-xs px-3 py-1"
+                          >
+                            <RotateCcw className="w-3 h-3 mr-1" />
+                            Reactivar
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              </>
+            )}
             
             <DropdownMenuSeparator className="my-2" />
             
