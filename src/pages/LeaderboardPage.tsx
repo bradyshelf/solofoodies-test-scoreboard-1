@@ -174,8 +174,8 @@ const LeaderboardPage = () => {
           
           <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
             <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-bold text-red-600">4.9</CardTitle>
-              <p className="text-gray-600">Highest Rating</p>
+              <CardTitle className="text-2xl font-bold text-red-600">15</CardTitle>
+              <p className="text-gray-600">Total Cities</p>
             </CardHeader>
           </Card>
           
