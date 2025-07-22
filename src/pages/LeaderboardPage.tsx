@@ -115,6 +115,7 @@ const LeaderboardPage = () => {
       const cityMatch = selectedCity === "all" || player.city === selectedCity;
       return countryMatch && cityMatch;
     })
+    .sort((a, b) => b.rating - a.rating) // Sort by rating descending (highest first)
     .slice(0, 10); // Show only top 10
 
   return (
