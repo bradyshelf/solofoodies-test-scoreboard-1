@@ -62,7 +62,7 @@ const LeaderboardPage = () => {
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
             <CardTitle className="text-center text-2xl font-bold text-gray-800">
-              Top Players
+              Top Foodies
             </CardTitle>
           </CardHeader>
           <CardContent>
