@@ -7,24 +7,43 @@ import { useState } from 'react';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
+  const [selectedCountry, setSelectedCountry] = useState("all");
   const [selectedCity, setSelectedCity] = useState("all");
 
   const leaderboardData = [
-    { rank: 1, name: "Alex Johnson", rating: 4.9, city: "New York", icon: Trophy, iconColor: "text-yellow-500" },
-    { rank: 2, name: "Sarah Chen", rating: 4.8, city: "Los Angeles", icon: Medal, iconColor: "text-gray-400" },
-    { rank: 3, name: "Mike Rodriguez", rating: 4.7, city: "Chicago", icon: Award, iconColor: "text-amber-600" },
-    { rank: 4, name: "Emma Wilson", rating: 4.6, city: "New York", icon: Award, iconColor: "text-orange-500" },
-    { rank: 5, name: "David Park", rating: 4.5, city: "San Francisco", icon: Award, iconColor: "text-orange-500" },
-    { rank: 6, name: "Lisa Thompson", rating: 4.4, city: "Los Angeles", icon: Award, iconColor: "text-orange-500" },
-    { rank: 7, name: "James Brown", rating: 4.3, city: "Chicago", icon: Award, iconColor: "text-orange-500" },
-    { rank: 8, name: "Maria Garcia", rating: 4.2, city: "Miami", icon: Award, iconColor: "text-orange-500" },
+    { rank: 1, name: "Alex Johnson", rating: 4.9, country: "USA", city: "New York", icon: Trophy, iconColor: "text-yellow-500" },
+    { rank: 2, name: "Sarah Chen", rating: 4.8, country: "USA", city: "Los Angeles", icon: Medal, iconColor: "text-gray-400" },
+    { rank: 3, name: "Mike Rodriguez", rating: 4.7, country: "USA", city: "Chicago", icon: Award, iconColor: "text-amber-600" },
+    { rank: 4, name: "Emma Wilson", rating: 4.6, country: "USA", city: "New York", icon: Award, iconColor: "text-orange-500" },
+    { rank: 5, name: "David Park", rating: 4.5, country: "USA", city: "San Francisco", icon: Award, iconColor: "text-orange-500" },
+    { rank: 6, name: "Lisa Thompson", rating: 4.4, country: "Canada", city: "Toronto", icon: Award, iconColor: "text-orange-500" },
+    { rank: 7, name: "James Brown", rating: 4.3, country: "Canada", city: "Vancouver", icon: Award, iconColor: "text-orange-500" },
+    { rank: 8, name: "Maria Garcia", rating: 4.2, country: "UK", city: "London", icon: Award, iconColor: "text-orange-500" },
   ];
 
-  const cities = ["all", "New York", "Los Angeles", "Chicago", "San Francisco", "Miami"];
+  const countries = ["all", "USA", "Canada", "UK"];
   
-  const filteredData = selectedCity === "all" 
-    ? leaderboardData 
-    : leaderboardData.filter(player => player.city === selectedCity);
+  const getCitiesForCountry = (country: string) => {
+    if (country === "all") return ["all"];
+    const cities = leaderboardData
+      .filter(player => player.country === country)
+      .map(player => player.city);
+    return ["all", ...Array.from(new Set(cities))];
+  };
+
+  const availableCities = getCitiesForCountry(selectedCountry);
+  
+  // Reset city when country changes
+  const handleCountryChange = (country: string) => {
+    setSelectedCountry(country);
+    setSelectedCity("all");
+  };
+  
+  const filteredData = leaderboardData.filter(player => {
+    const countryMatch = selectedCountry === "all" || player.country === selectedCountry;
+    const cityMatch = selectedCity === "all" || player.city === selectedCity;
+    return countryMatch && cityMatch;
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
@@ -43,14 +62,27 @@ const LeaderboardPage = () => {
           <div></div>
         </div>
 
-        {/* City Filter */}
-        <div className="mb-6">
+        {/* Country and City Filters */}
+        <div className="flex gap-4 mb-6">
+          <Select value={selectedCountry} onValueChange={handleCountryChange}>
+            <SelectTrigger className="w-48 bg-white backdrop-blur-sm border shadow-sm">
+              <SelectValue placeholder="Select country" />
+            </SelectTrigger>
+            <SelectContent className="bg-white border shadow-lg z-50">
+              {countries.map((country) => (
+                <SelectItem key={country} value={country}>
+                  {country === "all" ? "All Countries" : country}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
           <Select value={selectedCity} onValueChange={setSelectedCity}>
-            <SelectTrigger className="w-48 bg-white/95 backdrop-blur-sm">
+            <SelectTrigger className="w-48 bg-white backdrop-blur-sm border shadow-sm">
               <SelectValue placeholder="Select city" />
             </SelectTrigger>
-            <SelectContent>
-              {cities.map((city) => (
+            <SelectContent className="bg-white border shadow-lg z-50">
+              {availableCities.map((city) => (
                 <SelectItem key={city} value={city}>
                   {city === "all" ? "All Cities" : city}
                 </SelectItem>
@@ -106,7 +138,7 @@ const LeaderboardPage = () => {
                       <IconComponent className={`w-6 h-6 ${player.iconColor}`} />
                       <div>
                         <h3 className="font-semibold text-gray-800">{player.name}</h3>
-                        <p className="text-sm text-gray-500">{player.city}</p>
+                        <p className="text-sm text-gray-500">{player.city}, {player.country}</p>
                       </div>
                     </div>
                     <div className="text-right">
