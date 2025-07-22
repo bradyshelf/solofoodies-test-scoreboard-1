@@ -200,7 +200,7 @@ const LeaderboardPage = () => {
                 const IconComponent = player.icon;
                 return (
                   <div 
-                    key={player.rank}
+                    key={player.id}
                     className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:shadow-md transition-shadow"
                   >
                     <div className="flex items-center space-x-4">
