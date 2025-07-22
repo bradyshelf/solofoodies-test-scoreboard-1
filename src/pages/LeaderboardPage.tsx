@@ -1,21 +1,30 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Trophy, Medal, Award } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { ArrowLeft, Trophy, Medal, Award, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
+  const [selectedCity, setSelectedCity] = useState("all");
 
   const leaderboardData = [
-    { rank: 1, name: "Alex Johnson", score: 2847, icon: Trophy, iconColor: "text-yellow-500" },
-    { rank: 2, name: "Sarah Chen", score: 2634, icon: Medal, iconColor: "text-gray-400" },
-    { rank: 3, name: "Mike Rodriguez", score: 2521, icon: Award, iconColor: "text-amber-600" },
-    { rank: 4, name: "Emma Wilson", score: 2398, icon: Award, iconColor: "text-orange-500" },
-    { rank: 5, name: "David Park", score: 2276, icon: Award, iconColor: "text-orange-500" },
-    { rank: 6, name: "Lisa Thompson", score: 2154, icon: Award, iconColor: "text-orange-500" },
-    { rank: 7, name: "James Brown", score: 2087, icon: Award, iconColor: "text-orange-500" },
-    { rank: 8, name: "Maria Garcia", score: 1998, icon: Award, iconColor: "text-orange-500" },
+    { rank: 1, name: "Alex Johnson", rating: 4.9, city: "New York", icon: Trophy, iconColor: "text-yellow-500" },
+    { rank: 2, name: "Sarah Chen", rating: 4.8, city: "Los Angeles", icon: Medal, iconColor: "text-gray-400" },
+    { rank: 3, name: "Mike Rodriguez", rating: 4.7, city: "Chicago", icon: Award, iconColor: "text-amber-600" },
+    { rank: 4, name: "Emma Wilson", rating: 4.6, city: "New York", icon: Award, iconColor: "text-orange-500" },
+    { rank: 5, name: "David Park", rating: 4.5, city: "San Francisco", icon: Award, iconColor: "text-orange-500" },
+    { rank: 6, name: "Lisa Thompson", rating: 4.4, city: "Los Angeles", icon: Award, iconColor: "text-orange-500" },
+    { rank: 7, name: "James Brown", rating: 4.3, city: "Chicago", icon: Award, iconColor: "text-orange-500" },
+    { rank: 8, name: "Maria Garcia", rating: 4.2, city: "Miami", icon: Award, iconColor: "text-orange-500" },
   ];
+
+  const cities = ["all", "New York", "Los Angeles", "Chicago", "San Francisco", "Miami"];
+  
+  const filteredData = selectedCity === "all" 
+    ? leaderboardData 
+    : leaderboardData.filter(player => player.city === selectedCity);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
@@ -34,19 +43,35 @@ const LeaderboardPage = () => {
           <div></div>
         </div>
 
+        {/* City Filter */}
+        <div className="mb-6">
+          <Select value={selectedCity} onValueChange={setSelectedCity}>
+            <SelectTrigger className="w-48 bg-white/95 backdrop-blur-sm">
+              <SelectValue placeholder="Select city" />
+            </SelectTrigger>
+            <SelectContent>
+              {cities.map((city) => (
+                <SelectItem key={city} value={city}>
+                  {city === "all" ? "All Cities" : city}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
             <CardHeader className="text-center pb-2">
               <CardTitle className="text-2xl font-bold text-orange-600">156</CardTitle>
-              <p className="text-gray-600">Total Players</p>
+              <p className="text-gray-600">Total Foodies</p>
             </CardHeader>
           </Card>
           
           <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
             <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-bold text-red-600">2,847</CardTitle>
-              <p className="text-gray-600">Highest Score</p>
+              <CardTitle className="text-2xl font-bold text-red-600">4.9</CardTitle>
+              <p className="text-gray-600">Highest Rating</p>
             </CardHeader>
           </Card>
           
@@ -67,7 +92,7 @@ const LeaderboardPage = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {leaderboardData.map((player) => {
+              {filteredData.map((player) => {
                 const IconComponent = player.icon;
                 return (
                   <div 
@@ -81,14 +106,15 @@ const LeaderboardPage = () => {
                       <IconComponent className={`w-6 h-6 ${player.iconColor}`} />
                       <div>
                         <h3 className="font-semibold text-gray-800">{player.name}</h3>
-                        <p className="text-sm text-gray-500">Player</p>
+                        <p className="text-sm text-gray-500">{player.city}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="font-bold text-xl text-gray-800">
-                        {player.score.toLocaleString()}
+                      <div className="flex items-center justify-end space-x-1 font-bold text-xl text-gray-800">
+                        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        <span>{player.rating}</span>
                       </div>
-                      <div className="text-sm text-gray-500">points</div>
+                      <div className="text-sm text-gray-500">out of 5</div>
                     </div>
                   </div>
                 );
