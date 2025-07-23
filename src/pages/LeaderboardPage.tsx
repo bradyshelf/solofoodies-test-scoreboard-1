@@ -163,29 +163,6 @@ const LeaderboardPage = () => {
           </Select>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
-            <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-bold text-orange-600">156</CardTitle>
-              <p className="text-gray-600">Total Foodies</p>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
-            <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-bold text-red-600">15</CardTitle>
-              <p className="text-gray-600">Total Cities</p>
-            </CardHeader>
-          </Card>
-          
-          <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
-            <CardHeader className="text-center pb-2">
-              <CardTitle className="text-2xl font-bold text-pink-600">47</CardTitle>
-              <p className="text-gray-600">Active Today</p>
-            </CardHeader>
-          </Card>
-        </div>
 
         {/* Leaderboard */}
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
