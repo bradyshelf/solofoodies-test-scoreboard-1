@@ -255,23 +255,23 @@ const LeaderboardPage = () => {
               <p className="text-gray-600 mb-6 max-w-md">
                 Conectando restaurantes y creadores de contenido gastronómico en todo el mundo a través de colaboraciones significativas.
               </p>
-              <div className="flex space-x-4">
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
-                  <Instagram className="w-5 h-5 text-white" />
+              <div className="flex space-x-3">
+                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Instagram className="w-6 h-6 text-white" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
-                  <Linkedin className="w-5 h-5 text-white" />
+                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Linkedin className="w-6 h-6 text-white" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
-                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
-                    <span className="text-gray-800 text-xs font-bold">T</span>
+                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <div className="w-6 h-6 text-white text-lg font-bold flex items-center justify-center">
+                    @
                   </div>
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
-                  <Youtube className="w-5 h-5 text-white" />
+                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Youtube className="w-6 h-6 text-white" />
                 </a>
-                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
-                  <Facebook className="w-5 h-5 text-white" />
+                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                  <Facebook className="w-6 h-6 text-white" />
                 </a>
               </div>
             </div>
