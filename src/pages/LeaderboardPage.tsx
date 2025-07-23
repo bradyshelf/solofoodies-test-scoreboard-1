@@ -116,7 +116,7 @@ const LeaderboardPage = () => {
             <img 
               src="/lovable-uploads/ef7a5679-8264-4fc0-a985-e087938bcf04.png" 
               alt="Solofoodies Logo" 
-              className="h-10 w-10 md:hidden"
+              className="h-10 w-auto md:hidden"
             />
             <img 
               src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
