@@ -183,23 +183,21 @@ const LeaderboardPage = () => {
                 return (
                   <div 
                     key={player.id}
-                    className="flex items-center justify-between p-3 md:p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:shadow-md transition-shadow"
+                    className="p-3 md:p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:shadow-md transition-shadow"
                   >
-                    <div className="flex items-center space-x-2 md:space-x-4 min-w-0 flex-1">
-                      <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-orange-100 to-red-100 flex-shrink-0">
-                        <span className="font-bold text-xs md:text-sm text-gray-700">#{index + 1}</span>
+                    {/* Top row with name, location and rating */}
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center space-x-2 md:space-x-4 min-w-0 flex-1">
+                        <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-orange-100 to-red-100 flex-shrink-0">
+                          <span className="font-bold text-xs md:text-sm text-gray-700">#{index + 1}</span>
+                        </div>
+                        <IconComponent className={`w-4 h-4 md:w-6 md:h-6 ${player.iconColor} flex-shrink-0`} />
+                        <div className="min-w-0">
+                          <h3 className="font-semibold text-sm md:text-base text-gray-800 truncate">{player.name}</h3>
+                          <p className="text-xs md:text-sm text-gray-500 truncate">{player.city}, {player.country}</p>
+                        </div>
                       </div>
-                      <IconComponent className={`w-4 h-4 md:w-6 md:h-6 ${player.iconColor} flex-shrink-0`} />
-                      <div className="min-w-0">
-                        <h3 className="font-semibold text-sm md:text-base text-gray-800 truncate">{player.name}</h3>
-                        <p className="text-xs md:text-sm text-gray-500 truncate">{player.city}, {player.country}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-2 md:space-x-4 flex-shrink-0">
-                      <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 text-xs md:text-sm px-2 md:px-4 py-1 md:py-2">
-                        Colab
-                      </Button>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0">
                         <div className="flex items-center justify-end space-x-1 font-bold text-base md:text-xl text-gray-800">
                           <Star className="w-4 h-4 md:w-5 md:h-5 fill-yellow-400 text-yellow-400" />
                           <span>{player.rating}</span>
@@ -207,6 +205,11 @@ const LeaderboardPage = () => {
                         <div className="text-xs md:text-sm text-gray-500">out of 5</div>
                       </div>
                     </div>
+                    
+                    {/* Bottom row with full-width Colab button */}
+                    <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50 text-sm py-2">
+                      Colab
+                    </Button>
                   </div>
                 );
               })}
