@@ -209,6 +209,33 @@ const LeaderboardPage = () => {
         </Card>
       </div>
 
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 py-16">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">
+            Empieza tu primera colaboración hoy
+          </h2>
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
+            Únete a miles de restaurantes y creadores gastronómicos que ya están 
+            formando alianzas increíbles.
+          </p>
+          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+            <Button 
+              variant="outline" 
+              className="bg-white text-red-500 border-white hover:bg-gray-50 px-8 py-3 text-lg font-semibold"
+            >
+              QUIERO COLABORAR COMO FOODIE
+            </Button>
+            <Button 
+              variant="outline" 
+              className="bg-white text-red-500 border-white hover:bg-gray-50 px-8 py-3 text-lg font-semibold"
+            >
+              SOY UN RESTAURANTE, QUIERO RECIBIR CREADORES
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="bg-white mt-16">
         <div className="container mx-auto px-4 py-12">
