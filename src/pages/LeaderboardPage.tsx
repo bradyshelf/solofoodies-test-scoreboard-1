@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Trophy, Medal, Award, Star } from 'lucide-react';
+import { ArrowLeft, Trophy, Medal, Award, Star, Instagram, Linkedin, Youtube, Facebook } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -208,6 +208,69 @@ const LeaderboardPage = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-white mt-16">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Section */}
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-lg">S</span>
+                </div>
+                <span className="text-xl font-semibold text-gray-800">Solofoodies</span>
+              </div>
+              <p className="text-gray-600 mb-6 max-w-md">
+                Conectando restaurantes y creadores de contenido gastronómico en todo el mundo a través de colaboraciones significativas.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <Instagram className="w-5 h-5 text-white" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <Linkedin className="w-5 h-5 text-white" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <div className="w-5 h-5 bg-white rounded-full flex items-center justify-center">
+                    <span className="text-gray-800 text-xs font-bold">T</span>
+                  </div>
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <Youtube className="w-5 h-5 text-white" />
+                </a>
+                <a href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
+                  <Facebook className="w-5 h-5 text-white" />
+                </a>
+              </div>
+            </div>
+
+            {/* Right Section */}
+            <div>
+              <h3 className="text-lg font-semibold text-gray-800 mb-4">Plataforma</h3>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">¿Por qué Solofoodies?</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">¿Cómo funciona Solofoodies?</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">Historias de éxito</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">¿Para quién es Solofoodies?</a></li>
+                <li><a href="#" className="text-gray-600 hover:text-gray-800 transition-colors">Planes y Precios</a></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Section */}
+          <div className="border-t border-gray-200 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-600 text-sm mb-4 md:mb-0">
+              © 2025 SoloFoodies. Todos los derechos reservados.
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-gray-600 hover:text-gray-800 text-sm transition-colors">Política de Privacidad</a>
+              <a href="#" className="text-gray-600 hover:text-gray-800 text-sm transition-colors">Términos de Servicio</a>
+              <a href="#" className="text-gray-600 hover:text-gray-800 text-sm transition-colors">Política de Cookies</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
