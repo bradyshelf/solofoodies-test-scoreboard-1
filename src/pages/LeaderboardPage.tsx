@@ -112,15 +112,15 @@ const LeaderboardPage = () => {
       {/* Top Navigation Header */}
       <div className="bg-white shadow-sm">
         <div className="container mx-auto px-6 py-6 flex items-center">
-          <div className="flex items-center space-x-2 flex-1">
+          <div className="flex items-center space-x-6">
             <img 
               src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
               alt="Solofoodies Logo" 
               className="h-10 md:h-12 w-auto"
             />
           </div>
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
-          <div className="flex-1 flex justify-end">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800 flex-1 text-center mx-8">Leaderboard</h1>
+          <div className="flex justify-end">
             <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 px-3 md:px-4 py-2 text-sm">
               Iniciar Sesión
             </Button>
