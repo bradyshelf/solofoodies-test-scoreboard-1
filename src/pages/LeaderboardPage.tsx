@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Trophy, Medal, Award, Star, Instagram, Linkedin, Youtube, Facebook } from 'lucide-react';
+import { ArrowLeft, Trophy, Medal, Award, Star, Instagram, Linkedin, Youtube, Facebook, Filter } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -139,32 +139,35 @@ const LeaderboardPage = () => {
               <CardTitle className="text-2xl font-bold text-gray-800">
                 Top Foodies
               </CardTitle>
-              <div className="flex gap-4">
-                <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                  <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border shadow-lg z-50">
-                    {countries.map((country) => (
-                      <SelectItem key={country} value={country}>
-                        {country}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
-                <Select value={selectedCity} onValueChange={setSelectedCity}>
-                  <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
-                    <SelectValue placeholder="Select city" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border shadow-lg z-50">
-                    {availableCities.map((city) => (
-                      <SelectItem key={city} value={city}>
-                        {city === "all" ? "All Cities" : city}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              <div className="flex items-center gap-4">
+                <Filter className="w-5 h-5 text-gray-600" />
+                <div className="flex gap-4">
+                  <Select value={selectedCountry} onValueChange={handleCountryChange}>
+                    <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                      <SelectValue placeholder="Select country" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border shadow-lg z-50">
+                      {countries.map((country) => (
+                        <SelectItem key={country} value={country}>
+                          {country}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  
+                  <Select value={selectedCity} onValueChange={setSelectedCity}>
+                    <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                      <SelectValue placeholder="Select city" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-white border shadow-lg z-50">
+                      {availableCities.map((city) => (
+                        <SelectItem key={city} value={city}>
+                          {city === "all" ? "All Cities" : city}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
           </CardHeader>
