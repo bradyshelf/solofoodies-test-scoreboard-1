@@ -263,11 +263,11 @@ const LeaderboardPage = () => {
                 <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
                   <Linkedin className="w-6 h-6 text-white" />
                 </a>
-                <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
+                <a href="#" className="w-12 h-12 rounded-full flex items-center justify-center hover:opacity-80 transition-opacity">
                   <img 
-                    src="/src/assets/tiktok-logo.svg" 
+                    src="/lovable-uploads/b2ed06af-9f9d-40c2-9a59-6f64bce7ab42.png" 
                     alt="TikTok" 
-                    className="w-6 h-6"
+                    className="w-12 h-12 rounded-full"
                   />
                 </a>
                 <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
