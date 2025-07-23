@@ -140,42 +140,43 @@ const LeaderboardPage = () => {
           <h1 className="text-3xl font-bold text-white">Solofoodies Leaderboard</h1>
         </div>
 
-        {/* Country and City Filters */}
-        <div className="flex gap-4 mb-6">
-          <Select value={selectedCountry} onValueChange={handleCountryChange}>
-            <SelectTrigger className="w-48 bg-white backdrop-blur-sm border shadow-sm">
-              <SelectValue placeholder="Select country" />
-            </SelectTrigger>
-            <SelectContent className="bg-white border shadow-lg z-50">
-              {countries.map((country) => (
-                <SelectItem key={country} value={country}>
-                  {country === "all" ? "All Countries" : country}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <Select value={selectedCity} onValueChange={setSelectedCity}>
-            <SelectTrigger className="w-48 bg-white backdrop-blur-sm border shadow-sm">
-              <SelectValue placeholder="Select city" />
-            </SelectTrigger>
-            <SelectContent className="bg-white border shadow-lg z-50">
-              {availableCities.map((city) => (
-                <SelectItem key={city} value={city}>
-                  {city === "all" ? "All Cities" : city}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
 
 
         {/* Leaderboard */}
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
-            <CardTitle className="text-center text-2xl font-bold text-gray-800">
-              Top Foodies
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-2xl font-bold text-gray-800">
+                Top Foodies
+              </CardTitle>
+              <div className="flex gap-4">
+                <Select value={selectedCountry} onValueChange={handleCountryChange}>
+                  <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border shadow-lg z-50">
+                    {countries.map((country) => (
+                      <SelectItem key={country} value={country}>
+                        {country === "all" ? "All Countries" : country}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                
+                <Select value={selectedCity} onValueChange={setSelectedCity}>
+                  <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                    <SelectValue placeholder="Select city" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white border shadow-lg z-50">
+                    {availableCities.map((city) => (
+                      <SelectItem key={city} value={city}>
+                        {city === "all" ? "All Cities" : city}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
