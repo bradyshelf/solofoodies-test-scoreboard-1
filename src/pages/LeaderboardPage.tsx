@@ -219,20 +219,20 @@ const LeaderboardPage = () => {
             Únete a miles de restaurantes y creadores gastronómicos que ya están 
             formando alianzas increíbles.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
             <Button 
               variant="outline" 
-              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full md:w-auto px-4 md:px-8 py-3 text-sm md:text-lg font-semibold"
+              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full lg:w-auto px-4 lg:px-8 py-3 text-sm lg:text-lg font-semibold"
             >
-              <span className="md:hidden">COLABORAR COMO FOODIE</span>
-              <span className="hidden md:inline">QUIERO COLABORAR COMO FOODIE</span>
+              <span className="lg:hidden">COLABORAR COMO FOODIE</span>
+              <span className="hidden lg:inline">QUIERO COLABORAR COMO FOODIE</span>
             </Button>
             <Button 
               variant="outline" 
-              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full md:w-auto px-4 md:px-8 py-3 text-sm md:text-lg font-semibold"
+              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full lg:w-auto px-4 lg:px-8 py-3 text-sm lg:text-lg font-semibold"
             >
-              <span className="md:hidden">SOY RESTAURANTE</span>
-              <span className="hidden md:inline">SOY UN RESTAURANTE, QUIERO RECIBIR CREADORES</span>
+              <span className="lg:hidden">SOY RESTAURANTE</span>
+              <span className="hidden lg:inline">SOY UN RESTAURANTE, QUIERO RECIBIR CREADORES</span>
             </Button>
           </div>
         </div>
