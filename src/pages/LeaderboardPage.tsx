@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
-  const [selectedCountry, setSelectedCountry] = useState("all");
+  const [selectedCountry, setSelectedCountry] = useState("Spain");
   const [selectedCity, setSelectedCity] = useState("all");
 
   // Generate 150 diverse foodie influencers with at least 10 per city
