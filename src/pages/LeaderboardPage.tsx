@@ -120,7 +120,7 @@ const LeaderboardPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
       {/* Top Navigation Header */}
-      <div className="bg-white shadow-sm">
+      <div className="bg-white/90 backdrop-blur-sm shadow-sm border-b border-white/20">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
@@ -210,7 +210,7 @@ const LeaderboardPage = () => {
       </div>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 py-16">
+      <section className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Empieza tu primera colaboración hoy
@@ -237,7 +237,7 @@ const LeaderboardPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white mt-16">
+      <footer className="bg-gradient-to-b from-pink-500/20 to-white">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Section */}
