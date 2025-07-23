@@ -89,8 +89,7 @@ const LeaderboardPage = () => {
   const leaderboardData = generateLeaderboardData();
 
   const countries = [
-    "all", "United States", "United Kingdom", "Canada", "Australia", "Japan", 
-    "France", "Germany", "Italy", "Spain"
+    "all", "Spain"
   ];
   
   const getCitiesForCountry = (country: string) => {
