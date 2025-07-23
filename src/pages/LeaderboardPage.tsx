@@ -264,9 +264,11 @@ const LeaderboardPage = () => {
                   <Linkedin className="w-6 h-6 text-white" />
                 </a>
                 <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
-                  <div className="w-6 h-6 text-white text-lg font-bold flex items-center justify-center">
-                    🎵
-                  </div>
+                  <img 
+                    src="/src/assets/tiktok-logo.svg" 
+                    alt="TikTok" 
+                    className="w-6 h-6"
+                  />
                 </a>
                 <a href="#" className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors">
                   <Youtube className="w-6 h-6 text-white" />
