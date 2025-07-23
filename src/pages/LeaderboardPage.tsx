@@ -111,7 +111,7 @@ const LeaderboardPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
       {/* Top Navigation Header */}
       <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center">
+        <div className="container mx-auto px-6 py-6 flex items-center">
           <div className="flex items-center space-x-2 flex-1">
             <img 
               src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
