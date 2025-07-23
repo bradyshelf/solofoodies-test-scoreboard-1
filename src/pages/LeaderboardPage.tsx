@@ -210,7 +210,7 @@ const LeaderboardPage = () => {
       </div>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 py-16">
+      <section className="py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Empieza tu primera colaboración hoy
@@ -237,7 +237,7 @@ const LeaderboardPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white mt-16">
+      <footer className="bg-white">
         <div className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Section */}
