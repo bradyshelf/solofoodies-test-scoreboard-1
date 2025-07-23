@@ -190,12 +190,17 @@ const LeaderboardPage = () => {
                         <p className="text-sm text-gray-500">{player.city}, {player.country}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="flex items-center justify-end space-x-1 font-bold text-xl text-gray-800">
-                        <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                        <span>{player.rating}</span>
+                    <div className="flex items-center space-x-4">
+                      <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
+                        Colab
+                      </Button>
+                      <div className="text-right">
+                        <div className="flex items-center justify-end space-x-1 font-bold text-xl text-gray-800">
+                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                          <span>{player.rating}</span>
+                        </div>
+                        <div className="text-sm text-gray-500">out of 5</div>
                       </div>
-                      <div className="text-sm text-gray-500">out of 5</div>
                     </div>
                   </div>
                 );
