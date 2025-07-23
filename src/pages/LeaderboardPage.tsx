@@ -116,12 +116,12 @@ const LeaderboardPage = () => {
             <img 
               src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
               alt="Solofoodies Logo" 
-              className="h-12 w-auto"
+              className="h-8 md:h-12 w-auto"
             />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
+          <h1 className="text-lg md:text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
           <div className="flex-1 flex justify-end">
-            <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
+            <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 text-sm md:text-base px-2 md:px-4">
               Iniciar Sesión
             </Button>
           </div>
@@ -135,15 +135,18 @@ const LeaderboardPage = () => {
         {/* Leaderboard */}
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-2xl font-bold text-gray-800">
+            <div className="space-y-4">
+              <CardTitle className="text-xl md:text-2xl font-bold text-gray-800">
                 Top Foodies
               </CardTitle>
-              <div className="flex items-center gap-4">
-                <SlidersHorizontal className="w-5 h-5 text-gray-600" />
-                <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
+                <div className="flex items-center gap-2">
+                  <SlidersHorizontal className="w-4 h-4 md:w-5 md:h-5 text-gray-600" />
+                  <span className="text-sm font-medium text-gray-600">Filters</span>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                   <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                    <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                    <SelectTrigger className="w-full sm:w-32 md:w-40 bg-white backdrop-blur-sm border shadow-sm">
                       <SelectValue placeholder="Select country" />
                     </SelectTrigger>
                     <SelectContent className="bg-white border shadow-lg z-50">
@@ -156,7 +159,7 @@ const LeaderboardPage = () => {
                   </Select>
                   
                   <Select value={selectedCity} onValueChange={setSelectedCity}>
-                    <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
+                    <SelectTrigger className="w-full sm:w-32 md:w-40 bg-white backdrop-blur-sm border shadow-sm">
                       <SelectValue placeholder="Select city" />
                     </SelectTrigger>
                     <SelectContent className="bg-white border shadow-lg z-50">
@@ -178,28 +181,28 @@ const LeaderboardPage = () => {
                 return (
                   <div 
                     key={player.id}
-                    className="flex items-center justify-between p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:shadow-md transition-shadow"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3 md:p-4 rounded-lg bg-gradient-to-r from-gray-50 to-white border border-gray-200 hover:shadow-md transition-shadow space-y-3 sm:space-y-0"
                   >
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-orange-100 to-red-100">
-                        <span className="font-bold text-gray-700">#{index + 1}</span>
+                    <div className="flex items-center space-x-3">
+                      <div className="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-r from-orange-100 to-red-100">
+                        <span className="font-bold text-xs md:text-sm text-gray-700">#{index + 1}</span>
                       </div>
-                      <IconComponent className={`w-6 h-6 ${player.iconColor}`} />
-                      <div>
-                        <h3 className="font-semibold text-gray-800">{player.name}</h3>
-                        <p className="text-sm text-gray-500">{player.city}, {player.country}</p>
+                      <IconComponent className={`w-5 h-5 md:w-6 md:h-6 ${player.iconColor}`} />
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-semibold text-sm md:text-base text-gray-800 truncate">{player.name}</h3>
+                        <p className="text-xs md:text-sm text-gray-500">{player.city}, {player.country}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-4">
-                      <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
+                    <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
+                      <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 text-xs md:text-sm px-3 py-1.5 md:px-4 md:py-2">
                         Colab
                       </Button>
                       <div className="text-right">
-                        <div className="flex items-center justify-end space-x-1 font-bold text-xl text-gray-800">
-                          <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        <div className="flex items-center justify-end space-x-1 font-bold text-lg md:text-xl text-gray-800">
+                          <Star className="w-4 h-4 md:w-5 md:h-5 fill-yellow-400 text-yellow-400" />
                           <span>{player.rating}</span>
                         </div>
-                        <div className="text-sm text-gray-500">out of 5</div>
+                        <div className="text-xs md:text-sm text-gray-500">out of 5</div>
                       </div>
                     </div>
                   </div>
@@ -211,28 +214,30 @@ const LeaderboardPage = () => {
       </div>
 
       {/* CTA Section */}
-      <section className="py-16">
+      <section className="py-8 md:py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-4 md:mb-6">
             Empieza tu primera colaboración hoy
           </h2>
-          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
+          <p className="text-base md:text-xl text-white mb-6 md:mb-8 max-w-3xl mx-auto">
             Únete a miles de restaurantes y creadores gastronómicos que ya están 
             formando alianzas increíbles.
           </p>
-          <div className="flex flex-col lg:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center max-w-2xl mx-auto">
             <Button 
               variant="outline" 
-              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full lg:w-auto px-4 lg:px-8 py-3 text-sm lg:text-lg font-semibold"
+              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full sm:w-auto px-4 md:px-6 lg:px-8 py-2.5 md:py-3 text-sm md:text-base lg:text-lg font-semibold"
             >
-              <span className="lg:hidden">COLABORAR COMO FOODIE</span>
+              <span className="sm:hidden">COLABORAR COMO FOODIE</span>
+              <span className="hidden sm:inline lg:hidden">COLABORAR COMO FOODIE</span>
               <span className="hidden lg:inline">QUIERO COLABORAR COMO FOODIE</span>
             </Button>
             <Button 
               variant="outline" 
-              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full lg:w-auto px-4 lg:px-8 py-3 text-sm lg:text-lg font-semibold"
+              className="bg-white text-red-500 border-white hover:bg-gray-50 w-full sm:w-auto px-4 md:px-6 lg:px-8 py-2.5 md:py-3 text-sm md:text-base lg:text-lg font-semibold"
             >
-              <span className="lg:hidden">SOY RESTAURANTE</span>
+              <span className="sm:hidden">SOY RESTAURANTE</span>
+              <span className="hidden sm:inline lg:hidden">SOY RESTAURANTE</span>
               <span className="hidden lg:inline">SOY UN RESTAURANTE, QUIERO RECIBIR CREADORES</span>
             </Button>
           </div>
