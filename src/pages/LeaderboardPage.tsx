@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
-  const [selectedCountry, setSelectedCountry] = useState("Spain");
+  const [selectedCountry] = useState("Spain");
   const [selectedCity, setSelectedCity] = useState("all");
 
   // Generate 150 diverse foodie influencers with at least 10 per city
@@ -46,20 +46,6 @@ const LeaderboardPage = () => {
     ];
 
     const locations = [
-      { country: 'United States', city: 'New York' },
-      { country: 'United States', city: 'Los Angeles' },
-      { country: 'United States', city: 'Chicago' },
-      { country: 'United Kingdom', city: 'London' },
-      { country: 'United Kingdom', city: 'Manchester' },
-      { country: 'Canada', city: 'Toronto' },
-      { country: 'Canada', city: 'Vancouver' },
-      { country: 'Australia', city: 'Sydney' },
-      { country: 'Australia', city: 'Melbourne' },
-      { country: 'Japan', city: 'Tokyo' },
-      { country: 'Japan', city: 'Osaka' },
-      { country: 'France', city: 'Paris' },
-      { country: 'Germany', city: 'Berlin' },
-      { country: 'Italy', city: 'Rome' },
       { country: 'Spain', city: 'Barcelona' },
       { country: 'Spain', city: 'Madrid' },
       { country: 'Spain', city: 'Valencia' },
@@ -93,12 +79,7 @@ const LeaderboardPage = () => {
 
   const leaderboardData = generateLeaderboardData();
 
-  const countries = [
-    "all", "Spain"
-  ];
-  
   const getCitiesForCountry = (country: string) => {
-    if (country === "all") return ["all"];
     const cities = leaderboardData
       .filter(player => player.country === country)
       .map(player => player.city);
@@ -107,15 +88,9 @@ const LeaderboardPage = () => {
 
   const availableCities = getCitiesForCountry(selectedCountry);
   
-  // Reset city when country changes
-  const handleCountryChange = (country: string) => {
-    setSelectedCountry(country);
-    setSelectedCity("all");
-  };
-  
   const filteredData = leaderboardData
     .filter(player => {
-      const countryMatch = selectedCountry === "all" || player.country === selectedCountry;
+      const countryMatch = player.country === selectedCountry;
       const cityMatch = selectedCity === "all" || player.city === selectedCity;
       return countryMatch && cityMatch;
     })
@@ -155,19 +130,6 @@ const LeaderboardPage = () => {
                 Top Foodies
               </CardTitle>
               <div className="flex gap-4">
-                <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                  <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
-                    <SelectValue placeholder="Select country" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border shadow-lg z-50">
-                    {countries.map((country) => (
-                      <SelectItem key={country} value={country}>
-                        {country === "all" ? "All Countries" : country}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                
                 <Select value={selectedCity} onValueChange={setSelectedCity}>
                   <SelectTrigger className="w-40 bg-white backdrop-blur-sm border shadow-sm">
                     <SelectValue placeholder="Select city" />
