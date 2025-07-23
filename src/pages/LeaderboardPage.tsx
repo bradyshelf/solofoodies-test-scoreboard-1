@@ -119,19 +119,25 @@ const LeaderboardPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
+      {/* Top Navigation Header */}
+      <div className="bg-white shadow-sm">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
+              <span className="text-white font-bold text-lg">S</span>
+            </div>
+            <span className="text-xl font-semibold text-gray-800">Solofoodies</span>
+          </div>
+          <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
+            Iniciar Sesión
+          </Button>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate('/')}
-            className="text-white hover:bg-white/20"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </Button>
-          <h1 className="text-3xl font-bold text-white">Leaderboard</h1>
-          <div></div>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-white">Solofoodies Leaderboard</h1>
         </div>
 
         {/* Country and City Filters */}
