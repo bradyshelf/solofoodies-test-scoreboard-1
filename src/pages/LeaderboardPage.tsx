@@ -116,12 +116,12 @@ const LeaderboardPage = () => {
             <img 
               src="/lovable-uploads/40b5c75d-7579-4308-992f-6cbaccc19512.png" 
               alt="Solofoodies Logo" 
-              className="h-24 w-24 md:hidden object-contain"
+              className="h-12 w-12 md:hidden object-contain"
             />
             <img 
               src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
               alt="Solofoodies Logo" 
-              className="hidden md:block h-20 w-auto"
+              className="hidden md:block h-12 w-auto"
             />
           </div>
           <h1 className="text-xl md:text-2xl font-bold text-gray-800 flex-1 text-center mx-8">Leaderboard</h1>
