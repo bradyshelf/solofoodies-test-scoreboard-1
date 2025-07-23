@@ -123,10 +123,11 @@ const LeaderboardPage = () => {
       <div className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center">
           <div className="flex items-center space-x-2 flex-1">
-            <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
-            </div>
-            <span className="text-xl font-semibold text-gray-800">Solofoodies</span>
+            <img 
+              src="/lovable-uploads/88ae0b13-76e2-4716-b285-0a1b8aeabd49.png" 
+              alt="Solofoodies Logo" 
+              className="h-8 w-auto"
+            />
           </div>
           <h1 className="text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
           <div className="flex-1 flex justify-end">
