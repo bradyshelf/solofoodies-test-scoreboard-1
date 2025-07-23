@@ -121,17 +121,19 @@ const LeaderboardPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-orange-400 via-red-500 to-pink-500">
       {/* Top Navigation Header */}
       <div className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+        <div className="container mx-auto px-4 py-4 flex items-center">
+          <div className="flex items-center space-x-2 flex-1">
             <div className="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-lg">S</span>
             </div>
             <span className="text-xl font-semibold text-gray-800">Solofoodies</span>
           </div>
           <h1 className="text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
-          <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
-            Iniciar Sesión
-          </Button>
+          <div className="flex-1 flex justify-end">
+            <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
+              Iniciar Sesión
+            </Button>
+          </div>
         </div>
       </div>
 
