@@ -128,7 +128,7 @@ const LeaderboardPage = () => {
             </div>
             <span className="text-xl font-semibold text-gray-800">Solofoodies</span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">Leaderboard</h1>
+          <h1 className="text-2xl font-bold text-gray-800 flex-1 text-center">Leaderboard</h1>
           <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50">
             Iniciar Sesión
           </Button>
