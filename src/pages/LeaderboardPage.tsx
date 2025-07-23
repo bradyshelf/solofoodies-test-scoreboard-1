@@ -136,7 +136,7 @@ const LeaderboardPage = () => {
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <CardTitle className="text-2xl font-bold text-gray-800">
+              <CardTitle className="text-2xl font-bold text-gray-800 text-center md:text-left">
                 Top Foodies
               </CardTitle>
               <div className="flex items-center justify-center md:justify-end gap-3">
