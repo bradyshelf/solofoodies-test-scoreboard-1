@@ -60,7 +60,12 @@ const LeaderboardPage = () => {
       { country: 'France', city: 'Paris' },
       { country: 'Germany', city: 'Berlin' },
       { country: 'Italy', city: 'Rome' },
-      { country: 'Spain', city: 'Barcelona' }
+      { country: 'Spain', city: 'Barcelona' },
+      { country: 'Spain', city: 'Madrid' },
+      { country: 'Spain', city: 'Valencia' },
+      { country: 'Spain', city: 'Seville' },
+      { country: 'Spain', city: 'Bilbao' },
+      { country: 'Spain', city: 'Malaga' }
     ];
 
     const data = [];
