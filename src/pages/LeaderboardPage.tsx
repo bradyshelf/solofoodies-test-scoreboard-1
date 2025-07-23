@@ -133,7 +133,7 @@ const LeaderboardPage = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 md:px-16 lg:px-32 py-8">
 
 
 
