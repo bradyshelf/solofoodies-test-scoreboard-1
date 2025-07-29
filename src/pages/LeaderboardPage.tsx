@@ -1,14 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Trophy, Medal, Award, Star, Instagram, Linkedin, Youtube, Facebook, SlidersHorizontal } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { ArrowLeft, Trophy, Medal, Award, Star, Instagram, Linkedin, Youtube, Facebook } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 const LeaderboardPage = () => {
   const navigate = useNavigate();
-  const [selectedCountry, setSelectedCountry] = useState("Spain");
-  const [selectedCity, setSelectedCity] = useState("all");
 
   // Generate 150 diverse foodie influencers with at least 10 per city
   const generateLeaderboardData = () => {
@@ -78,32 +75,8 @@ const LeaderboardPage = () => {
   };
 
   const leaderboardData = generateLeaderboardData();
-
-  const countries = [
-    "Spain"
-  ];
   
-  const getCitiesForCountry = (country: string) => {
-    const cities = leaderboardData
-      .filter(player => player.country === country)
-      .map(player => player.city);
-    return ["all", ...Array.from(new Set(cities))];
-  };
-
-  const availableCities = getCitiesForCountry(selectedCountry);
-  
-  // Reset city when country changes
-  const handleCountryChange = (country: string) => {
-    setSelectedCountry(country);
-    setSelectedCity("all");
-  };
-  
-  const filteredData = leaderboardData
-    .filter(player => {
-      const countryMatch = player.country === selectedCountry;
-      const cityMatch = selectedCity === "all" || player.city === selectedCity;
-      return countryMatch && cityMatch;
-    })
+  const displayData = leaderboardData
     .sort((a, b) => b.rating - a.rating) // Sort by rating descending (highest first)
     .slice(0, 10); // Show only top 10
 
@@ -140,42 +113,10 @@ const LeaderboardPage = () => {
         {/* Leaderboard */}
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex items-center justify-center md:justify-end gap-3">
-                <SlidersHorizontal className="w-5 h-5 text-gray-600" />
-                <div className="flex gap-2 md:gap-4">
-                  <Select value={selectedCountry} onValueChange={handleCountryChange}>
-                    <SelectTrigger className="w-28 md:w-40 bg-white backdrop-blur-sm border shadow-sm">
-                      <SelectValue placeholder="Select country" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white border shadow-lg z-50">
-                      {countries.map((country) => (
-                        <SelectItem key={country} value={country}>
-                          {country}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  
-                  <Select value={selectedCity} onValueChange={setSelectedCity}>
-                    <SelectTrigger className="w-28 md:w-40 bg-white backdrop-blur-sm border shadow-sm">
-                      <SelectValue placeholder="Select city" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white border shadow-lg z-50">
-                      {availableCities.map((city) => (
-                        <SelectItem key={city} value={city}>
-                          {city === "all" ? "All Cities" : city}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-            </div>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {filteredData.map((player, index) => {
+              {displayData.map((player, index) => {
                 const IconComponent = player.icon;
                 return (
                   <div 
@@ -189,9 +130,13 @@ const LeaderboardPage = () => {
                           <span className="font-bold text-sm text-gray-700">#{index + 1}</span>
                         </div>
                         <IconComponent className={`w-6 h-6 ${player.iconColor} flex-shrink-0`} />
-                        <div className="min-w-0">
-                          <h3 className="font-semibold text-base text-gray-800 truncate">{player.name}</h3>
-                          <p className="text-sm text-gray-500 truncate">{player.city}, {player.country}</p>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <h3 className="font-semibold text-base text-gray-800 truncate">{player.name}</h3>
+                            <Badge variant="secondary" className="bg-orange-100 text-orange-700 text-xs px-2 py-1">
+                              {player.city}
+                            </Badge>
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center space-x-4 flex-shrink-0">
@@ -216,9 +161,13 @@ const LeaderboardPage = () => {
                             <span className="font-bold text-xs text-gray-700">#{index + 1}</span>
                           </div>
                           <IconComponent className={`w-4 h-4 ${player.iconColor} flex-shrink-0`} />
-                          <div className="min-w-0">
-                            <h3 className="font-semibold text-sm text-gray-800 truncate">{player.name}</h3>
-                            <p className="text-xs text-gray-500 truncate">{player.city}, {player.country}</p>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-1 mb-1">
+                              <h3 className="font-semibold text-sm text-gray-800 truncate">{player.name}</h3>
+                              <Badge variant="secondary" className="bg-orange-100 text-orange-700 text-xs px-1 py-0.5">
+                                {player.city}
+                              </Badge>
+                            </div>
                           </div>
                         </div>
                         <div className="text-right flex-shrink-0">
