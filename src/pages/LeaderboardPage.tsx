@@ -64,6 +64,7 @@ const LeaderboardPage = () => {
           ...location,
           rating: Math.round((Math.random() * 2 + 3) * 10) / 10, // 3.0 to 5.0 stars
           verified: Math.random() > 0.3, // 70% verified
+          colabs: Math.floor(Math.random() * 50) + 5, // 5 to 54 collaborations
           icon: currentIndex === 0 ? Trophy : currentIndex === 1 ? Medal : Award,
           iconColor: currentIndex === 0 ? "text-yellow-500" : currentIndex === 1 ? "text-gray-400" : currentIndex === 2 ? "text-amber-600" : "text-orange-500"
         });
@@ -156,6 +157,10 @@ const LeaderboardPage = () => {
                         <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 text-sm px-4 py-2">
                           Colab
                         </Button>
+                        <div className="text-center">
+                          <div className="font-semibold text-sm text-gray-700">{player.colabs}</div>
+                          <div className="text-xs text-gray-500">colabs</div>
+                        </div>
                         <div className="text-right">
                           <div className="flex items-center justify-end space-x-1 font-bold text-xl text-gray-800">
                             <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
@@ -191,9 +196,15 @@ const LeaderboardPage = () => {
                           <div className="text-xs text-gray-500">out of 5</div>
                         </div>
                       </div>
-                      <Button variant="outline" className="w-full text-red-500 border-red-500 hover:bg-red-50 text-xs py-2">
-                        Colab
-                      </Button>
+                      <div className="flex items-center space-x-2 w-full">
+                        <Button variant="outline" className="flex-1 text-red-500 border-red-500 hover:bg-red-50 text-xs py-2">
+                          Colab
+                        </Button>
+                        <div className="text-center">
+                          <div className="font-semibold text-xs text-gray-700">{player.colabs}</div>
+                          <div className="text-xs text-gray-500">colabs</div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );
