@@ -97,7 +97,7 @@ const LeaderboardPage = () => {
               className="hidden md:block h-12 w-auto"
             />
           </div>
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800 flex-1 text-center mx-8">Scoreboard</h1>
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800 text-center w-full">Scoreboard</h1>
           <div className="flex justify-end">
             <Button variant="outline" className="text-red-500 border-red-500 hover:bg-red-50 px-3 md:px-4 py-2 text-sm">
               Iniciar Sesión
