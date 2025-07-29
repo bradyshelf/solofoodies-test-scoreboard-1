@@ -123,7 +123,7 @@ const LeaderboardPage = () => {
           <CardContent>
             <div className="space-y-4">
               {displayData.map((player, index) => {
-                const IconComponent = index === 0 ? Trophy : index === 1 ? Medal : Award;
+                const IconComponent = index === 0 ? Trophy : Award;
                 const iconColor = index === 0 ? "text-yellow-500" : index === 1 ? "text-gray-400" : "text-amber-600";
                 return (
                   <div 
