@@ -123,7 +123,13 @@ const LeaderboardPage = () => {
           <CardContent>
             <div className="space-y-4">
               {displayData.map((player, index) => {
-                const IconComponent = index === 0 ? Trophy : index === 1 ? Award : index === 2 ? Award : null;
+                const getIconComponent = () => {
+                  if (index === 0) return Trophy;
+                  if (index === 1) return Award;
+                  if (index === 2) return Award;
+                  return null;
+                };
+                const IconComponent = getIconComponent();
                 const iconColor = index === 0 ? "text-yellow-500" : index === 1 ? "text-gray-400" : "text-amber-600";
                 return (
                   <div 
