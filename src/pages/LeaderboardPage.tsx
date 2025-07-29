@@ -123,7 +123,7 @@ const LeaderboardPage = () => {
           <CardContent>
             <div className="space-y-4">
               {displayData.map((player, index) => {
-                const IconComponent = index === 0 ? Trophy : Award;
+                const IconComponent = index === 0 ? Trophy : index === 1 ? Award : index === 2 ? Award : null;
                 const iconColor = index === 0 ? "text-yellow-500" : index === 1 ? "text-gray-400" : "text-amber-600";
                 return (
                   <div 
@@ -136,7 +136,7 @@ const LeaderboardPage = () => {
                         <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-orange-100 to-red-100 flex-shrink-0">
                           <span className="font-bold text-sm text-gray-700">#{index + 1}</span>
                         </div>
-                        <IconComponent className={`w-6 h-6 ${iconColor} flex-shrink-0`} />
+                        {IconComponent && <IconComponent className={`w-6 h-6 ${iconColor} flex-shrink-0`} />}
                         <div className="min-w-0 flex-1">
                           <div className="flex items-center gap-2 mb-1">
                             <h3 className="font-semibold text-base text-gray-800 truncate">{player.name}</h3>
@@ -167,7 +167,7 @@ const LeaderboardPage = () => {
                           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-orange-100 to-red-100 flex-shrink-0">
                             <span className="font-bold text-xs text-gray-700">#{index + 1}</span>
                           </div>
-                          <IconComponent className={`w-4 h-4 ${iconColor} flex-shrink-0`} />
+                          {IconComponent && <IconComponent className={`w-4 h-4 ${iconColor} flex-shrink-0`} />}
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1 mb-1">
                               <h3 className="font-semibold text-sm text-gray-800 truncate">{player.name}</h3>
