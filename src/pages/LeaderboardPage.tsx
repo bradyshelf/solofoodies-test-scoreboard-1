@@ -140,10 +140,15 @@ const LeaderboardPage = () => {
         {/* Leaderboard */}
         <Card className="bg-white/95 backdrop-blur-sm shadow-lg">
           <CardHeader>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <CardTitle className="text-2xl font-bold text-gray-800 text-center md:text-left">
-                Top Foodies
-              </CardTitle>
+            <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+              <div className="text-center md:text-left">
+                <CardTitle className="text-2xl font-bold text-gray-800 mb-2">
+                  Top Foodies de Solofoodies
+                </CardTitle>
+                <p className="text-gray-600 text-sm max-w-2xl">
+                  los influencers gastronómicos mejor valorados de nuestra comunidad seleccionados por sus valoraciones, colaboraciones exitosas y el impacto real que generan en los restaurantes.
+                </p>
+              </div>
               <div className="flex items-center justify-center md:justify-end gap-3">
                 <SlidersHorizontal className="w-5 h-5 text-gray-600" />
                 <div className="flex gap-2 md:gap-4">
